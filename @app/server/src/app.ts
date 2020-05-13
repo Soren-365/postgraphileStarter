@@ -86,6 +86,7 @@ export async function makeApp({
   await middleware.installPostGraphile(app);
   await middleware.installSSR(app);
 
+  await middleware.installCors(app);
   /*
    * Error handling middleware
    */

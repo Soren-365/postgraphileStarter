@@ -1,3 +1,4 @@
+import installCors from "./installCors";
 import installCypressServerCommand from "./installCypressServerCommand";
 import installDatabasePools from "./installDatabasePools";
 import installErrorHandler from "./installErrorHandler";
@@ -11,6 +12,7 @@ import installSSR from "./installSSR";
 import installWorkerUtils from "./installWorkerUtils";
 
 export {
+  installCors,
   installDatabasePools,
   installWorkerUtils,
   installSession,

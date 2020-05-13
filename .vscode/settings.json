@@ -30,5 +30,7 @@
 
   "files.associations": {
     ".gmrc": "jsonc"
-  }
+  },
+  "editor.quickSuggestionsDelay": 1777,
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

@@ -12,6 +12,7 @@ import {
   postgraphile,
   PostGraphileOptions,
 } from "postgraphile";
+// import ConnectionFilterPlugin from "postgraphile-plugin-connection-filter";
 import { makePgSmartTagsFromFilePlugin } from "postgraphile/plugins";
 
 import { getHttpServer, getWebsocketMiddlewares } from "../app";
@@ -99,7 +100,7 @@ export function getPostGraphileOptions({
     dynamicJson: true,
 
     // ignoreRBAC=false: honour the permissions in your DB - don't expose what you don't GRANT
-    ignoreRBAC: false,
+    ignoreRBAC: true,
 
     // ignoreIndexes=false: honour your DB indexes - only expose things that are fast
     ignoreIndexes: false,
@@ -183,6 +184,9 @@ export function getPostGraphileOptions({
 
       // Adds custom orders to our GraphQL schema
       OrdersPlugin,
+
+      // Adds custom filter plugin
+      // ConnectionFilterPlugin,
     ],
 
     /*

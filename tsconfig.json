@@ -3,7 +3,6 @@
     "composite": true,
     "incremental": true,
     "noEmitOnError": true,
-
     "allowJs": false,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
@@ -25,11 +24,8 @@
     "preserveWatchOutput": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
-
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-
-    "noEmit": true,
     "declaration": true,
     "declarationMap": true,
     "baseUrl": ".",
