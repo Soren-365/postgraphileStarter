@@ -1,5 +1,27 @@
 require("@app/config");
 const compose = require("lodash/flowRight");
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+var babelLoader = {
+  loader: "babel-loader",
+  options: {
+    cacheDirectory: true,
+    babelrc: true,
+    presets: [
+      [
+        "@babel/preset-env",
+        { targets: { browsers: "last 2 versions" } } // or whatever your project requires
+      ],
+      "@babel/preset-react"
+    ],
+    plugins: [
+      // plugin-proposal-decorators is only needed if you're using experimental decorators in TypeScript
+      //  ["@babel/plugin-proposal-decorators", { legacy: true }],
+      ["@babel/plugin-proposal-class-properties", { loose: true }],
+      "react-hot-loader/babel"
+    ]
+  }
+}
+
 
 const { ROOT_URL, T_AND_C_URL } = process.env;
 if (!ROOT_URL) {
@@ -9,6 +31,9 @@ if (!ROOT_URL) {
     throw new Error("ROOT_URL is a required envvar");
   }
 }
+
+
+
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 (function (process = null) {
@@ -29,7 +54,7 @@ if (!ROOT_URL) {
     );
     // fix: prevents error when .less files are required by node
     if (typeof require !== "undefined") {
-      require.extensions[".less"] = () => {};
+      require.extensions[".less"] = () => { };
     }
     return compose(
       withCss,
@@ -43,7 +68,36 @@ if (!ROOT_URL) {
         modifyVars: themeVariables, // make your antd custom effective
       },
       webpack(config, { webpack, dev, isServer }) {
-        if (dev) config.devtool = "cheap-module-source-map";
+        if (dev) config.devtool = "eval-cheap-module-source-map";
+        if (dev) config.watch = true;
+
+
+        config.module.rules.push({
+          test: /\.(j|t)sx?$/,
+          exclude: /node_modules/,
+          use: {
+            loader: "babel-loader",
+            options: {
+              cacheDirectory: true,
+              babelrc: true,
+              presets: [
+                [
+                  "@babel/preset-env",
+                  { targets: { browsers: "last 2 versions" } } // or whatever your project requires
+                ],
+                "@babel/preset-typescript",
+                "@babel/preset-react"
+              ],
+              plugins: [
+                // plugin-proposal-decorators is only needed if you're using experimental decorators in TypeScript
+                //  ["@babel/plugin-proposal-decorators", { legacy: true }],
+                ["@babel/plugin-proposal-class-properties", { loose: true }],
+                "react-hot-loader/babel"
+              ]
+            }
+          }
+        }
+        );
 
         const makeSafe = (externals) => {
           if (Array.isArray(externals)) {
@@ -87,7 +141,15 @@ if (!ROOT_URL) {
             isServer ? { "pg-native": "pg/lib/client" } : null,
           ].filter((_) => _),
         };
+
+      },
+      optimization: {
+        minimizer: [new UglifyJsPlugin({
+          cache: true,
+        })],
       },
     });
+
+
   };
 })();
