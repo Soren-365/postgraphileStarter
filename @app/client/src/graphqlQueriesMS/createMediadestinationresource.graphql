@@ -1,0 +1,13 @@
+mutation createMediadestinationresource($medialocationId: Int, $atAgency: Int!, $atDestination: Int!) {
+  __typename
+  createMediadestinationresource(
+    input: { mediadestinationresource: { atAgency: $atAgency, mainImage: $medialocationId, atDestination: $atDestination } }
+  ) {
+    medialocationByMainImage {
+      id
+    }
+    mediadestinationresource {
+      id
+    }
+  }
+}

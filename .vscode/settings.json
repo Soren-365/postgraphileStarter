@@ -13,14 +13,8 @@
     "typescriptreact",
     "graphql"
   ],
-  "editor.codeActionsOnSaveTimeout": 750,
   "editor.codeActionsOnSave": {
     "source.fixAll": true
-  },
-  "[graphql]": {
-    "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": false
-    }
   },
 
   "files.insertFinalNewline": true,
@@ -31,6 +25,13 @@
   "files.associations": {
     ".gmrc": "jsonc"
   },
-  "editor.quickSuggestionsDelay": 1777,
-  "typescript.tsdk": "node_modules/typescript/lib"
+
+  "[graphql]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": false
+    }
+  },
+  "[markdown]": {
+    "files.trimTrailingWhitespace": false
+  }
 }

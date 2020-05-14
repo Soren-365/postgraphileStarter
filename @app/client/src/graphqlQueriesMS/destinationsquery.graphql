@@ -1,0 +1,17 @@
+query Destination {
+  destinationresources {
+    totalCount
+    nodes {
+      nodeId
+      id
+      createdById
+      lastModified
+      atAgency
+      destinationName
+      area
+      priceInfo {
+        advertisedPrice
+      }
+    }
+  }
+}

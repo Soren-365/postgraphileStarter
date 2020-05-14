@@ -19,7 +19,7 @@ const Home: NextPage = () => {
       <Row justify="space-between" gutter={32}>
         <Col xs={24} sm={16}>
           <Title data-cy="homepage-header">
-            Welcome to the PostGraphile starter & stuff & more
+            Welcome to the PostGraphile starter
           </Title>
           <Paragraph>
             This project can serve as a basis for your own project. We've added

@@ -1,0 +1,9 @@
+query Agencies {
+  agencies {
+    totalCount
+    nodes {
+      id
+
+    }
+  }
+}

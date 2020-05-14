@@ -1,8 +1,4 @@
-import {
-  CrownOutlined,
-  DownOutlined,
-  ShoppingCartOutlined,
-} from "@ant-design/icons";
+import { CrownOutlined, DownOutlined } from "@ant-design/icons";
 import { QueryResult } from "@apollo/react-common";
 import { useApolloClient } from "@apollo/react-hooks";
 import { companyName, projectName } from "@app/config";
@@ -12,19 +8,7 @@ import {
   useCurrentUserUpdatedSubscription,
   useLogoutMutation,
 } from "@app/graphql";
-import { IconNames } from "@blueprintjs/icons";
-import {
-  Avatar,
-  Button,
-  Col,
-  Dropdown,
-  Layout,
-  Menu,
-  Popover,
-  Row,
-  Typography,
-} from "antd";
-import SubMenu from "antd/lib/menu/SubMenu";
+import { Avatar, Col, Dropdown, Layout, Menu, Row, Typography } from "antd";
 import { ApolloError } from "apollo-client";
 import Head from "next/head";
 import Link from "next/link";
@@ -120,7 +104,6 @@ export function SharedLayout({
   const currentUrl = router.asPath;
   const client = useApolloClient();
   const [logout] = useLogoutMutation();
-
   const handleLogout = useCallback(() => {
     const reset = async () => {
       Router.events.off("routeChangeComplete", reset);
@@ -134,7 +117,6 @@ export function SharedLayout({
     Router.events.on("routeChangeComplete", reset);
     Router.push("/");
   }, [client, logout]);
-
   const renderChildren = (props: SharedLayoutChildProps) => {
     const inner =
       props.error && !props.loading && !noHandleErrors ? (
@@ -168,7 +150,6 @@ export function SharedLayout({
 
     return noPad ? inner : <StandardWidth>{inner}</StandardWidth>;
   };
-
   const { data, loading, error } = query;
 
   return (
@@ -185,12 +166,17 @@ export function SharedLayout({
           <title>{title ? `${title} — ${projectName}` : projectName}</title>
         </Head>
         <Row justify="space-between">
-          <Col span={6} style={{ textAlign: "left" }}>
+          <Col span={6}>
+            <Link href="/">
+              <a>{projectName}</a>
+            </Link>
+          </Col>
+          <Col span={12}>
             <H3
               style={{
                 margin: 0,
                 padding: 0,
-                textAlign: "left",
+                textAlign: "center",
                 lineHeight: "64px",
               }}
               data-cy="layout-header-title"
@@ -204,99 +190,70 @@ export function SharedLayout({
               )}
             </H3>
           </Col>
-
-          <Col span={4}></Col>
-          <Menu>
-            <Menu.Item>Menu</Menu.Item>
-            <Menu.SubMenu title={<span>Option 2</span>}>
-              <Menu.Item></Menu.Item>
-            </Menu.SubMenu>
-          </Menu>
-          <Col span={8}>
-            <Button>
-              <ShoppingCartOutlined />
-            </Button>
-            {/* <NavbarDivider className=" invisible" />
- <div className="w-4"></div>
- <NavbarDivider className=" invisible" />
- <span>Thursday 23/7/2020 - 08:25</span> */}
-            <Menu>
-              <Menu.Item>map</Menu.Item>
-              <Menu.Item>company trips</Menu.Item>
-
-              <Menu.Item>agencies</Menu.Item>
-              <Menu.Item>New</Menu.Item>
-
-              <Menu.Item>Tourists</Menu.Item>
-            </Menu>
-          </Col>
           <Col span={6} style={{ textAlign: "right" }}>
             {data && data.currentUser ? (
-              <>
-                <Dropdown
-                  overlay={
-                    <Menu>
-                      {data.currentUser.organizationMemberships.nodes.map(
-                        ({ organization, isOwner }) => (
-                          <Menu.Item key={organization?.id}>
-                            <Link
-                              href={`/o/[slug]`}
-                              as={`/o/${organization?.slug}`}
-                            >
-                              <a>
-                                {organization?.name}
-                                {isOwner ? (
-                                  <span>
-                                    {" "}
-                                    <CrownOutlined />
-                                  </span>
-                                ) : (
-                                  ""
-                                )}
-                              </a>
-                            </Link>
-                          </Menu.Item>
-                        )
-                      )}
-                      <Menu.Item>
-                        <Link href="/create-organization">
-                          <a data-cy="layout-link-create-organization">
-                            Create organization
-                          </a>
-                        </Link>
-                      </Menu.Item>
-                      <Menu.Item>
-                        <Link href="/settings">
-                          <a data-cy="layout-link-settings">
-                            <Warn okay={data.currentUser.isVerified}>
-                              Settings
-                            </Warn>
-                          </a>
-                        </Link>
-                      </Menu.Item>
-                      <Menu.Item>
-                        <a onClick={handleLogout}>Logout</a>
-                      </Menu.Item>
-                    </Menu>
-                  }
+              <Dropdown
+                overlay={
+                  <Menu>
+                    {data.currentUser.organizationMemberships.nodes.map(
+                      ({ organization, isOwner }) => (
+                        <Menu.Item key={organization?.id}>
+                          <Link
+                            href={`/o/[slug]`}
+                            as={`/o/${organization?.slug}`}
+                          >
+                            <a>
+                              {organization?.name}
+                              {isOwner ? (
+                                <span>
+                                  {" "}
+                                  <CrownOutlined />
+                                </span>
+                              ) : (
+                                ""
+                              )}
+                            </a>
+                          </Link>
+                        </Menu.Item>
+                      )
+                    )}
+                    <Menu.Item>
+                      <Link href="/create-organization">
+                        <a data-cy="layout-link-create-organization">
+                          Create organization
+                        </a>
+                      </Link>
+                    </Menu.Item>
+                    <Menu.Item>
+                      <Link href="/settings">
+                        <a data-cy="layout-link-settings">
+                          <Warn okay={data.currentUser.isVerified}>
+                            Settings
+                          </Warn>
+                        </a>
+                      </Link>
+                    </Menu.Item>
+                    <Menu.Item>
+                      <a onClick={handleLogout}>Logout</a>
+                    </Menu.Item>
+                  </Menu>
+                }
+              >
+                <span
+                  data-cy="layout-dropdown-user"
+                  style={{ whiteSpace: "nowrap" }}
                 >
-                  <span
-                    data-cy="layout-dropdown-user"
-                    style={{ whiteSpace: "nowrap" }}
-                  >
-                    <Avatar>
-                      {(data.currentUser.name && data.currentUser.name[0]) ||
-                        "?"}
-                    </Avatar>
-                    <Warn okay={data.currentUser.isVerified}>
-                      <span style={{ marginLeft: 8, marginRight: 8 }}>
-                        {data.currentUser.name}
-                      </span>
-                      <DownOutlined />
-                    </Warn>
-                  </span>
-                </Dropdown>
-              </>
+                  <Avatar>
+                    {(data.currentUser.name && data.currentUser.name[0]) || "?"}
+                  </Avatar>
+                  <Warn okay={data.currentUser.isVerified}>
+                    <span style={{ marginLeft: 8, marginRight: 8 }}>
+                      {data.currentUser.name}
+                    </span>
+                    <DownOutlined />
+                  </Warn>
+                </span>
+              </Dropdown>
             ) : (
               <Link href={`/login?next=${encodeURIComponent(currentUrl)}`}>
                 <a data-cy="header-login-button">Sign in</a>
@@ -339,9 +296,9 @@ export function SharedLayout({
             Powered by{" "}
             <a
               style={{ textDecoration: "underline" }}
-              href="https://avantweb.ro/en"
+              href="https://graphile.org/postgraphile"
             >
-              Avant
+              PostGraphile
             </a>
           </Text>
         </div>

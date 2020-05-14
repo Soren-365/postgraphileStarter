@@ -12,7 +12,6 @@ import {
   postgraphile,
   PostGraphileOptions,
 } from "postgraphile";
-// import ConnectionFilterPlugin from "postgraphile-plugin-connection-filter";
 import { makePgSmartTagsFromFilePlugin } from "postgraphile/plugins";
 
 import { getHttpServer, getWebsocketMiddlewares } from "../app";
@@ -184,18 +183,15 @@ export function getPostGraphileOptions({
 
       // Adds custom orders to our GraphQL schema
       OrdersPlugin,
-
-      // Adds custom filter plugin
-      // ConnectionFilterPlugin,
     ],
 
     /*
      * Plugins we don't want in our schema
      */
-    skipPlugins: [
-      // Disable the 'Node' interface
-      NodePlugin,
-    ],
+    // skipPlugins: [
+    //   // Disable the 'Node' interface
+    //   NodePlugin,
+    // ],
 
     graphileBuildOptions: {
       /*

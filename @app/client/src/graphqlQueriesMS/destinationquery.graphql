@@ -1,0 +1,21 @@
+query getMyDestination($id:Int!) {
+  __typename
+
+  destinationresource(id: $id) {
+    nodeId
+    destinationName
+    id
+    atAgency
+    createdById
+    lastModified
+    judet
+    tripTypeName
+    isActive
+    priceInfoId
+    activeAtPeriodsId
+    presentationId
+    geoCodingId
+    isPublic
+  }
+}
+

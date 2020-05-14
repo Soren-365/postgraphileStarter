@@ -14,7 +14,7 @@ services:
     user: $UID
 
     env_file:
-      - .env
+      - docker/.env
     volumes:
       - .:/work
       # let's us run docker & docker-compose from inside container (used for yarn setup)
@@ -52,7 +52,7 @@ services:
         SETUP_MODE: dev
 
     env_file:
-      - .env
+      - docker/.env
 
     # On Linux, this will prevent new files getting created as root, but you
     # may need to update the USER_UID and USER_GID in `Dockerfile` to match
@@ -82,13 +82,13 @@ services:
       #! LINUX HOST ONLY
       ## copies your ssh credentials, to be able to use them from within the container
       ## (see: https://code.visualstudio.com/docs/remote/containers#_sharing-git-credentials-with-your-container)
-      - $HOME/.ssh:/root/.home-localhost/.ssh:ro
+      # - $HOME/.ssh:/root/.home-localhost/.ssh:ro
       ## .bashrc
-      - $HOME/.bashrc:/root/.home-localhost/.bashrc:ro
+      # - $HOME/.bashrc:/root/.home-localhost/.bashrc:ro
       ## .gitconfig
-      - $HOME/.gitconfig:/root/.home-localhost/.gitconfig:ro
+      # - $HOME/.gitconfig:/root/.home-localhost/.gitconfig:ro
       ## .tmux
-      - $HOME/tmux.conf:/root/.home-localhost/tmux.conf:ro
+      # - $HOME/tmux.conf:/root/.home-localhost/tmux.conf:ro
       ##! WINDOWS HOST ONLY
       ##* on windows host can't mount single files
       ## comment all the other `.home-localhost` lines above this
@@ -113,7 +113,7 @@ services:
   db:
     image: postgres:11
     env_file:
-      - .env
+      - docker/.env
 
     # Unlike above, the Postgres image cannot start as our user account
     # otherwise we get permission denied errors. So this one has to run as

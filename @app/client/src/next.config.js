@@ -1,8 +1,7 @@
 require("@app/config");
 const compose = require("lodash/flowRight");
+const AntDDayjsWebpackPlugin = require("antd-dayjs-webpack-plugin");
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-
-
 
 const { ROOT_URL, T_AND_C_URL } = process.env;
 if (!ROOT_URL) {
@@ -13,15 +12,11 @@ if (!ROOT_URL) {
   }
 }
 
-
-
-
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 (function (process = null) {
   // You *must not* use `process.env` in here, because we need to check we have
   // those variables. To enforce this, we've deliberately shadowed process.
   module.exports = () => {
-    // const tailwindCss = require('tailwindcss');
     const withCss = require("@zeit/next-css");
     const withLess = require("@zeit/next-less");
     const lessToJS = require("less-vars-to-js");
@@ -36,12 +31,8 @@ if (!ROOT_URL) {
     );
     // fix: prevents error when .less files are required by node
     if (typeof require !== "undefined") {
-      require.extensions[".less"] = () => { };
+      require.extensions[".less"] = () => {};
     }
-
-
-
-
     return compose(
       withCss,
       withLess
@@ -56,7 +47,6 @@ if (!ROOT_URL) {
       webpack(config, { webpack, dev, isServer }) {
         if (dev) config.devtool = "eval-cheap-module-source-map";
         if (dev) config.watch = true;
-
 
 
         const makeSafe = (externals) => {
@@ -95,13 +85,13 @@ if (!ROOT_URL) {
               // attempting to bundle them into the client.
               /^(node-gyp-build|bufferutil|utf-8-validate)$/
             ),
+            new AntDDayjsWebpackPlugin(),
           ],
           externals: [
             ...(externals || []),
             isServer ? { "pg-native": "pg/lib/client" } : null,
           ].filter((_) => _),
         };
-
       },
       optimization: {
         minimizer: [new UglifyJsPlugin({
@@ -109,7 +99,5 @@ if (!ROOT_URL) {
         })],
       },
     });
-
-
   };
 })();

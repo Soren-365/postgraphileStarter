@@ -1,0 +1,45 @@
+query Account {
+  __typename
+  account(id: 1) {
+    id
+    nodeId
+    emailHash
+    passwordHash
+  }
+}
+
+query Users {
+  __typename
+  usertables {
+    nodes {
+      id
+      firstName
+      lastName
+      userEmail
+      atAgency
+      atGuide
+      atTourist
+      isActive
+      isRomanian
+    }
+    pageInfo {
+      startCursor
+      endCursor
+    }
+    totalCount
+  }
+}
+
+query Accounts {
+  __typename
+  accounts {
+    nodes {
+      emailHash
+      passwordHash
+      sessionId
+      id
+      nodeId
+    }
+    totalCount
+  }
+}

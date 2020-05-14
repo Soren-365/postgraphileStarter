@@ -1,5 +1,5 @@
 --! Previous: -
---! Hash: sha1:86096586030c70564884a31cabecc6ee57bb53bc
+--! Hash: sha1:e1b27f7832f31570c34083d3a619062bc0ae4a72
 
 drop schema if exists app_public cascade;
 
@@ -20,7 +20,6 @@ grant usage on schema public, app_public to :DATABASE_VISITOR;
 drop schema if exists app_hidden cascade;
 create schema app_hidden;
 grant usage on schema app_hidden to :DATABASE_VISITOR;
-alter default privileges in schema app_hidden grant usage, select on sequences to :DATABASE_VISITOR;
 
 /**********/
 
@@ -328,11 +327,62 @@ comment on column app_public.user_emails.is_verified is
 create policy select_own on app_public.user_emails for select using (user_id = app_public.current_user_id());
 create policy insert_own on app_public.user_emails for insert with check (user_id = app_public.current_user_id());
 -- No update
-create policy delete_own on app_public.user_emails for delete using (user_id = app_public.current_user_id()); -- TODO check this isn't the last one!
+create policy delete_own on app_public.user_emails for delete using (user_id = app_public.current_user_id());
 grant select on app_public.user_emails to :DATABASE_VISITOR;
 grant insert (email) on app_public.user_emails to :DATABASE_VISITOR;
 -- No update
 grant delete on app_public.user_emails to :DATABASE_VISITOR;
+
+-- Prevent deleting last email
+
+create function app_public.tg_user_emails__prevent_delete_last_email() returns trigger as $$
+begin
+  if exists (
+    with remaining as (
+      select user_emails.user_id
+      from app_public.user_emails
+      inner join deleted
+      on user_emails.user_id = deleted.user_id
+      -- Don't delete last verified email
+      where (user_emails.is_verified is true or not exists (
+        select 1
+        from deleted d2
+        where d2.user_id = user_emails.user_id
+        and d2.is_verified is true
+      ))
+      order by user_emails.id asc
+
+      /*
+       * Lock this table to prevent race conditions; see:
+       * https://www.cybertec-postgresql.com/en/triggers-to-enforce-constraints/
+       */
+      for update of user_emails
+    )
+    select 1
+    from app_public.users
+    where id in (
+      select user_id from deleted
+      except
+      select user_id from remaining
+    )
+  )
+  then
+    raise exception 'You must have at least one (verified) email address' using errcode = 'CDLEA';
+  end if;
+
+  return null;
+end;
+$$
+language plpgsql
+-- Security definer is required for 'FOR UPDATE OF' since we don't grant UPDATE privileges.
+security definer
+set search_path = pg_catalog, public, pg_temp;
+
+create trigger _500_prevent_delete_last
+  after delete on app_public.user_emails
+  referencing old table as deleted
+  for each statement
+  execute procedure app_public.tg_user_emails__prevent_delete_last_email();
 
 /**********/
 
@@ -720,7 +770,8 @@ begin
   select * into v_user_email
     from app_public.user_emails
     where user_id = app_public.current_user_id()
-    and is_primary is true;
+    order by is_primary desc, is_verified desc, id desc
+    limit 1;
 
   -- Fetch or generate token
   update app_private.user_secrets
@@ -772,7 +823,13 @@ begin
   end if;
 
   -- Check the token
-  if v_user_secret.delete_account_token = token then
+  if (
+    -- token is still valid
+    v_user_secret.delete_account_token_generated > now() - v_token_max_duration
+  and
+    -- token matches
+    v_user_secret.delete_account_token = token
+  ) then
     -- Token passes; delete their account :(
     delete from app_public.users where id = app_public.current_user_id();
     return true;
@@ -1223,9 +1280,9 @@ grant select on app_public.organization_memberships to :DATABASE_VISITOR;
 
 create table app_public.organization_invitations (
   id uuid primary key default gen_random_uuid(),
-  organization_id uuid not null references app_public.organizations,
+  organization_id uuid not null references app_public.organizations on delete cascade,
   code text,
-  user_id uuid references app_public.users,
+  user_id uuid references app_public.users on delete cascade,
   email citext,
   check ((user_id is null) <> (email is null)),
   check ((code is null) = (email is null)),
@@ -1235,7 +1292,7 @@ create table app_public.organization_invitations (
 alter table app_public.organization_invitations enable row level security;
 
 create index on app_public.organization_invitations(user_id);
-grant select on app_public.organization_invitations to :DATABASE_VISITOR;
+-- grant select on app_public.organization_invitations to :DATABASE_VISITOR;
 
 --------------------------------------------------------------------------------
 create function app_public.current_user_member_organization_ids() returns setof uuid as $$
@@ -1425,8 +1482,13 @@ begin
   if (v_my_membership is null) then
     -- I'm not a member of that organization
     return;
-  elsif v_my_membership.is_owner and remove_from_organization.user_id <> app_public.current_user_id() then
-    -- Delete it
+  elsif v_my_membership.is_owner then
+    if remove_from_organization.user_id <> app_public.current_user_id() then
+      -- Delete it
+    else
+      -- Need to transfer ownership before I can leave
+      return;
+    end if;
   elsif v_my_membership.user_id = user_id then
     -- Delete it
   else
@@ -1454,57 +1516,39 @@ $$ language plpgsql volatile security definer set search_path to pg_catalog, pub
 
 --------------------------------------------------------------------------------
 
-create or replace function app_public.confirm_account_deletion(token text) returns boolean as $$
-declare
-  v_user_secret app_private.user_secrets;
-  v_token_max_duration interval = interval '3 days';
+create function app_public.tg_users__deletion_organization_checks_and_actions() returns trigger as $$
 begin
-  if app_public.current_user_id() is null then
-    raise exception 'You must log in to delete your account' using errcode = 'LOGIN';
+  -- Check they're not an organization owner
+  if exists(
+    select 1
+    from app_public.organization_memberships
+    where user_id = app_public.current_user_id()
+    and is_owner is true
+  ) then
+    raise exception 'You cannot delete your account until you are not the owner of any organizations.' using errcode = 'OWNER';
   end if;
 
-  select * into v_user_secret
-    from app_private.user_secrets
-    where user_secrets.user_id = app_public.current_user_id();
+  -- Reassign billing contact status back to the organization owner
+  update app_public.organization_memberships
+    set is_billing_contact = true
+    where is_owner = true
+    and organization_id in (
+      select organization_id
+      from app_public.organization_memberships my_memberships
+      where my_memberships.user_id = app_public.current_user_id()
+      and is_billing_contact is true
+    );
 
-  if v_user_secret is null then
-    -- Success: they're already deleted
-    return true;
-  end if;
-
-  -- Check the token
-  if v_user_secret.delete_account_token = token then
-    -- Token passes
-
-    -- Check that they are not the owner of any organizations
-    if exists(
-      select 1
-      from app_public.organization_memberships
-      where user_id = app_public.current_user_id()
-      and is_owner is true
-    ) then
-      raise exception 'You cannot delete your account until you are not the owner of any organizations.' using errcode = 'OWNER';
-    end if;
-
-    -- Reassign billing contact status back to the organization owner
-    update app_public.organization_memberships
-      set is_billing_contact = true
-      where is_owner = true
-      and organization_id in (
-        select organization_id
-        from app_public.organization_memberships my_memberships
-        where my_memberships.user_id = app_public.current_user_id()
-        and is_billing_contact is true
-      );
-
-    -- Delete their account :(
-    delete from app_public.users where id = app_public.current_user_id();
-    return true;
-  end if;
-
-  raise exception 'The supplied token was incorrect - perhaps you''re logged in to the wrong account, or the token has expired?' using errcode = 'DNIED';
+  return old;
 end;
-$$ language plpgsql strict volatile security definer set search_path to pg_catalog, public, pg_temp;
+$$ language plpgsql;
+
+create trigger _500_deletion_organization_checks_and_actions
+  before delete
+  on app_public.users
+  for each row
+  when (app_public.current_user_id() is not null)
+  execute procedure app_public.tg_users__deletion_organization_checks_and_actions();
 
 create function app_public.delete_organization(organization_id uuid) returns void as $$
 begin

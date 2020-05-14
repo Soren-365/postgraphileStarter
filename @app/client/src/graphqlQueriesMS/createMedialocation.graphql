@@ -1,0 +1,42 @@
+mutation createMedialocation(
+  $medialocationId:Int!
+  $uploadLocationOriginal: String
+  $signedUrlDesktop: String
+  $atAgency:Int!
+  $atResource:Int!
+  $mediaLocationPlacement: Medialocationplacement!
+) {
+  __typename
+  createMedialocation(
+    input: {
+      medialocation: {
+        id: $medialocationId
+        signedUrlDesktop: $signedUrlDesktop
+        mediaLocationPlacement: $mediaLocationPlacement
+        uploadLocationOriginal: $uploadLocationOriginal
+        atAgency: $atAgency
+        atResource: $atResource
+      }
+    }
+  ) {
+    clientMutationId
+    medialocation {
+      id
+      atAgency
+      nodeId
+
+      signedUrlDesktop
+      timeCreated
+      uploadLocationOriginal
+      mediadestinationresourcesByMainImage {
+        nodes {
+          atAgency
+          atDestination
+          guideImage
+          id
+          mainImage
+        }
+      }
+    }
+  }
+}

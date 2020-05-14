@@ -2,8 +2,6 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "noEmit": false,
-    "noUnusedLocals": false, // default false, i changed it from true -> false
-    "noUnusedParameters": false, // default false, i changed it from true -> false
     "rootDir": "src",
     "outDir": "dist",
     "tsBuildInfoFile": "dist/tsconfig.tsbuildinfo",

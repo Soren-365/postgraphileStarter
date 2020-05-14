@@ -1,0 +1,13 @@
+mutation CreateUser {
+  __typename
+  createAccount(input: { account: { emailHash: "dfs6fgh", passwordHash: "dfh6dgh" } }) {
+    account {
+      id
+    }
+  }
+  createUsertable(input: { usertable: { id: 1, userEmail: "s6fddfsd@sdf.xin", firstName: "Ha6ns", lastName: "And6ersen" } }) {
+    usertable {
+      id
+    }
+  }
+}

@@ -1,0 +1,11 @@
+mutation updateDestination($lastModified: Datetime!, $lastModifiedBy:Int!) {
+  __typename
+  updateDestinationresource(input: { patch: { lastModified: $lastModified, lastModifiedBy: $lastModifiedBy }, id: 1 }) {
+    destinationresource {
+      lastModified
+      createdById
+      lastModified
+      lastModifiedBy
+    }
+  }
+}
