@@ -1,0 +1,38 @@
+export interface mediabookDbType {
+id?: number;
+atLibrary: number;
+atBook: number;
+lastModified: string;
+lastModifiedBy?: number;
+mainImage?: number;
+mainImageSignedUrl?: string;
+authorImage?: number;
+authorSignedUrl?: string;
+mapImage?: number;
+mapImageSignedUrl?: string;
+thumbnailImage?: number;
+thumbnailImageSignedUrl?: string;
+imageGallery1?: number;
+imageGallery1SignedUrl?: string;
+imageGallery2?: number;
+imageGallery2SignedUrl?: string;
+imageGallery3?: number;
+imageGallery3SignedUrl?: string;
+imageGallery4?: number;
+imageGallery4SignedUrl?: string;
+imageGallery5?: number;
+imageGallery5SignedUrl?: string;
+imageGallery6?: number;
+imageGallery6SignedUrl?: string;
+imageGallery7?: number;
+imageGallery7SignedUrl?: string;
+imageGallery8?: number;
+imageGallery8SignedUrl?: string;
+imageGallery9?: number;
+imageGallery9SignedUrl?: string;
+imageGallery10?: number;
+imageGallery10SignedUrl?: string;
+signedUrlsUpdate: string;
+timeCreated: string;
+ nodeId?: string;
+}

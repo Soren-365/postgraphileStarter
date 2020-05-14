@@ -1,11 +1,13 @@
-import React, { Component } from 'react';
-import { connect, ConnectProps } from 'umi';
-import { Tag, message } from 'antd';
+import { message,Tag } from 'antd';
 import groupBy from 'lodash/groupBy';
 import moment from 'moment';
+import React, { Component } from 'react';
+import { connect, ConnectProps } from 'umi';
+
+import { ConnectState } from '@/models/connect';
 import { NoticeItem } from '@/models/global';
 import { CurrentUser } from '@/models/user';
-import { ConnectState } from '@/models/connect';
+
 import NoticeIcon from '../NoticeIcon';
 import styles from './index.less';
 

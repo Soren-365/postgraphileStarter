@@ -1,26 +1,7 @@
 require("@app/config");
 const compose = require("lodash/flowRight");
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-var babelLoader = {
-  loader: "babel-loader",
-  options: {
-    cacheDirectory: true,
-    babelrc: true,
-    presets: [
-      [
-        "@babel/preset-env",
-        { targets: { browsers: "last 2 versions" } } // or whatever your project requires
-      ],
-      "@babel/preset-react"
-    ],
-    plugins: [
-      // plugin-proposal-decorators is only needed if you're using experimental decorators in TypeScript
-      //  ["@babel/plugin-proposal-decorators", { legacy: true }],
-      ["@babel/plugin-proposal-class-properties", { loose: true }],
-      "react-hot-loader/babel"
-    ]
-  }
-}
+
 
 
 const { ROOT_URL, T_AND_C_URL } = process.env;
@@ -40,6 +21,7 @@ if (!ROOT_URL) {
   // You *must not* use `process.env` in here, because we need to check we have
   // those variables. To enforce this, we've deliberately shadowed process.
   module.exports = () => {
+    // const tailwindCss = require('tailwindcss');
     const withCss = require("@zeit/next-css");
     const withLess = require("@zeit/next-less");
     const lessToJS = require("less-vars-to-js");
@@ -56,6 +38,10 @@ if (!ROOT_URL) {
     if (typeof require !== "undefined") {
       require.extensions[".less"] = () => { };
     }
+
+
+
+
     return compose(
       withCss,
       withLess
@@ -72,32 +58,6 @@ if (!ROOT_URL) {
         if (dev) config.watch = true;
 
 
-        config.module.rules.push({
-          test: /\.(j|t)sx?$/,
-          exclude: /node_modules/,
-          use: {
-            loader: "babel-loader",
-            options: {
-              cacheDirectory: true,
-              babelrc: true,
-              presets: [
-                [
-                  "@babel/preset-env",
-                  { targets: { browsers: "last 2 versions" } } // or whatever your project requires
-                ],
-                "@babel/preset-typescript",
-                "@babel/preset-react"
-              ],
-              plugins: [
-                // plugin-proposal-decorators is only needed if you're using experimental decorators in TypeScript
-                //  ["@babel/plugin-proposal-decorators", { legacy: true }],
-                ["@babel/plugin-proposal-class-properties", { loose: true }],
-                "react-hot-loader/babel"
-              ]
-            }
-          }
-        }
-        );
 
         const makeSafe = (externals) => {
           if (Array.isArray(externals)) {

@@ -1,0 +1,31 @@
+export interface GuideDbType {
+guideId: number;
+contactId: number;
+hasGuideLicence: boolean;
+guideLicenceURL: string;
+publisherId: number;
+createdById: number;
+guideFirstName: string;
+guideLastName: string;
+hasOwnCompany: boolean;
+atAgency: number;
+languageLevelId: number;
+areas: string;
+triptypeId: number;
+guideOfferId: number;
+guideBidId: number;
+guideFavoriteId: number;
+guideDealId: number;
+agencyReviewINIdPool: number;
+touristReviewINIdPool: number;
+agencyReviewOUTIdPool: number;
+touristReviewOUTIdPool: number;
+holidayCalendarId: number;
+hostIdPool: number;
+eventIdPool: number;
+accomodationIdPool: number;
+transportIdPool: number;
+lastModified: string;
+timeCreated: string;
+isActive: boolean;
+}

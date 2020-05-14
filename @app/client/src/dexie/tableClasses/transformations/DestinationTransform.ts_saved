@@ -1,0 +1,16 @@
+import { Destinationresource } from '*.graphqls'
+import { Destination } from 'src/graphqlQueriesMS/__generated__/Destination'
+
+ const DestinationTransform = (raw: Destinationresource): Destination => {
+  return {
+      destinationId: `${raw.destinationId}`,
+      createdById: `${raw.createdById}`,
+      publishedById: `${raw.publishedById}`,
+      atAgency: `${raw.atAgency}`,
+      destinationName: `${raw.destinationName}`,
+    };
+};
+
+
+export default DestinationTransform
+

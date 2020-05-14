@@ -1,8 +1,9 @@
 import { MenuDataItem } from '@ant-design/pro-layout';
-import { GlobalModelState } from './global';
+
 import { DefaultSettings as SettingModelState } from '../../config/defaultSettings';
-import { UserModelState } from './user';
+import { GlobalModelState } from './global';
 import { StateType } from './login';
+import { UserModelState } from './user';
 
 export { GlobalModelState, SettingModelState, UserModelState };
 
