@@ -11,5 +11,6 @@ onFreePeriod: boolean;
 freePeriodExpires?: string;
 isRomanian?: boolean;
 isActive?: boolean;
+timeCreated?: string;
  nodeId?: string;
 }

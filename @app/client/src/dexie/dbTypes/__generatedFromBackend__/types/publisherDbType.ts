@@ -10,5 +10,6 @@ isRomanian?: boolean;
 isActive?: boolean;
 commandLogEntryId?: number[];
 timeCreated?: string;
+timeCommand?: string;
  nodeId?: string;
 }

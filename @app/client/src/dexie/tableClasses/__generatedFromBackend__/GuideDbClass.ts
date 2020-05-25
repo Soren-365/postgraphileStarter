@@ -31,9 +31,10 @@ transportIdPool?: number[];
 lastModified?: string;
 timeCreated?: string;
 isActive?: boolean;
+isPublic: boolean;
  nodeId?: string;
 
-  constructor(id?: number,name?: string,contactId: number,hasGuideLicence: boolean,guideLicenceUrl?: string,publisherId: number,createdById: number,guideFirstName?: string,guideLastName?: string,hasOwnCompany: boolean,atAgency?: number,languageLevelId: number,areas: string[],tripTypeName?: string,guideOfferId: number,guideBidId: number,guideFavoriteId: number,guideDealId: number,agencyReviewInIdPool?: number[],touristReviewInIdPool?: number[],agencyReviewOutIdPool?: number[],touristReviewOutIdPool?: number[],bookingCalendarId: number,hostIdPool?: number[],eventIdPool?: number[],accomodationIdPool?: number[],transportIdPool?: number[],lastModified?: string,timeCreated?: string,isActive?: boolean, nodeId?: string,) {
+  constructor(id?: number,name?: string,contactId: number,hasGuideLicence: boolean,guideLicenceUrl?: string,publisherId: number,createdById: number,guideFirstName?: string,guideLastName?: string,hasOwnCompany: boolean,atAgency?: number,languageLevelId: number,areas: string[],tripTypeName?: string,guideOfferId: number,guideBidId: number,guideFavoriteId: number,guideDealId: number,agencyReviewInIdPool?: number[],touristReviewInIdPool?: number[],agencyReviewOutIdPool?: number[],touristReviewOutIdPool?: number[],bookingCalendarId: number,hostIdPool?: number[],eventIdPool?: number[],accomodationIdPool?: number[],transportIdPool?: number[],lastModified?: string,timeCreated?: string,isActive?: boolean,isPublic: boolean, nodeId?: string,) {
     this.id = id
     this.name = name
     this.contactId = contactId
@@ -64,6 +65,7 @@ isActive?: boolean;
     this.lastModified = lastModified
     this.timeCreated = timeCreated
     this.isActive = isActive
+    this.isPublic = isPublic
     this.nodeId = nodeId
   }
 //  add methods here and move to 'edited' folder

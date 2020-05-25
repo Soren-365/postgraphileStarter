@@ -3,7 +3,7 @@ export const query = `query getConditionalGuidebid(, $id:  number ) {
         guidebids(condition: {id: $id  })  {
           nodes {
             id
- 
+
           }
         }
       }`

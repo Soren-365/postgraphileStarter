@@ -3,7 +3,7 @@ export const query = `query getConditionalAgencyhost(, $hostId:  number , $timeC
         agencyhosts(condition: {,hostId: $hostId ,timeCreated: $timeCreated  })  {
           nodes {
             agencyId hostId timeCreated
- 
+
           }
         }
       }`

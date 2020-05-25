@@ -4,6 +4,9 @@ const { Text, Title, Paragraph } = Typography;
 import { SharedLayout } from "@app/components";
 import { useSharedQuery } from "@app/graphql";
 import { NextPage } from "next";
+import { WithRouterProps } from "next/dist/client/with-router";
+
+import Navbar from "../components/navbar";
 
 // Convenience helper
 const Li = ({ children, ...props }: any) => (
@@ -16,6 +19,7 @@ const Home: NextPage = () => {
   const query = useSharedQuery();
   return (
     <SharedLayout title="" query={query}>
+      <Navbar />
       <Row justify="space-between" gutter={32}>
         <Col xs={24} sm={16}>
           <Title data-cy="homepage-header">

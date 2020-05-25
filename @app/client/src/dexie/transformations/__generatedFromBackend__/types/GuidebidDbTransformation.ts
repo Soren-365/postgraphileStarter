@@ -1,6 +1,6 @@
-import { Guidebid  as gqlGuidebid } from '*.graphqls'
-
 import { guidebidDbType as objGuidebid } from '../../../dbTypes/__generatedFromBackend__/types/guidebidDbType'
+
+import { Guidebid  as gqlGuidebid } from '*.graphqls'
 
 
 export const GuidebidTransform = (raw: gqlGuidebid): objGuidebid => {

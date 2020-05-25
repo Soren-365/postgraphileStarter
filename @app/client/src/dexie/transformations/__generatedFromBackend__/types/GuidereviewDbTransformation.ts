@@ -1,11 +1,11 @@
-import { Guidereview  as gqlGuidereview } from '*.graphqls'
-
 import { guidereviewDbType as objGuidereview } from '../../../dbTypes/__generatedFromBackend__/types/guidereviewDbType'
+
+import { Guidereview  as gqlGuidereview } from '*.graphqls'
 
 
 export const GuidereviewTransform = (raw: gqlGuidereview): objGuidereview => {
     return {
-         id: raw.id, publisherId: raw.publisherId, createdById: raw.createdById, isActive: raw.isActive, halfStars: raw.halfStars, reviewText: raw.reviewText, guideIdTarget: raw.guideIdTarget, startDateTripEvent: raw.startDateTripEvent, byRomanian: raw.byRomanian
+         id: raw.id, publisherId: raw.publisherId, createdById: raw.createdById, isActive: raw.isActive, halfStars: raw.halfStars, reviewText: raw.reviewText, guideIdTarget: raw.guideIdTarget, startDateTripEvent: raw.startDateTripEvent, byRomanian: raw.byRomanian, timeCreated: raw.timeCreated
     }
 }
 

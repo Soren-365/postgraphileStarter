@@ -8,9 +8,10 @@ locationSignedUrls?: string[];
 signedUrlsUpdate?: string[];
 lastModifiedBy: number;
 timeCreated?: string;
+lastModified?: string;
  nodeId?: string;
 
-  constructor(id?: number,atAgency: number,uploadLocations?: string[],locationSignedUrls?: string[],signedUrlsUpdate?: string[],lastModifiedBy: number,timeCreated?: string, nodeId?: string,) {
+  constructor(id?: number,atAgency: number,uploadLocations?: string[],locationSignedUrls?: string[],signedUrlsUpdate?: string[],lastModifiedBy: number,timeCreated?: string,lastModified?: string, nodeId?: string,) {
     this.id = id
     this.atAgency = atAgency
     this.uploadLocations = uploadLocations
@@ -18,6 +19,7 @@ timeCreated?: string;
     this.signedUrlsUpdate = signedUrlsUpdate
     this.lastModifiedBy = lastModifiedBy
     this.timeCreated = timeCreated
+    this.lastModified = lastModified
     this.nodeId = nodeId
   }
 //  add methods here and move to 'edited' folder

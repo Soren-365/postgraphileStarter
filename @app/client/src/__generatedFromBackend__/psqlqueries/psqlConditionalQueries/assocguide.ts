@@ -3,7 +3,7 @@ export const query = `query getConditionalAssocguide(, $guideId:  number , $time
         assocguides(condition: {,guideId: $guideId ,,timeCreated: $timeCreated  })  {
           nodes {
             assocGuideId guideId atAgency timeCreated
- 
+
           }
         }
       }`

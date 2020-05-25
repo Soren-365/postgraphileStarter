@@ -1,6 +1,6 @@
-import { Assoctravelgroup  as gqlAssoctravelgroup } from '*.graphqls'
-
 import { assoctravelgroupDbType as objAssoctravelgroup } from '../../../dbTypes/__generatedFromBackend__/types/assoctravelgroupDbType'
+
+import { Assoctravelgroup  as gqlAssoctravelgroup } from '*.graphqls'
 
 
 export const AssoctravelgroupTransform = (raw: gqlAssoctravelgroup): objAssoctravelgroup => {

@@ -6,4 +6,5 @@ touristOfferId: number;
 touristFavoriteId: number;
 touristBidId: number;
 touristDealId: number;
+isRomanian: boolean;
 }

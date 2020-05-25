@@ -6,4 +6,5 @@ atGuide?: number;
 presentationId?: number;
 isActive?: boolean;
 lastModified?: string;
+timeCreated?: string;
 }

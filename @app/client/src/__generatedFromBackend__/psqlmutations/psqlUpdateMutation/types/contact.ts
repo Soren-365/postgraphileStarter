@@ -13,4 +13,5 @@ isCompany?: boolean;
 createdById?: number;
 belongsToType?: string;
 belongsToId?: number;
+timeCreated?: string;
 }

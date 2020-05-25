@@ -2,8 +2,8 @@ export const query = `query getConditionalHostresource(, $id:  number , $contact
         __typename
         hostresources(condition: {id: $id ,,contactId: $contactId ,publisherId: $publisherId ,createdById: $createdById ,,atAccomodation: $atAccomodation ,atAgency: $atAgency ,atGuide: $atGuide ,tripTypeName: $tripTypeName ,,addressInfoId: $addressInfoId ,,presentationId: $presentationId ,bookingCalendarId: $bookingCalendarId ,,,,, })  {
           nodes {
-            id hostResourceName contactId publisherId createdById withAccomodation atAccomodation atAgency atGuide tripTypeName locatedIn addressInfoId ownedByAt presentationId bookingCalendarId isRomanian isActive isPublic lastModified
- 
+            id hostResourceName contactId publisherId createdById withAccomodation atAccomodation atAgency atGuide tripTypeName locatedIn addressInfoId ownedByAt presentationId bookingCalendarId isRomanian isActive isPublic lastModified timeCreated
+
           }
         }
       }`

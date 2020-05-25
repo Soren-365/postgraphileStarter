@@ -3,7 +3,7 @@ export const query = `query getConditionalTriptype(, $timeCreated:  string ) {
         triptypes(condition: {,,,,timeCreated: $timeCreated  })  {
           nodes {
             id tripTypeName atAgency lastModified timeCreated
- 
+
           }
         }
       }`

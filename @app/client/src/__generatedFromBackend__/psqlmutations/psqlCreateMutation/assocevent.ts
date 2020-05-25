@@ -4,7 +4,7 @@ export const mutation = `mutation createAssocevent($assocEventId: [Int] ,$eventI
             agencyEdge {
                 node {
                       id
-                     }  
+                     }
               }
             clientMutationId
             }

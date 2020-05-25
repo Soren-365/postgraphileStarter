@@ -12,9 +12,10 @@ publisherTarget: number;
 startDateTripEvent?: string;
 byRomanian?: boolean;
 isActive?: boolean;
+timeCreated?: string;
  nodeId?: string;
 
-  constructor(id?: number,publisherId: number,createdById: number,halfStars?: number,reviewText?: string,resourceType: string,resourceId: number,publisherTarget: number,startDateTripEvent?: string,byRomanian?: boolean,isActive?: boolean, nodeId?: string,) {
+  constructor(id?: number,publisherId: number,createdById: number,halfStars?: number,reviewText?: string,resourceType: string,resourceId: number,publisherTarget: number,startDateTripEvent?: string,byRomanian?: boolean,isActive?: boolean,timeCreated?: string, nodeId?: string,) {
     this.id = id
     this.publisherId = publisherId
     this.createdById = createdById
@@ -26,6 +27,7 @@ isActive?: boolean;
     this.startDateTripEvent = startDateTripEvent
     this.byRomanian = byRomanian
     this.isActive = isActive
+    this.timeCreated = timeCreated
     this.nodeId = nodeId
   }
 //  add methods here and move to 'edited' folder

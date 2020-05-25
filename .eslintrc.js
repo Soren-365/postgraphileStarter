@@ -50,15 +50,15 @@ module.exports = {
   rules: {
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "error",
-    "@typescript-eslint/no-unused-vars": [
-      "error",
-      {
-        argsIgnorePattern: "^_",
-        varsIgnorePattern: "^_",
-        args: "after-used",
-        ignoreRestSiblings: true,
-      },
-    ],
+    // "@typescript-eslint/no-unused-vars": [
+    //   "error",
+    //   {
+    //     argsIgnorePattern: "^_",
+    //     varsIgnorePattern: "^_",
+    //     args: "after-used",
+    //     ignoreRestSiblings: true,
+    //   },
+    // ],
     "no-unused-expressions": [
       "error",
       {

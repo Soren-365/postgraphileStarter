@@ -18,5 +18,6 @@ agencyReviewOutIdPool?: number[];
 timeCreated?: string;
 atTravelGroup?: number;
 isActive?: boolean;
+isRomanian: boolean;
  nodeId?: string;
 }

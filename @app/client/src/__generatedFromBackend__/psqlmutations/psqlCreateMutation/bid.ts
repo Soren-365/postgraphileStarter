@@ -1,10 +1,10 @@
-export const mutation = `mutation createBid(,$publisherId: [Int]! ,$createdById: [Int]! ,$bidAmount: [Int] ,$isActive: [Boolean]! ,$timeCreated: [Datetime]! , $clientMutationId: String!) {
+export const mutation = `mutation createBid(, $clientMutationId: String!) {
         __typename
-        createBid(input: {clientMutationId: $clientMutationId,bid: {,publisherId: $publisherId ,createdById: $createdById ,bidAmount: $bidAmount ,isActive: $isActive ,timeCreated: $timeCreated }}) {
+        createBid(input: {clientMutationId: $clientMutationId,bid: {}}) {
             agencyEdge {
                 node {
                       id
-                     }  
+                     }
               }
             clientMutationId
             }

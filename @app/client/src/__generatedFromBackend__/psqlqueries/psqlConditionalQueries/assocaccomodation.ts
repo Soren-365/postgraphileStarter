@@ -3,7 +3,7 @@ export const query = `query getConditionalAssocaccomodation(, $accomodationId:  
         assocaccomodations(condition: {,accomodationId: $accomodationId ,atAgency: $atAgency ,timeCreated: $timeCreated  })  {
           nodes {
             assocAccomodationId accomodationId atAgency timeCreated
- 
+
           }
         }
       }`

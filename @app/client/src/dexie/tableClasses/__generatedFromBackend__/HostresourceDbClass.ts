@@ -20,9 +20,10 @@ isRomanian?: boolean;
 isActive?: boolean;
 isPublic: boolean;
 lastModified?: string;
+timeCreated?: string;
  nodeId?: string;
 
-  constructor(id?: number,hostResourceName?: string,contactId: number,publisherId: number,createdById: number,withAccomodation: boolean,atAccomodation?: number,atAgency?: number,atGuide?: number,tripTypeName?: string,locatedIn?: string,addressInfoId: number,ownedByAt: boolean,presentationId: number,bookingCalendarId: number,isRomanian?: boolean,isActive?: boolean,isPublic: boolean,lastModified?: string, nodeId?: string,) {
+  constructor(id?: number,hostResourceName?: string,contactId: number,publisherId: number,createdById: number,withAccomodation: boolean,atAccomodation?: number,atAgency?: number,atGuide?: number,tripTypeName?: string,locatedIn?: string,addressInfoId: number,ownedByAt: boolean,presentationId: number,bookingCalendarId: number,isRomanian?: boolean,isActive?: boolean,isPublic: boolean,lastModified?: string,timeCreated?: string, nodeId?: string,) {
     this.id = id
     this.hostResourceName = hostResourceName
     this.contactId = contactId
@@ -42,6 +43,7 @@ lastModified?: string;
     this.isActive = isActive
     this.isPublic = isPublic
     this.lastModified = lastModified
+    this.timeCreated = timeCreated
     this.nodeId = nodeId
   }
 //  add methods here and move to 'edited' folder

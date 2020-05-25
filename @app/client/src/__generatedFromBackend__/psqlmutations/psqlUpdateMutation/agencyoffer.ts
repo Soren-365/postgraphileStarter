@@ -1,6 +1,6 @@
-export const mutation = `mutation updateAgencyoffer($id: Int ,$tripsOfferesourceIdPool: [Int] , $clientMutationId: String!) {
+export const mutation = `mutation updateAgencyoffer($id: Int , $clientMutationId: String!) {
         __typename
-        updateAgencyoffer(input: {clientMutationId: $clientMutationId, patch: {,tripsOfferesourceIdPool: $tripsOfferesourceIdPool }, id: $id}) {
+        updateAgencyoffer(input: {clientMutationId: $clientMutationId, patch: {}, id: $id}) {
             clientMutationId
             }
           }`

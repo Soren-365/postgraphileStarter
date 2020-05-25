@@ -17,9 +17,10 @@ geoCodingId?: number;
 isPublic: boolean;
 lastModified?: string;
 lastModifiedBy?: number;
+timeCreated?: string;
  nodeId?: string;
 
-  constructor(id?: number,destinationName?: string,publishedById: number,createdById: number,area?: string,judet?: string,tripTypeName?: string,isActive?: boolean,priceInfoId?: number,activeAtPeriodsId?: number,presentationId?: number,atAgency: number,geoCodingId?: number,isPublic: boolean,lastModified?: string,lastModifiedBy?: number, nodeId?: string,) {
+  constructor(id?: number,destinationName?: string,publishedById: number,createdById: number,area?: string,judet?: string,tripTypeName?: string,isActive?: boolean,priceInfoId?: number,activeAtPeriodsId?: number,presentationId?: number,atAgency: number,geoCodingId?: number,isPublic: boolean,lastModified?: string,lastModifiedBy?: number,timeCreated?: string, nodeId?: string,) {
     this.id = id
     this.destinationName = destinationName
     this.publishedById = publishedById
@@ -36,6 +37,7 @@ lastModifiedBy?: number;
     this.isPublic = isPublic
     this.lastModified = lastModified
     this.lastModifiedBy = lastModifiedBy
+    this.timeCreated = timeCreated
     this.nodeId = nodeId
   }
 //  add methods here and move to 'edited' folder

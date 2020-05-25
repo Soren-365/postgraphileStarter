@@ -2,8 +2,8 @@ export const query = `query getConditionalPresentation(, $id:  number , $publish
         __typename
         presentations(condition: {id: $id ,,publisherId: $publisherId ,createdById: $createdById ,,,,, })  {
           nodes {
-            id headline publisherId createdById resourceType resourceTypeId isActive lastModified
- 
+            id headline publisherId createdById resourceType resourceTypeId isActive lastModified timeCreated
+
           }
         }
       }`

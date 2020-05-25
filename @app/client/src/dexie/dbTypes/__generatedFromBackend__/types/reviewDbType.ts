@@ -10,5 +10,6 @@ publisherTarget: number;
 startDateTripEvent?: string;
 byRomanian?: boolean;
 isActive?: boolean;
+timeCreated?: string;
  nodeId?: string;
 }

@@ -1,6 +1,6 @@
 export const query = `query getNodeassoctransport($nodeId: String!) {
         __typename
-        assoctransportByNodeId(nodeId: $nodeId }) { 
+        assoctransportByNodeId(nodeId: $nodeId }) {
             assocTransportId transportId atAgency
 
         }

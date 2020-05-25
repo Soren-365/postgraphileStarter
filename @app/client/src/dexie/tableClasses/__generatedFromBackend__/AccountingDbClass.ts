@@ -13,9 +13,10 @@ onFreePeriod: boolean;
 freePeriodExpires?: string;
 isRomanian?: boolean;
 isActive?: boolean;
+timeCreated?: string;
  nodeId?: string;
 
-  constructor(id?: number,publisherId: number,paymentHistory?: string[],abonamentActive: boolean,lastPayment?: string,lastPaymentAmount?: string,abonamentExpires?: string,onYearlyPayment: boolean,onFreePeriod: boolean,freePeriodExpires?: string,isRomanian?: boolean,isActive?: boolean, nodeId?: string,) {
+  constructor(id?: number,publisherId: number,paymentHistory?: string[],abonamentActive: boolean,lastPayment?: string,lastPaymentAmount?: string,abonamentExpires?: string,onYearlyPayment: boolean,onFreePeriod: boolean,freePeriodExpires?: string,isRomanian?: boolean,isActive?: boolean,timeCreated?: string, nodeId?: string,) {
     this.id = id
     this.publisherId = publisherId
     this.paymentHistory = paymentHistory
@@ -28,6 +29,7 @@ isActive?: boolean;
     this.freePeriodExpires = freePeriodExpires
     this.isRomanian = isRomanian
     this.isActive = isActive
+    this.timeCreated = timeCreated
     this.nodeId = nodeId
   }
 //  add methods here and move to 'edited' folder

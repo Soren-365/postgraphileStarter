@@ -4,7 +4,7 @@ export const mutation = `mutation createTriptype(,$tripTypeName: String! ,$atAge
             agencyEdge {
                 node {
                       id
-                     }  
+                     }
               }
             clientMutationId
             }

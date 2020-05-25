@@ -4,7 +4,7 @@ export const mutation = `mutation createTouristoffer(, $clientMutationId: String
             agencyEdge {
                 node {
                       id
-                     }  
+                     }
               }
             clientMutationId
             }

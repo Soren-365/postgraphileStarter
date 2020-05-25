@@ -18,4 +18,5 @@ export interface mediadestinationresourceConditionalQueryType {
  imageGallery9?:  number;
  imageGallery10?:  number;
  signedUrlsUpdate?:  string;
+ timeCreated?:  string;
 }

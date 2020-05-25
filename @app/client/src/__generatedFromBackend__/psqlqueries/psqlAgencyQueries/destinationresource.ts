@@ -2,7 +2,7 @@ export const query = `query getAgencydestinationresources($atAgency: Int!, $id: 
         __typename
         destinationresources(condition: {atAgency: $atAgency, id: $id }) {
           nodes {
-            id destinationName publishedById createdById area judet tripTypeName isActive priceInfoId activeAtPeriodsId presentationId atAgency geoCodingId isPublic lastModified lastModifiedBy
+            id destinationName publishedById createdById area judet tripTypeName isActive priceInfoId activeAtPeriodsId presentationId atAgency geoCodingId isPublic lastModified lastModifiedBy timeCreated
 
           }
         }

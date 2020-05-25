@@ -10,9 +10,10 @@ fromTimestamp: string[];
 toTimestamp: string[];
 resourceType?: string[];
 comment?: string[];
+timeCreated?: string;
  nodeId?: string;
 
-  constructor(id?: number,belongsToId?: number,belongsToType?: string,createdById?: number,isActive?: boolean,fromTimestamp: string[],toTimestamp: string[],resourceType?: string[],comment?: string[], nodeId?: string,) {
+  constructor(id?: number,belongsToId?: number,belongsToType?: string,createdById?: number,isActive?: boolean,fromTimestamp: string[],toTimestamp: string[],resourceType?: string[],comment?: string[],timeCreated?: string, nodeId?: string,) {
     this.id = id
     this.belongsToId = belongsToId
     this.belongsToType = belongsToType
@@ -22,6 +23,7 @@ comment?: string[];
     this.toTimestamp = toTimestamp
     this.resourceType = resourceType
     this.comment = comment
+    this.timeCreated = timeCreated
     this.nodeId = nodeId
   }
 //  add methods here and move to 'edited' folder

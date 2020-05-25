@@ -8,5 +8,6 @@ reviewText?: string;
 agencyIdTarget: number;
 startDateTripEvent?: string;
 byRomanian?: boolean;
+timeCreated?: string;
  nodeId?: string;
 }

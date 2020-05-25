@@ -16,5 +16,6 @@ atTouristResource: number;
 isRomanian: boolean;
 isActive?: boolean;
 lastModified?: string;
+timeCreated?: string;
  nodeId?: string;
 }

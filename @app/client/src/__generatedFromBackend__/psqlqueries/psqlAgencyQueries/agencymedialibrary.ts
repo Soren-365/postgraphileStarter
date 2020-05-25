@@ -2,7 +2,7 @@ export const query = `query getAgencyagencymedialibraries($atAgency: Int!, $id: 
         __typename
         agencymedialibraries(condition: {atAgency: $atAgency, id: $id }) {
           nodes {
-            id atAgency uploadLocations locationSignedUrls signedUrlsUpdate lastModifiedBy timeCreated
+            id atAgency uploadLocations locationSignedUrls signedUrlsUpdate lastModifiedBy timeCreated lastModified
 
           }
         }

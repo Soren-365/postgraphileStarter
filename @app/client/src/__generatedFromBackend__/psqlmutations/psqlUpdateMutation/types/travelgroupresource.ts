@@ -9,4 +9,5 @@ atGuide?: number;
 atTripOfferResource?: number;
 isActive?: boolean;
 lastModified?: string;
+timeCreated?: string;
 }

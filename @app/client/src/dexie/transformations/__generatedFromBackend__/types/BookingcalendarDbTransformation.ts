@@ -1,11 +1,11 @@
-import { Bookingcalendar  as gqlBookingcalendar } from '*.graphqls'
-
 import { bookingcalendarDbType as objBookingcalendar } from '../../../dbTypes/__generatedFromBackend__/types/bookingcalendarDbType'
+
+import { Bookingcalendar  as gqlBookingcalendar } from '*.graphqls'
 
 
 export const BookingcalendarTransform = (raw: gqlBookingcalendar): objBookingcalendar => {
     return {
-         id: raw.id, belongsToId: raw.belongsToId, belongsToType: raw.belongsToType, createdById: raw.createdById, isActive: raw.isActive, fromTimestamp: raw.fromTimestamp, toTimestamp: raw.toTimestamp, resourceType: raw.resourceType, comment: raw.comment
+         id: raw.id, belongsToId: raw.belongsToId, belongsToType: raw.belongsToType, createdById: raw.createdById, isActive: raw.isActive, fromTimestamp: raw.fromTimestamp, toTimestamp: raw.toTimestamp, resourceType: raw.resourceType, comment: raw.comment, timeCreated: raw.timeCreated
     }
 }
 

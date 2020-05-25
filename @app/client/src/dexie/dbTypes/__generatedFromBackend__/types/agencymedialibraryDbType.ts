@@ -6,5 +6,6 @@ locationSignedUrls?: string[];
 signedUrlsUpdate?: string[];
 lastModifiedBy: number;
 timeCreated?: string;
+lastModified?: string;
  nodeId?: string;
 }

@@ -2,8 +2,8 @@ export const query = `query getConditionalGuideresource(, $id:  number , $publis
         __typename
         guideresources(condition: {id: $id ,,publisherId: $publisherId ,createdById: $createdById ,atGuide: $atGuide ,timeRangeId: $timeRangeId ,priceInfoId: $priceInfoId ,atAgency: $atAgency ,,bookingCalendarId: $bookingCalendarId ,,,,, })  {
           nodes {
-            id guideResourceName publisherId createdById atGuide timeRangeId priceInfoId atAgency multipleTimeRange bookingCalendarId isRomanian isActive isPublic lastModified
- 
+            id guideResourceName publisherId createdById atGuide timeRangeId priceInfoId atAgency multipleTimeRange bookingCalendarId isRomanian isActive isPublic lastModified timeCreated
+
           }
         }
       }`

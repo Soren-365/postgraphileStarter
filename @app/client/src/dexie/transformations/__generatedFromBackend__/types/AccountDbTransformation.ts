@@ -1,11 +1,11 @@
-import { Account  as gqlAccount } from '*.graphqls'
-
 import { accountDbType as objAccount } from '../../../dbTypes/__generatedFromBackend__/types/accountDbType'
+
+import { Account  as gqlAccount } from '*.graphqls'
 
 
 export const AccountTransform = (raw: gqlAccount): objAccount => {
     return {
-         id: raw.id, emailHash: raw.emailHash, passwordHash: raw.passwordHash, sessionId: raw.sessionId
+         id: raw.id
     }
 }
 

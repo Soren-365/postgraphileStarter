@@ -1,11 +1,11 @@
-import { Timerange  as gqlTimerange } from '*.graphqls'
-
 import { timerangeDbType as objTimerange } from '../../../dbTypes/__generatedFromBackend__/types/timerangeDbType'
+
+import { Timerange  as gqlTimerange } from '*.graphqls'
 
 
 export const TimerangeTransform = (raw: gqlTimerange): objTimerange => {
     return {
-         id: raw.id, fromTimestamp: raw.fromTimestamp, toTimestamp: raw.toTimestamp, timeCreated: raw.timeCreated
+         id: raw.id
     }
 }
 

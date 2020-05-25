@@ -16,9 +16,10 @@ atGuide?: number;
 isActive?: boolean;
 isPublic: boolean;
 lastModified?: string;
+timeCreated?: string;
  nodeId?: string;
 
-  constructor(id?: number,tripOfferName?: string,publisherId: number,createdById: number,availableAtCalendarId: number,guideResponsibleId: number,guideSecondaryId?: number,atAgency?: number,priceInfoId: number,destinationId: number[],isSigned: boolean,atGuide?: number,isActive?: boolean,isPublic: boolean,lastModified?: string, nodeId?: string,) {
+  constructor(id?: number,tripOfferName?: string,publisherId: number,createdById: number,availableAtCalendarId: number,guideResponsibleId: number,guideSecondaryId?: number,atAgency?: number,priceInfoId: number,destinationId: number[],isSigned: boolean,atGuide?: number,isActive?: boolean,isPublic: boolean,lastModified?: string,timeCreated?: string, nodeId?: string,) {
     this.id = id
     this.tripOfferName = tripOfferName
     this.publisherId = publisherId
@@ -34,6 +35,7 @@ lastModified?: string;
     this.isActive = isActive
     this.isPublic = isPublic
     this.lastModified = lastModified
+    this.timeCreated = timeCreated
     this.nodeId = nodeId
   }
 //  add methods here and move to 'edited' folder

@@ -8,4 +8,5 @@ atAgency?: number;
 atGuide?: number;
 isActive?: boolean;
 lastModified?: string;
+timeCreated?: string;
 }

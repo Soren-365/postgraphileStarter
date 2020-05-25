@@ -1,6 +1,6 @@
 export const query = `query getNodeassoctravelgroup($nodeId: String!) {
         __typename
-        assoctravelgroupByNodeId(nodeId: $nodeId }) { 
+        assoctravelgroupByNodeId(nodeId: $nodeId }) {
             assocTravelGroupId travelGroupId atAgency timeCreated
 
         }

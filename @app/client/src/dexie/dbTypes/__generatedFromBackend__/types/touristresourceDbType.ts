@@ -14,5 +14,6 @@ isRomanian?: boolean;
 isActive?: boolean;
 isPublic: boolean;
 lastModified?: string;
+timeCreated?: string;
  nodeId?: string;
 }

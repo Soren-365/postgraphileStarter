@@ -11,4 +11,5 @@ guideBidId: number;
 guideFavoriteId: number;
 guideDealId: number;
 bookingCalendarId: number;
+isPublic: boolean;
 }

@@ -22,4 +22,5 @@ agencyMediaLibraryId?: number;
 bookingCalendarId?: number;
 specializedAgency?: string;
 lastModified?: string;
+timeCreated?: string;
 }

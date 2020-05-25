@@ -12,5 +12,6 @@ isActive?: boolean;
 atResourceType: string;
 belongsToId: number;
 lastModified?: string;
+timeCreated?: string;
  nodeId?: string;
 }

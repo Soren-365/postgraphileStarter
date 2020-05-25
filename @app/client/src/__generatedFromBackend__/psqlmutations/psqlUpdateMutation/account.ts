@@ -1,6 +1,6 @@
-export const mutation = `mutation updateAccount($id: Int ,$emailHash: String ,$passwordHash: String ,$sessionId: String , $clientMutationId: String!) {
+export const mutation = `mutation updateAccount($id: Int , $clientMutationId: String!) {
         __typename
-        updateAccount(input: {clientMutationId: $clientMutationId, patch: {,emailHash: $emailHash ,passwordHash: $passwordHash ,sessionId: $sessionId }, id: $id}) {
+        updateAccount(input: {clientMutationId: $clientMutationId, patch: {}, id: $id}) {
             clientMutationId
             }
           }`

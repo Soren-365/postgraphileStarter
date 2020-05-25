@@ -1,5 +1,5 @@
 export interface agencyfavoriteConditionalQueryType {
  resourceId?:  number;
- resourceType?:  string;
- atAgency?:  number;
+ undefined?:  string;
+ undefined?:  number;
 }

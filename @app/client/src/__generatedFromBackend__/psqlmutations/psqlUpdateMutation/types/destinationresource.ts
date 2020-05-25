@@ -11,4 +11,5 @@ presentationId?: number;
 geoCodingId?: number;
 lastModified?: string;
 lastModifiedBy?: number;
+timeCreated?: string;
 }

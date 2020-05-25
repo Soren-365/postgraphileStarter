@@ -3,7 +3,7 @@ export const query = `query getConditionalAgencyuser(, $userId:  number , $timeC
         agencyusers(condition: {,userId: $userId ,timeCreated: $timeCreated  })  {
           nodes {
             agencyId userId timeCreated
- 
+
           }
         }
       }`

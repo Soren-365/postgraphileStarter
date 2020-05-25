@@ -3,7 +3,7 @@ export const query = `query getConditionalRoomcalendar(, $id:  number , $publish
         roomcalendars(condition: {id: $id ,publisherId: $publisherId ,createdById: $createdById ,,calendarentryId: $calendarentryId , })  {
           nodes {
             id publisherId createdById isActive calendarentryId timeCreated
- 
+
           }
         }
       }`

@@ -2,8 +2,8 @@ export const query = `query getConditionalAccounting(, $id:  number , $publisher
         __typename
         accountings(condition: {id: $id ,publisherId: $publisherId ,,,,,,,,,,, })  {
           nodes {
-            id publisherId paymentHistory abonamentActive lastPayment lastPaymentAmount abonamentExpires onYearlyPayment onFreePeriod freePeriodExpires isRomanian isActive
- 
+            id publisherId paymentHistory abonamentActive lastPayment lastPaymentAmount abonamentExpires onYearlyPayment onFreePeriod freePeriodExpires isRomanian isActive timeCreated
+
           }
         }
       }`

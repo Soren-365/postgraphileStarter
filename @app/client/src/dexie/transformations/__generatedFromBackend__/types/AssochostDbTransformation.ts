@@ -1,6 +1,6 @@
-import { Assochost  as gqlAssochost } from '*.graphqls'
-
 import { assochostDbType as objAssochost } from '../../../dbTypes/__generatedFromBackend__/types/assochostDbType'
+
+import { Assochost  as gqlAssochost } from '*.graphqls'
 
 
 export const AssochostTransform = (raw: gqlAssochost): objAssochost => {

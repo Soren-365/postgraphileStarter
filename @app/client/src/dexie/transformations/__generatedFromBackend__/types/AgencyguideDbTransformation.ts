@@ -1,6 +1,6 @@
-import { Agencyguide  as gqlAgencyguide } from '*.graphqls'
-
 import { agencyguideDbType as objAgencyguide } from '../../../dbTypes/__generatedFromBackend__/types/agencyguideDbType'
+
+import { Agencyguide  as gqlAgencyguide } from '*.graphqls'
 
 
 export const AgencyguideTransform = (raw: gqlAgencyguide): objAgencyguide => {

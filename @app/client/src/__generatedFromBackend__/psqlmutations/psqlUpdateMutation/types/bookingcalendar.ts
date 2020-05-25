@@ -6,4 +6,5 @@ createdById?: number;
 isActive?: boolean;
 resourceType?: string[];
 comment?: string[];
+timeCreated?: string;
 }

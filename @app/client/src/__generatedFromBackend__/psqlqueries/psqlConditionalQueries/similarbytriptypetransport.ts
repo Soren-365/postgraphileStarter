@@ -1,9 +1,10 @@
 export const query = `query getConditionalSimilarbytriptypetransport(, $timeCreated:  string ) {
         __typename
-        similarbytriptypetransports(condition: {,,,timeCreated: $timeCreated  })  {
+        similarbytriptypetransports(condition: {,,,,,,,,,,,timeCreated: $timeCreated  })  {
           nodes {
-            transportIds tripTypeName atAgency timeCreated
- 
+            transportIds -- resource eventres  accomodationres  hostres  transportres  app_public.guideres  app_public.tourist?  travelgroup?]
+ atAgency timeCreated
+
           }
         }
       }`

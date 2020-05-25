@@ -1,11 +1,11 @@
-import { Touristbid  as gqlTouristbid } from '*.graphqls'
-
 import { touristbidDbType as objTouristbid } from '../../../dbTypes/__generatedFromBackend__/types/touristbidDbType'
+
+import { Touristbid  as gqlTouristbid } from '*.graphqls'
 
 
 export const TouristbidTransform = (raw: gqlTouristbid): objTouristbid => {
     return {
-         id: raw.id, tripOfferResourceIdPool: raw.tripOfferResourceIdPool, eventResourceIdPool: raw.eventResourceIdPool, transportationResourceIdPool: raw.transportationResourceIdPool, accomodationResourceIdPool: raw.accomodationResourceIdPool
+         id: raw.id
     }
 }
 

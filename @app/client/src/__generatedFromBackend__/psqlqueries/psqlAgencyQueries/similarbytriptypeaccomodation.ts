@@ -2,7 +2,7 @@ export const query = `query getAgencysimilarbytriptypeaccomodations($atAgency: I
         __typename
         similarbytriptypeaccomodations(condition: {atAgency: $atAgency, id: $id }) {
           nodes {
-            accomodationIds tripTypeName atAgency timeCreated
+            accomodationIds -- triptypes tripTypeName atAgency timeCreated
 
           }
         }

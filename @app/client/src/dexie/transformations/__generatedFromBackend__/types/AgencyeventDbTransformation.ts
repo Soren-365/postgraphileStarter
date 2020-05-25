@@ -1,6 +1,6 @@
-import { Agencyevent  as gqlAgencyevent } from '*.graphqls'
-
 import { agencyeventDbType as objAgencyevent } from '../../../dbTypes/__generatedFromBackend__/types/agencyeventDbType'
+
+import { Agencyevent  as gqlAgencyevent } from '*.graphqls'
 
 
 export const AgencyeventTransform = (raw: gqlAgencyevent): objAgencyevent => {

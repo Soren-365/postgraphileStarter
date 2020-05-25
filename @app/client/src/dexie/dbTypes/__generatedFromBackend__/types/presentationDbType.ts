@@ -7,5 +7,6 @@ resourceType: string;
 resourceTypeId: number;
 isActive?: boolean;
 lastModified?: string;
+timeCreated?: string;
  nodeId?: string;
 }

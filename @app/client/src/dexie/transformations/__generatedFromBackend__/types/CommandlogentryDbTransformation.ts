@@ -1,11 +1,11 @@
-import { Commandlogentry  as gqlCommandlogentry } from '*.graphqls'
-
 import { commandlogentryDbType as objCommandlogentry } from '../../../dbTypes/__generatedFromBackend__/types/commandlogentryDbType'
+
+import { Commandlogentry  as gqlCommandlogentry } from '*.graphqls'
 
 
 export const CommandlogentryTransform = (raw: gqlCommandlogentry): objCommandlogentry => {
     return {
-         id: raw.id, atPublisher: raw.atPublisher, belongsToType: raw.belongsToType, resourceId: raw.resourceId, logcommand: raw.logcommand, timeCommand: raw.timeCommand
+         id: raw.id
     }
 }
 

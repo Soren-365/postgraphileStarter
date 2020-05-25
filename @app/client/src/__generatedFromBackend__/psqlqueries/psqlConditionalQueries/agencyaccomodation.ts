@@ -3,7 +3,7 @@ export const query = `query getConditionalAgencyaccomodation(, $agencyId:  numbe
         agencyaccomodations(condition: {agencyId: $agencyId ,accomodationId: $accomodationId ,lastModified: $lastModified ,urlExperyAt: $urlExperyAt ,,,timeCreated: $timeCreated  })  {
           nodes {
             agencyId accomodationId lastModified urlExperyAt presentationPlacements agencyBucketUrls timeCreated
- 
+
           }
         }
       }`

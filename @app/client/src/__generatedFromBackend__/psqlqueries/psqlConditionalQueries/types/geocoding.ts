@@ -1,5 +1,6 @@
 export interface geocodingConditionalQueryType {
  id?:  number;
  createdById?:  number;
- publishedById?:  number;
+ undefined?:  number;
+ undefined?:  string;
 }

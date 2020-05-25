@@ -1,0 +1,2 @@
+export interface  ConditionalQueryType {
+}

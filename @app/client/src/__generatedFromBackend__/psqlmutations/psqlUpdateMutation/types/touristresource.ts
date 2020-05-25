@@ -7,4 +7,5 @@ atGuide?: number;
 isRomanian?: boolean;
 isActive?: boolean;
 lastModified?: string;
+timeCreated?: string;
 }

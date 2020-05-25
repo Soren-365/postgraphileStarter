@@ -1,6 +1,6 @@
 export const query = `query getNodeagencyaccomodation($nodeId: String!) {
         __typename
-        agencyaccomodationByNodeId(nodeId: $nodeId }) { 
+        agencyaccomodationByNodeId(nodeId: $nodeId }) {
             agencyId accomodationId lastModified urlExperyAt presentationPlacements agencyBucketUrls timeCreated
 
         }

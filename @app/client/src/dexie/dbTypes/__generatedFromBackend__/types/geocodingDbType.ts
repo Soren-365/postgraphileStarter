@@ -11,8 +11,5 @@ viewportNorthEastLng?: number;
 viewportSouthWestLat?: number;
 viewportSouthWestLng?: number;
 createdById: number;
-publishedById: number;
-lastModified?: string;
-timeCreated?: string;
  nodeId?: string;
 }

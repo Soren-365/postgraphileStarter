@@ -1,9 +1,9 @@
-export const query = `query getConditionalCommandlogentry(, $id:  number , $atPublisher:  number ) {
+export const query = `query getConditionalCommandlogentry(, $id:  number ) {
         __typename
-        commandlogentries(condition: {id: $id ,atPublisher: $atPublisher ,,,, })  {
+        commandlogentries(condition: {id: $id ,,,, })  {
           nodes {
-            id atPublisher belongsToType resourceId logcommand timeCommand
- 
+            id
+
           }
         }
       }`

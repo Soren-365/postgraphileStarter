@@ -4,7 +4,7 @@ export const mutation = `mutation createAgencyuser($agencyId: Int ,$userId: Int 
             agencyEdge {
                 node {
                       id
-                     }  
+                     }
               }
             clientMutationId
             }

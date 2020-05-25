@@ -1,6 +1,6 @@
 export const query = `query getNodeassocguide($nodeId: String!) {
         __typename
-        assocguideByNodeId(nodeId: $nodeId }) { 
+        assocguideByNodeId(nodeId: $nodeId }) {
             assocGuideId guideId atAgency timeCreated
 
         }

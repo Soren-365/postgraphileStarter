@@ -1,7 +1,7 @@
 export const query = `query getNodebid($nodeId: String!) {
         __typename
-        bidByNodeId(nodeId: $nodeId }) { 
-            id publisherId createdById bidAmount isActive timeCreated
+        bidByNodeId(nodeId: $nodeId }) {
+            id
 
         }
       }`

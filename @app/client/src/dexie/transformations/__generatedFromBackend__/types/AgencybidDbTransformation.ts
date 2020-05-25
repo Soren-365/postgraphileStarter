@@ -1,6 +1,6 @@
-import { Agencybid  as gqlAgencybid } from '*.graphqls'
-
 import { agencybidDbType as objAgencybid } from '../../../dbTypes/__generatedFromBackend__/types/agencybidDbType'
+
+import { Agencybid  as gqlAgencybid } from '*.graphqls'
 
 
 export const AgencybidTransform = (raw: gqlAgencybid): objAgencybid => {

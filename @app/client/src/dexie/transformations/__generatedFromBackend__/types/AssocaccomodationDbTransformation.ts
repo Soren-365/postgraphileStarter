@@ -1,6 +1,6 @@
-import { Assocaccomodation  as gqlAssocaccomodation } from '*.graphqls'
-
 import { assocaccomodationDbType as objAssocaccomodation } from '../../../dbTypes/__generatedFromBackend__/types/assocaccomodationDbType'
+
+import { Assocaccomodation  as gqlAssocaccomodation } from '*.graphqls'
 
 
 export const AssocaccomodationTransform = (raw: gqlAssocaccomodation): objAssocaccomodation => {

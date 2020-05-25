@@ -33,5 +33,13 @@
   },
   "[markdown]": {
     "files.trimTrailingWhitespace": false
+  },
+
+  "workbench.colorCustomizations": {
+    "editor.background": "#080208",
+    "[Darcula Theme from IntelliJ]": {
+      "foreground": "#9e6eec",
+      "editor.hoverHighlightBackground": "#770077"
+    }
   }
 }

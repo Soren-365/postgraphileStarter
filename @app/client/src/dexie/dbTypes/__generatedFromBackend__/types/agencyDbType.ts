@@ -26,5 +26,6 @@ isRomanian: boolean;
 bookingCalendarId?: number;
 specializedAgency?: string;
 lastModified?: string;
+timeCreated?: string;
  nodeId?: string;
 }

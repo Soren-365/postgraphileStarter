@@ -2,8 +2,8 @@ export const query = `query getConditionalAuctioninfo(, $id:  number , $publishe
         __typename
         auctioninfos(condition: {id: $id ,publishedById: $publishedById ,createdById: $createdById ,,,bidId: $bidId ,,,,,,, })  {
           nodes {
-            id publishedById createdById advertisedPrice currentHighBid bidId acceptsOffers auctionExpiry isAuction isActive atResourceType belongsToId
- 
+            id publishedById createdById advertisedPrice currentHighBid bidId acceptsOffers auctionExpiry isAuction isActive atResourceType belongsToId timeCreated
+
           }
         }
       }`

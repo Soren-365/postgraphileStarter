@@ -2,8 +2,8 @@ export const query = `query getConditionalGuide(, $id:  number , $contactId:  nu
         __typename
         guides(condition: {id: $id ,,contactId: $contactId ,,,publisherId: $publisherId ,createdById: $createdById ,,,,atAgency: $atAgency ,languageLevelId: $languageLevelId ,,tripTypeName: $tripTypeName ,guideOfferId: $guideOfferId ,guideBidId: $guideBidId ,guideFavoriteId: $guideFavoriteId ,guideDealId: $guideDealId ,,,,,bookingCalendarId: $bookingCalendarId ,,,,,,,, })  {
           nodes {
-            id name contactId hasGuideLicence guideLicenceUrl publisherId createdById guideFirstName guideLastName hasOwnCompany atAgency languageLevelId areas tripTypeName guideOfferId guideBidId guideFavoriteId guideDealId agencyReviewInIdPool touristReviewInIdPool agencyReviewOutIdPool touristReviewOutIdPool bookingCalendarId hostIdPool eventIdPool accomodationIdPool transportIdPool lastModified timeCreated isActive
- 
+            id name contactId hasGuideLicence guideLicenceUrl publisherId createdById guideFirstName guideLastName hasOwnCompany atAgency languageLevelId areas tripTypeName guideOfferId guideBidId guideFavoriteId guideDealId agencyReviewInIdPool touristReviewInIdPool agencyReviewOutIdPool touristReviewOutIdPool bookingCalendarId hostIdPool eventIdPool accomodationIdPool transportIdPool lastModified timeCreated isActive isPublic
+
           }
         }
       }`

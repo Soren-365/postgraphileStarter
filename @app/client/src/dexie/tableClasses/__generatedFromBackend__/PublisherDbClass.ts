@@ -12,9 +12,10 @@ isRomanian?: boolean;
 isActive?: boolean;
 commandLogEntryId?: number[];
 timeCreated?: string;
+timeCommand?: string;
  nodeId?: string;
 
-  constructor(id?: number,name?: string,createdById?: number,belongsToId?: number,belongsToType?: string,canReview?: boolean,canPublish?: boolean,isRomanian?: boolean,isActive?: boolean,commandLogEntryId?: number[],timeCreated?: string, nodeId?: string,) {
+  constructor(id?: number,name?: string,createdById?: number,belongsToId?: number,belongsToType?: string,canReview?: boolean,canPublish?: boolean,isRomanian?: boolean,isActive?: boolean,commandLogEntryId?: number[],timeCreated?: string,timeCommand?: string, nodeId?: string,) {
     this.id = id
     this.name = name
     this.createdById = createdById
@@ -26,6 +27,7 @@ timeCreated?: string;
     this.isActive = isActive
     this.commandLogEntryId = commandLogEntryId
     this.timeCreated = timeCreated
+    this.timeCommand = timeCommand
     this.nodeId = nodeId
   }
 //  add methods here and move to 'edited' folder

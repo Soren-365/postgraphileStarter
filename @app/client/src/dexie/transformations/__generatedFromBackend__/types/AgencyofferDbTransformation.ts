@@ -1,11 +1,11 @@
-import { Agencyoffer  as gqlAgencyoffer } from '*.graphqls'
-
 import { agencyofferDbType as objAgencyoffer } from '../../../dbTypes/__generatedFromBackend__/types/agencyofferDbType'
+
+import { Agencyoffer  as gqlAgencyoffer } from '*.graphqls'
 
 
 export const AgencyofferTransform = (raw: gqlAgencyoffer): objAgencyoffer => {
     return {
-         id: raw.id, tripsOfferesourceIdPool: raw.tripsOfferesourceIdPool
+         id: raw.id
     }
 }
 

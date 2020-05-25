@@ -1,10 +1,10 @@
-export const mutation = `mutation createGuidefavorite(,$agenciesRomanianIdPool: [Int] ,$agenciesAbroadIdPool: [Int] , $clientMutationId: String!) {
+export const mutation = `mutation createGuidefavorite(, $clientMutationId: String!) {
         __typename
-        createGuidefavorite(input: {clientMutationId: $clientMutationId,guidefavorite: {,agenciesRomanianIdPool: $agenciesRomanianIdPool ,agenciesAbroadIdPool: $agenciesAbroadIdPool }}) {
+        createGuidefavorite(input: {clientMutationId: $clientMutationId,guidefavorite: {}}) {
             agencyEdge {
                 node {
                       id
-                     }  
+                     }
               }
             clientMutationId
             }

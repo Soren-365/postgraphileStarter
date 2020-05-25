@@ -1,6 +1,6 @@
-import { Triptype  as gqlTriptype } from '*.graphqls'
-
 import { triptypeDbType as objTriptype } from '../../../dbTypes/__generatedFromBackend__/types/triptypeDbType'
+
+import { Triptype  as gqlTriptype } from '*.graphqls'
 
 
 export const TriptypeTransform = (raw: gqlTriptype): objTriptype => {

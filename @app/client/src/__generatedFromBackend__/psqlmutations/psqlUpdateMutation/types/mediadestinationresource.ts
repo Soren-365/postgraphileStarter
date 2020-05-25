@@ -30,4 +30,5 @@ imageGallery9?: number;
 imageGallery9SignedUrl?: string;
 imageGallery10?: number;
 imageGallery10SignedUrl?: string;
+timeCreated?: string;
 }

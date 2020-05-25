@@ -3,7 +3,7 @@ export const query = `query getConditionalAssochost(, $hostId:  number , $atAgen
         assochosts(condition: {,hostId: $hostId ,atAgency: $atAgency ,timeCreated: $timeCreated  })  {
           nodes {
             assocHostId hostId atAgency timeCreated
- 
+
           }
         }
       }`

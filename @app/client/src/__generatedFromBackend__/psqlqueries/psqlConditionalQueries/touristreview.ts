@@ -2,8 +2,8 @@ export const query = `query getConditionalTouristreview(, $id:  number , $publis
         __typename
         touristreviews(condition: {id: $id ,publisherId: $publisherId ,createdById: $createdById ,,,,touristIdTarget: $touristIdTarget ,,, })  {
           nodes {
-            id publisherId createdById isActive halfStars reviewText touristIdTarget startDateTripEvent byRomanian
- 
+            id publisherId createdById isActive halfStars reviewText touristIdTarget startDateTripEvent byRomanian timeCreated
+
           }
         }
       }`

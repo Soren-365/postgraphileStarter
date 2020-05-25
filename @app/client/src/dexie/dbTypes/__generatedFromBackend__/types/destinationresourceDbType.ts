@@ -15,5 +15,6 @@ geoCodingId?: number;
 isPublic: boolean;
 lastModified?: string;
 lastModifiedBy?: number;
+timeCreated?: string;
  nodeId?: string;
 }

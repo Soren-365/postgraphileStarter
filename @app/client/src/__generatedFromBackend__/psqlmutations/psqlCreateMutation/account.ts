@@ -1,10 +1,10 @@
-export const mutation = `mutation createAccount(,$emailHash: String ,$passwordHash: String ,$sessionId: String , $clientMutationId: String!) {
+export const mutation = `mutation createAccount(, $clientMutationId: String!) {
         __typename
-        createAccount(input: {clientMutationId: $clientMutationId,account: {,emailHash: $emailHash ,passwordHash: $passwordHash ,sessionId: $sessionId }}) {
+        createAccount(input: {clientMutationId: $clientMutationId,account: {}}) {
             agencyEdge {
                 node {
                       id
-                     }  
+                     }
               }
             clientMutationId
             }

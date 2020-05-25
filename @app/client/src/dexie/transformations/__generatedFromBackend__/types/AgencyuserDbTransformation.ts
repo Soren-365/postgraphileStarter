@@ -1,6 +1,6 @@
-import { Agencyuser  as gqlAgencyuser } from '*.graphqls'
-
 import { agencyuserDbType as objAgencyuser } from '../../../dbTypes/__generatedFromBackend__/types/agencyuserDbType'
+
+import { Agencyuser  as gqlAgencyuser } from '*.graphqls'
 
 
 export const AgencyuserTransform = (raw: gqlAgencyuser): objAgencyuser => {

@@ -1,7 +1,7 @@
 export const query = `query getNodecalendarentry($nodeId: String!) {
         __typename
-        calendarentryByNodeId(nodeId: $nodeId }) { 
-            id fromTimestamp toTimestamp resourceType comment timeCreated
+        calendarentryByNodeId(nodeId: $nodeId }) {
+            id
 
         }
       }`

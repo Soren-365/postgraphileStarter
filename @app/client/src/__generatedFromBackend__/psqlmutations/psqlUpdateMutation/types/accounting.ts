@@ -7,4 +7,5 @@ abonamentExpires?: string;
 freePeriodExpires?: string;
 isRomanian?: boolean;
 isActive?: boolean;
+timeCreated?: string;
 }

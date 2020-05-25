@@ -1,11 +1,11 @@
-import { Agencyfavorite  as gqlAgencyfavorite } from '*.graphqls'
-
 import { agencyfavoriteDbType as objAgencyfavorite } from '../../../dbTypes/__generatedFromBackend__/types/agencyfavoriteDbType'
+
+import { Agencyfavorite  as gqlAgencyfavorite } from '*.graphqls'
 
 
 export const AgencyfavoriteTransform = (raw: gqlAgencyfavorite): objAgencyfavorite => {
     return {
-         resourceId: raw.resourceId, resourceType: raw.resourceType, atAgency: raw.atAgency
+         resourceId: raw.resourceId
     }
 }
 

@@ -13,9 +13,10 @@ isAuction: boolean;
 isActive?: boolean;
 atResourceType: string;
 belongsToId: number;
+timeCreated?: string;
  nodeId?: string;
 
-  constructor(id?: number,publishedById: number,createdById: number,advertisedPrice: number,currentHighBid?: number,bidId?: number,acceptsOffers: boolean,auctionExpiry?: string,isAuction: boolean,isActive?: boolean,atResourceType: string,belongsToId: number, nodeId?: string,) {
+  constructor(id?: number,publishedById: number,createdById: number,advertisedPrice: number,currentHighBid?: number,bidId?: number,acceptsOffers: boolean,auctionExpiry?: string,isAuction: boolean,isActive?: boolean,atResourceType: string,belongsToId: number,timeCreated?: string, nodeId?: string,) {
     this.id = id
     this.publishedById = publishedById
     this.createdById = createdById
@@ -28,6 +29,7 @@ belongsToId: number;
     this.isActive = isActive
     this.atResourceType = atResourceType
     this.belongsToId = belongsToId
+    this.timeCreated = timeCreated
     this.nodeId = nodeId
   }
 //  add methods here and move to 'edited' folder

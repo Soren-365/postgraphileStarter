@@ -3,7 +3,7 @@ export const query = `query getConditionalAssocevent(, $eventId:  number , $time
         assocevents(condition: {,eventId: $eventId ,,timeCreated: $timeCreated  })  {
           nodes {
             assocEventId eventId atAgency timeCreated
- 
+
           }
         }
       }`

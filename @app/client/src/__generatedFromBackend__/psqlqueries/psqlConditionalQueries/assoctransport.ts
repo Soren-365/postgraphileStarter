@@ -3,7 +3,7 @@ export const query = `query getConditionalAssoctransport(, $transportId:  number
         assoctransports(condition: {,transportId: $transportId ,atAgency: $atAgency  })  {
           nodes {
             assocTransportId transportId atAgency
- 
+
           }
         }
       }`

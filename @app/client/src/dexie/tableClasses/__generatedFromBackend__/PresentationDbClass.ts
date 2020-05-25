@@ -9,9 +9,10 @@ resourceType: string;
 resourceTypeId: number;
 isActive?: boolean;
 lastModified?: string;
+timeCreated?: string;
  nodeId?: string;
 
-  constructor(id?: number,headline?: string,publisherId: number,createdById: number,resourceType: string,resourceTypeId: number,isActive?: boolean,lastModified?: string, nodeId?: string,) {
+  constructor(id?: number,headline?: string,publisherId: number,createdById: number,resourceType: string,resourceTypeId: number,isActive?: boolean,lastModified?: string,timeCreated?: string, nodeId?: string,) {
     this.id = id
     this.headline = headline
     this.publisherId = publisherId
@@ -20,6 +21,7 @@ lastModified?: string;
     this.resourceTypeId = resourceTypeId
     this.isActive = isActive
     this.lastModified = lastModified
+    this.timeCreated = timeCreated
     this.nodeId = nodeId
   }
 //  add methods here and move to 'edited' folder

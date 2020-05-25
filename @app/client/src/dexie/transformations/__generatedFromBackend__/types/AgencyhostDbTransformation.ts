@@ -1,6 +1,6 @@
-import { Agencyhost  as gqlAgencyhost } from '*.graphqls'
-
 import { agencyhostDbType as objAgencyhost } from '../../../dbTypes/__generatedFromBackend__/types/agencyhostDbType'
+
+import { Agencyhost  as gqlAgencyhost } from '*.graphqls'
 
 
 export const AgencyhostTransform = (raw: gqlAgencyhost): objAgencyhost => {

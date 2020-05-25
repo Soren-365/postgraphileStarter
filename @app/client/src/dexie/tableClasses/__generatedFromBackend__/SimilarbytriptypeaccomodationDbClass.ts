@@ -2,13 +2,17 @@ import { similarbytriptypeaccomodationDbType as SimilarbytriptypeaccomodationDbT
 
 export class SimilarbytriptypeaccomodationDbClass implements SimilarbytriptypeaccomodationDbType {
 accomodationIds?: number[];
+--?: string;
+triptypes?: string;
 tripTypeName?: string;
-atAgency?: string;
-timeCreated?: number;
+atAgency?: number;
+timeCreated?: string;
  nodeId?: string;
 
-  constructor(accomodationIds?: number[],tripTypeName?: string,atAgency?: string,timeCreated?: number, nodeId?: string,) {
+  constructor(accomodationIds?: number[],--?: string,triptypes?: string,tripTypeName?: string,atAgency?: number,timeCreated?: string, nodeId?: string,) {
     this.accomodationIds = accomodationIds
+    this.-- = --
+    this.triptypes = triptypes
     this.tripTypeName = tripTypeName
     this.atAgency = atAgency
     this.timeCreated = timeCreated

@@ -12,7 +12,7 @@ import { call, put } from "redux-saga/effects";
 // import { Storage } from '../../dexie/tableClasses/classSagaDb'
 // import { getAgencyData } from 'dbSaga.ts'
 // import { accountType } from '../reducers/account'
-import clientDb from "../../db/dexieDB";
+import clientDb from "../../db/dexieDBgenerated";
 import { destinationresourceDbType } from "../../dexie/dbTypes/__generatedFromBackend__/types/destinationresourceDbType";
 import { DbTables } from "../../functions/__generatedFromBackend__/tableEnums";
 // import { MutationType } from '../../functions/controllers/commControl'

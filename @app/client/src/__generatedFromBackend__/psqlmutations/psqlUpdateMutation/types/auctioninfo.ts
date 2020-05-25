@@ -4,4 +4,5 @@ currentHighBid?: number;
 bidId?: number;
 auctionExpiry?: string;
 isActive?: boolean;
+timeCreated?: string;
 }

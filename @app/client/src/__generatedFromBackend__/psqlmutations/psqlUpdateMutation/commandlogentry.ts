@@ -1,6 +1,6 @@
-export const mutation = `mutation updateCommandlogentry($id: Int ,$atPublisher: Int! ,$belongsToType: Resourcetype ,$resourceId: Int ,$logcommand: Logcommand! ,$timeCommand: TIMESTAMP	default now( , $clientMutationId: String!) {
+export const mutation = `mutation updateCommandlogentry($id: Int , $clientMutationId: String!) {
         __typename
-        updateCommandlogentry(input: {clientMutationId: $clientMutationId, patch: {,atPublisher: $atPublisher ,belongsToType: $belongsToType ,resourceId: $resourceId ,logcommand: $logcommand ,timeCommand: $timeCommand }, id: $id}) {
+        updateCommandlogentry(input: {clientMutationId: $clientMutationId, patch: {}, id: $id}) {
             clientMutationId
             }
           }`

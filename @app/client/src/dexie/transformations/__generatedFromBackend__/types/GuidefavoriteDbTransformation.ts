@@ -1,11 +1,11 @@
-import { Guidefavorite  as gqlGuidefavorite } from '*.graphqls'
-
 import { guidefavoriteDbType as objGuidefavorite } from '../../../dbTypes/__generatedFromBackend__/types/guidefavoriteDbType'
+
+import { Guidefavorite  as gqlGuidefavorite } from '*.graphqls'
 
 
 export const GuidefavoriteTransform = (raw: gqlGuidefavorite): objGuidefavorite => {
     return {
-         id: raw.id, agenciesRomanianIdPool: raw.agenciesRomanianIdPool, agenciesAbroadIdPool: raw.agenciesAbroadIdPool
+         id: raw.id
     }
 }
 

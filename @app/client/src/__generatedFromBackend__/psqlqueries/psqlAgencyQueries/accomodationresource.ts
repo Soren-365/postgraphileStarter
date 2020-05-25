@@ -2,7 +2,7 @@ export const query = `query getAgencyaccomodationresources($atAgency: Int!, $id:
         __typename
         accomodationresources(condition: {atAgency: $atAgency, id: $id }) {
           nodes {
-            id accomodationName contactId addressId locatedIn locationCalendarId tripTypeName publisherId createdById isActive ownedByAt presentationId atAgency atGuide isPublic lastModified
+            id accomodationName contactId addressId locatedIn locationCalendarId tripTypeName publisherId createdById isActive ownedByAt presentationId atAgency atGuide isPublic lastModified timeCreated
 
           }
         }

@@ -1,11 +1,11 @@
-import { Languagelevel  as gqlLanguagelevel } from '*.graphqls'
-
 import { languagelevelDbType as objLanguagelevel } from '../../../dbTypes/__generatedFromBackend__/types/languagelevelDbType'
+
+import { Languagelevel  as gqlLanguagelevel } from '*.graphqls'
 
 
 export const LanguagelevelTransform = (raw: gqlLanguagelevel): objLanguagelevel => {
     return {
-         id: raw.id, langauges: raw.langauges, langaugesSkill: raw.langaugesSkill, isActive: raw.isActive, createdById: raw.createdById, publisherId: raw.publisherId
+         id: raw.id, langauges: raw.langauges, langaugesSkill: raw.langaugesSkill, isActive: raw.isActive, createdById: raw.createdById, publisherId: raw.publisherId, timeCreated: raw.timeCreated
     }
 }
 

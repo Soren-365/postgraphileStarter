@@ -4,7 +4,7 @@ export const mutation = `mutation createAgencytravelgroup($agencyId: Int ,$trave
             agencyEdge {
                 node {
                       id
-                     }  
+                     }
               }
             clientMutationId
             }

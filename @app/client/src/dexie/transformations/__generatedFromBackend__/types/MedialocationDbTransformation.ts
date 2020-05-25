@@ -1,6 +1,6 @@
-import { Medialocation  as gqlMedialocation } from '*.graphqls'
-
 import { medialocationDbType as objMedialocation } from '../../../dbTypes/__generatedFromBackend__/types/medialocationDbType'
+
+import { Medialocation  as gqlMedialocation } from '*.graphqls'
 
 
 export const MedialocationTransform = (raw: gqlMedialocation): objMedialocation => {

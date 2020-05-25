@@ -1,7 +1,7 @@
 export const query = `query getNodepublisher($nodeId: String!) {
         __typename
-        publisherByNodeId(nodeId: $nodeId }) { 
-            id name createdById belongsToId belongsToType canReview canPublish isRomanian isActive commandLogEntryId timeCreated
+        publisherByNodeId(nodeId: $nodeId }) {
+            id name createdById belongsToId belongsToType canReview canPublish isRomanian isActive commandLogEntryId timeCreated timeCommand
 
         }
       }`

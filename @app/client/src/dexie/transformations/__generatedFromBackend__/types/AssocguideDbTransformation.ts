@@ -1,6 +1,6 @@
-import { Assocguide  as gqlAssocguide } from '*.graphqls'
-
 import { assocguideDbType as objAssocguide } from '../../../dbTypes/__generatedFromBackend__/types/assocguideDbType'
+
+import { Assocguide  as gqlAssocguide } from '*.graphqls'
 
 
 export const AssocguideTransform = (raw: gqlAssocguide): objAssocguide => {

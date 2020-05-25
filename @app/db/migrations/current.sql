@@ -50,7 +50,7 @@ from B.
 You can uncomment the following lines one block a time and safe the file to view
 the changes.
 
-**IMPORTANT**: when you uncomment the `CREATE TABLE` statements this will not
+**IMPORTANT**: when you uncomment the `CREATE-TABLE` statements this will not
 result in the table being added to the GraphQL API, this is because we are
 using `ignoreRBAC: false` so we do not expose tables until you `GRANT` the
 relevant operations on them. The tables will appear when you uncomment the
@@ -62,10 +62,14 @@ drop table if exists app_public.user_feed_posts;
 drop table if exists app_public.posts;
 drop table if exists app_public.topics;
 
+--//
+
 create table app_public.topics (
   title            text not null primary key
 );
 alter table app_public.topics enable row level security;
+
+--//
 
 create table app_public.posts (
   id               serial primary key,
@@ -79,7 +83,11 @@ create table app_public.posts (
 alter table app_public.posts enable row level security;
 create index on app_public.posts (author_id);
 
+--//
+
 create trigger _100_timestamps before insert or update on app_public.posts for each row execute procedure app_private.tg__timestamps();
+
+--//
 
 grant
   select,
@@ -87,6 +95,8 @@ grant
   update (headline, body, topic),
   delete
 on app_public.posts to :DATABASE_VISITOR;
+
+--//
 
 create policy select_all on app_public.posts for select using (true);
 create policy manage_own on app_public.posts for all using (author_id = app_public.current_user_id());
@@ -101,6 +111,8 @@ comment on column app_public.posts.body is 'The main body text of our `Post`.';
 comment on column app_public.posts.created_at is 'The time this `Post` was created.';
 comment on column app_public.posts.updated_at is 'The time this `Post` was last modified (or created).';
 
+--//
+
 create table app_public.user_feed_posts (
   id               serial primary key,
   user_id          uuid not null references app_public.users on delete cascade,
@@ -111,14 +123,21 @@ alter table app_public.user_feed_posts enable row level security;
 create index on app_public.user_feed_posts (user_id);
 create index on app_public.user_feed_posts (post_id);
 
+--//
+
 grant select on app_public.user_feed_posts to :DATABASE_VISITOR;
 
+--//
+
 create policy select_own on app_public.user_feed_posts for select using (user_id = app_public.current_user_id());
+
+--//
 
 comment on table app_public.user_feed_posts is 'A feed of `Post`s relevant to a particular `User`.';
 comment on column app_public.user_feed_posts.id is 'An identifier for this entry in the feed.';
 comment on column app_public.user_feed_posts.created_at is 'The time this feed item was added.';
 
+--//
 
 
 CREATE TABLE app_public.triptype (
@@ -129,6 +148,8 @@ CREATE TABLE app_public.triptype (
 ,    "timeCreated"     TIMESTAMP DEFAULT NOW()
 ,  CONSTRAINT triptype_pkey PRIMARY KEY ("atAgency", "tripTypeName") -- explicit pk
 );
+
+--//
 
 grant
   select,
@@ -141,15 +162,15 @@ on app_public.triptype to :DATABASE_VISITOR;
 
 CREATE TYPE  app_public.area AS ENUM (
     'Muntenia',
-	'Oltenia',
-	'Transilvania',
-	'Dobrogea',
-	'Banat',
-	'Moldova',
-	'Bucovina',
-	'Crisana',
-	'SatuMare',
-	'Maramures'
+        'Oltenia',
+        'Transilvania',
+        'Dobrogea',
+        'Banat',
+        'Moldova',
+        'Bucovina',
+        'Crisana',
+        'SatuMare',
+        'Maramures'
 );
 
 --//
@@ -175,35 +196,35 @@ CREATE TYPE  app_public.medialocationplacement AS ENUM (
 
 CREATE TYPE  app_public.languages AS ENUM (
     'German'
-,	'English'
-,	'Romanian'
-,	'Danish'
-,	'Israeli'
-,	'French'
-,	'Italian'
-,	'Spanish'
-,	'Russian'
-,	'Hungarian'
-,	'Turkish'
-,	'Polish'
-,	'Greek'
-,	'Bulgarian'
-,	'Serbian'
-,	'Swedish'
-,	'Norwegian'
-,	'Chinese'
-,	'Japanese'
-,	'Arabic'
+,        'English'
+,        'Romanian'
+,        'Danish'
+,        'Israeli'
+,        'French'
+,        'Italian'
+,        'Spanish'
+,        'Russian'
+,        'Hungarian'
+,        'Turkish'
+,        'Polish'
+,        'Greek'
+,        'Bulgarian'
+,        'Serbian'
+,        'Swedish'
+,        'Norwegian'
+,        'Chinese'
+,        'Japanese'
+,        'Arabic'
 );
 
 --//
 
 CREATE TYPE  app_public.languageskill AS ENUM (
     'Native'
-,	'Excellent'
-,	'Good'
-,	'Medium'
-,	'Basic'
+,        'Excellent'
+,        'Good'
+,        'Medium'
+,        'Basic'
 
     );
 
@@ -213,20 +234,20 @@ CREATE TYPE  app_public.languageskill AS ENUM (
 
 
    CREATE TYPE  app_public.logcommand AS ENUM (
-	'ContactInfo'
-,	'DestinationResource'
-,	'TravelGroup'
-,	'TouristResource'
+        'ContactInfo'
+,        'DestinationResource'
+,        'TravelGroup'
+,        'TouristResource'
 ,   'TripOfferResource'
-,	'Login'
-,	'Logout'
-,	'Tourist'
-,	'Guide'
+,        'Login'
+,        'Logout'
+,        'Tourist'
+,        'Guide'
 ,   'GuideResource'
-,	'Agency'
+,        'Agency'
 ,   'User'
 ,   'Publisher'
-,	'Bid'
+,        'Bid'
 ,   ' app_public.priceinfo'
 ,   'HostResource'
 ,   'EventResource'
@@ -236,25 +257,25 @@ CREATE TYPE  app_public.languageskill AS ENUM (
 ,   'TransportResource'
 ,   'Review'
 ,   'BookingCalendar'
-,	'Unknown'
+,        'Unknown'
 );
 
 --//
 
 CREATE TYPE  app_public.resourcetype AS ENUM (
-   	'TouristResource'
-,	'Tourist'
-,	'Agency'
-,	'Guide'
-,	'GuideResource'
-,	'EventResource'
-,	'TripOfferResource'
-,	'HostResource'
-,	'AccomodationResource'
-,	'CarResource'
+           'TouristResource'
+,        'Tourist'
+,        'Agency'
+,        'Guide'
+,        'GuideResource'
+,        'EventResource'
+,        'TripOfferResource'
+,        'HostResource'
+,        'AccomodationResource'
+,        'CarResource'
 ,   'DestinationResource'
 ,   'TravelGroup'
-,	'Unknown'
+,        'Unknown'
 );
 
 --//
@@ -364,37 +385,64 @@ CREATE TABLE app_public.contact (
 
 CREATE INDEX ON app_public.contact("createdById");
 CREATE INDEX ON app_public.contact("belongsToType");
+
+--//
+
+CREATE TABLE app_public.publisher (
+    "id"       SERIAL primary key
+,   "name"     VARCHAR(240)
+,         "createdById"           INT
+,         "belongsToId"        INT
+,         "belongsToType"     resourcetype
+,        "canReview"                        BOOLEAN DEFAULT true
+,        "canPublish"                BOOLEAN DEFAULT true
+,        "isRomanian"        BOOLEAN
+,   "isActive"          BOOLEAN DEFAULT true
+,   "commandLogEntryId"                INT[]
+,   "timeCreated"       TIMESTAMP DEFAULT NOW()
+,   "timeCommand"        TIMESTAMP        default NOW()
+,    FOREIGN KEY ("createdById") REFERENCES app_public.usertable("id")
+);
+ ALTER TABLE app_public.commandlogentry
+ ADD FOREIGN KEY ("atPublisher") REFERENCES app_public.publisher("id");
+
+
+CREATE INDEX ON app_public.publisher("createdById");
+CREATE INDEX ON app_public.publisher("id");
+CREATE INDEX ON app_public.publisher("commandLogEntryId");
+CREATE INDEX ON app_public.publisher("belongsToType");
+
 --//
 
 
 CREATE TABLE app_public.commandlogentry (
     "id"       SERIAL primary key
 ,    "atPublisher"        INT NOT NULL
-,	"belongsToType"		 resourcetype DEFAULT ('Unknown')
+,        "belongsToType"                 resourcetype DEFAULT ('Unknown')
 ,   "resourceId"         INT
-,	"logcommand"         logcommand NOT NULL
-,   "timeCommand"        TIMESTAMP	default now()
+,        "logcommand"         logcommand NOT NULL
+,   "timeCommand"        TIMESTAMP        default now()
 );
 
 CREATE INDEX ON app_public.commandlogentry("atPublisher");
 
 
-
+--//
 
 
 CREATE TABLE app_public.publisher (
     "id"       SERIAL primary key
 ,   "name"     VARCHAR(240)
-, 	"createdById"           INT
-, 	"belongsToId"        INT
-, 	"belongsToType"     resourcetype
-,	"canReview"			BOOLEAN DEFAULT true
-,	"canPublish"		BOOLEAN DEFAULT true
-,	"isRomanian"        BOOLEAN
+,         "createdById"           INT
+,         "belongsToId"        INT
+,         "belongsToType"     resourcetype
+,        "canReview"                        BOOLEAN DEFAULT true
+,        "canPublish"                BOOLEAN DEFAULT true
+,        "isRomanian"        BOOLEAN
 ,   "isActive"          BOOLEAN DEFAULT true
-,   "commandLogEntryId"		INT[]
+,   "commandLogEntryId"                INT[]
 ,   "timeCreated"       TIMESTAMP DEFAULT NOW()
-,   "timeCommand"        TIMESTAMP	default NOW()
+,   "timeCommand"        TIMESTAMP        default NOW()
 ,    FOREIGN KEY ("createdById") REFERENCES app_public.usertable("id")
 );
  ALTER TABLE app_public.commandlogentry
@@ -433,16 +481,16 @@ CREATE INDEX ON app_public.geocoding("publishedById");
 
 CREATE TABLE app_public.accounting (
     "id"      SERIAL primary key
-, 	"publisherId"            INT NOT NULL
-,	"paymentHistory"    VARCHAR(64)[]
-,	"abonamentActive"   BOOLEAN NOT NULL
-,	"lastPayment" 		DATE
-,	"lastPaymentAmount" VARCHAR(64)
-,	"abonamentExpires"  DATE
-,	"onYearlyPayment"   Boolean NOT NULL
-,	"onFreePeriod"      Boolean NOT NULL
-,	"freePeriodExpires" DATE
-,	"isRomanian"        BOOLEAN
+,         "publisherId"            INT NOT NULL
+,        "paymentHistory"    VARCHAR(64)[]
+,        "abonamentActive"   BOOLEAN NOT NULL
+,        "lastPayment"                 DATE
+,        "lastPaymentAmount" VARCHAR(64)
+,        "abonamentExpires"  DATE
+,        "onYearlyPayment"   Boolean NOT NULL
+,        "onFreePeriod"      Boolean NOT NULL
+,        "freePeriodExpires" DATE
+,        "isRomanian"        BOOLEAN
 ,   "isActive"          BOOLEAN DEFAULT true
 ,   "timeCreated"       TIMESTAMP DEFAULT NOW()
 ,    FOREIGN KEY ("publisherId") REFERENCES app_public.publisher("id")
@@ -459,11 +507,11 @@ CREATE INDEX ON app_public.accounting("publisherId");
 
 CREATE TABLE app_public.presentation (
     "id"          SERIAL primary key
-,	"headline"          VARCHAR(160)
-,	"publisherId"       INT NOT NULL
-,	"createdById"       INT NOT NULL
-,	"resourceType"		resourcetype NOT NULL
-,	"resourceTypeId"      INT NOT NULL
+,        "headline"          VARCHAR(160)
+,        "publisherId"       INT NOT NULL
+,        "createdById"       INT NOT NULL
+,        "resourceType"                resourcetype NOT NULL
+,        "resourceTypeId"      INT NOT NULL
 ,   "isActive"          BOOLEAN DEFAULT true
 ,    "lastModified"     TIMESTAMP
 ,   "timeCreated"       TIMESTAMP DEFAULT NOW()
@@ -482,9 +530,9 @@ CREATE INDEX ON app_public.presentation("createdById");
 
 CREATE TABLE app_public.bid (
     "id"             SERIAL primary key
-,	"publisherId"       INT[] NOT NULL
-,	"createdById"       INT[] NOT NULL
-,	"bidAmount"         MONEY[]
+,        "publisherId"       INT[] NOT NULL
+,        "createdById"       INT[] NOT NULL
+,        "bidAmount"         MONEY[]
 ,   "isActive"          BOOLEAN[] NOT NULL
 
 ,   "timeCreated"       TIMESTAMP[] NOT NULL DEFAULT array[now()]
@@ -499,17 +547,17 @@ CREATE TABLE app_public.bid (
 
 CREATE TABLE app_public.auctioninfo (
     "id"        SERIAL primary key
-,	"publishedById"       INT NOT NULL
-,	"createdById"       INT NOT NULL
-,	"advertisedPrice"   MONEY NOT NULL
-,	"currentHighBid"	MONEY
-,	"bidId"			INT
-,	"acceptsOffers"		BOOLEAN NOT NULL
-,	"auctionExpiry"		TIMESTAMP
+,        "publishedById"       INT NOT NULL
+,        "createdById"       INT NOT NULL
+,        "advertisedPrice"   MONEY NOT NULL
+,        "currentHighBid"        MONEY
+,        "bidId"                        INT
+,        "acceptsOffers"                BOOLEAN NOT NULL
+,        "auctionExpiry"                TIMESTAMP
 ,   "isAuction"         BOOLEAN NOT NULL
 ,   "isActive"          BOOLEAN DEFAULT true
-,   "atResourceType"	resourcetype NOT NULL
-, 	"belongsToId"		        INT NOT NULL
+,   "atResourceType"        resourcetype NOT NULL
+,         "belongsToId"                        INT NOT NULL
 ,   "timeCreated"       TIMESTAMP DEFAULT NOW()
 ,    FOREIGN KEY ("publishedById") REFERENCES app_public.publisher("id")
 ,    FOREIGN KEY ("createdById") REFERENCES app_public.usertable("id")
@@ -529,17 +577,17 @@ CREATE INDEX ON app_public.auctioninfo("bidId");
 
 CREATE TABLE app_public.priceinfo (
     "id"        SERIAL primary key
-,	"publisherId"       INT NOT NULL
-,	"createdById"       INT NOT NULL
-,	"advertisedPrice"   MONEY NOT NULL
-,	"currentHighBId"	MONEY
-,	"bidId"				INT
-,	"acceptsOffers"		BOOLEAN NOT NULL
-,	"auctionExpiry"		TIMESTAMP
+,        "publisherId"       INT NOT NULL
+,        "createdById"       INT NOT NULL
+,        "advertisedPrice"   MONEY NOT NULL
+,        "currentHighBId"        MONEY
+,        "bidId"                                INT
+,        "acceptsOffers"                BOOLEAN NOT NULL
+,        "auctionExpiry"                TIMESTAMP
 ,   "isAuction"         BOOLEAN NOT NULL
 ,   "isActive"          BOOLEAN DEFAULT true
-,   "atResourceType"	resourcetype NOT NULL
-, 	"belongsToId"		        INT NOT NULL
+,   "atResourceType"        resourcetype NOT NULL
+,         "belongsToId"                        INT NOT NULL
 ,    "lastModified"     TIMESTAMP
 
 ,   "timeCreated"       TIMESTAMP DEFAULT NOW()
@@ -572,7 +620,7 @@ CREATE TABLE app_public.calendarentry (
 
 --//
 
-	CREATE TABLE app_public.timerange (
+        CREATE TABLE app_public.timerange (
     "id"       SERIAL primary key
 ,   "fromTimestamp"     TIMESTAMP
 ,   "toTimestamp"       TIMESTAMP
@@ -583,9 +631,9 @@ CREATE TABLE app_public.calendarentry (
 
 CREATE TABLE app_public.bookingcalendar (
     "id" SERIAL primary key
-, 	"belongsToId"         INT
+,         "belongsToId"         INT
 ,    "belongsToType"     resourcetype
-,	"createdById"       INT
+,        "createdById"       INT
 ,   "isActive"          BOOLEAN DEFAULT true
 ,   "fromTimestamp"     TIMESTAMP[] NOT NULL default array[now()]
 ,   "toTimestamp"       TIMESTAMP[] NOT NULL default array[now()]
@@ -606,16 +654,16 @@ CREATE INDEX ON app_public.bookingcalendar("createdById");
 CREATE TABLE app_public.accomodationresource (
     "id"     SERIAL primary key
 ,   "accomodationName"   VARCHAR(240)
-, 	"contactId"          INT NOT NULL
-,	"addressId"			 INT NOT NULL
-,	"locatedIn"			 area
+,         "contactId"          INT NOT NULL
+,        "addressId"                         INT NOT NULL
+,        "locatedIn"                         area
 ,   "locationCalendarId" INT NOT NULL
 ,   "tripTypeName"       VARCHAR(128)
-,	"publisherId"        INT NOT NULL
-,	"createdById"        INT NOT NULL
+,        "publisherId"        INT NOT NULL
+,        "createdById"        INT NOT NULL
 ,   "isActive"           BOOLEAN DEFAULT true
-,	"ownedByAt" 	     BOOLEAN DEFAULT false
-,	"presentationId"     INT NOT NULL
+,        "ownedByAt"              BOOLEAN DEFAULT false
+,        "presentationId"     INT NOT NULL
 ,   "atAgency"            INT
 ,   "atGuide"            INT
 ,   "isPublic"          BOOLEAN DEFAULT true
@@ -704,17 +752,17 @@ CREATE TABLE app_public.eventresource (
     "id"          SERIAL primary key
 ,   "eventName"         VARCHAR(180)
 ,   "agencyName"        VARCHAR(180)
-, 	"contactId"         INT NOT NULL
-,	"publisherId"       INT NOT NULL
-,	"createdById"       INT NOT NULL
-,	"locatedIn"			area
-,	"locationAddressId"  INT NOT NULL
+,         "contactId"         INT NOT NULL
+,        "publisherId"       INT NOT NULL
+,        "createdById"       INT NOT NULL
+,        "locatedIn"                        area
+,        "locationAddressId"  INT NOT NULL
  ,  "tripTypeName" VARCHAR(128)
-,	"activeAtPeriodsId"   INT NOT NULL
-,	"ownedByAt"         BOOLEAN NOT NULL DEFAULT false
-,	"atAgency"			INT
-,	"atGuide"			INT
-,	"presentationId"    INT NOT NULL
+,        "activeAtPeriodsId"   INT NOT NULL
+,        "ownedByAt"         BOOLEAN NOT NULL DEFAULT false
+,        "atAgency"                        INT
+,        "atGuide"                        INT
+,        "presentationId"    INT NOT NULL
 ,   "isActive"          BOOLEAN DEFAULT true
 ,   "isPublic"          BOOLEAN NOT NULL DEFAULT true
 ,    "lastModified"     TIMESTAMP
@@ -750,16 +798,16 @@ CREATE INDEX ON "app_public"."eventresource"("atAgency", "tripTypeName");
 CREATE TABLE app_public.tripofferresource (
     "id"          SERIAL primary key
 ,   "tripOfferName"        VARCHAR(240)
-,	"publisherId"          INT NOT NULL
-,	"createdById"          INT NOT NULL
+,        "publisherId"          INT NOT NULL
+,        "createdById"          INT NOT NULL
 ,   "availableAtCalendarId"   INT NOT NULL
-,	"guideResponsibleId"     INT NOT NULL
-,	"guideSecondaryId"       INT
-,	"atAgency"             INT
-,	"priceInfoId"          INT NOT NULL
+,        "guideResponsibleId"     INT NOT NULL
+,        "guideSecondaryId"       INT
+,        "atAgency"             INT
+,        "priceInfoId"          INT NOT NULL
 ,   "destinationId"        INT[] NOT NULL
-,	"isSigned"			  BOOLEAN NOT NULL
-,	"atGuide"             INT
+,        "isSigned"                          BOOLEAN NOT NULL
+,        "atGuide"             INT
 ,   "isActive"             BOOLEAN DEFAULT true
 ,   "isPublic"          BOOLEAN NOT NULL DEFAULT true
 ,    "lastModified"     TIMESTAMP
@@ -808,10 +856,10 @@ CREATE TABLE app_public.roomcalendarentry (
 
 CREATE TABLE app_public.roomcalendar (
     "id"    SERIAL primary key
-,	"publisherId"       INT NOT NULL
-,	"createdById"       INT NOT NULL
+,        "publisherId"       INT NOT NULL
+,        "createdById"       INT NOT NULL
 ,   "isActive"          BOOLEAN DEFAULT true
-,	"calendarentryId" 	INT NOT NULL
+,        "calendarentryId"         INT NOT NULL
 ,   "timeCreated"       TIMESTAMP DEFAULT NOW()
 ,    FOREIGN KEY ("publisherId") REFERENCES app_public.publisher("id")
 ,    FOREIGN KEY ("createdById") REFERENCES app_public.usertable("id")
@@ -836,10 +884,10 @@ CREATE INDEX ON app_public.roomcalendar("calendarentryId");
 CREATE TABLE app_public.roomlist (
     "id"        SERIAL primary key
 ,    "atAccomodation"    INT NOT NULL
-,	"roomNames"			VARCHAR(128)
-, 	"roomNumPeople"	    INT
-, 	"roomCalendarId"    INT REFERENCES app_public.roomcalendar
-,	"roomPrices"		MONEY
+,        "roomNames"                        VARCHAR(128)
+,         "roomNumPeople"            INT
+,         "roomCalendarId"    INT REFERENCES app_public.roomcalendar
+,        "roomPrices"                MONEY
 ,   "roomActive"        BOOLEAN
 ,    FOREIGN KEY ("atAccomodation") REFERENCES app_public.accomodationresource("id")
 
@@ -855,18 +903,18 @@ CREATE INDEX ON app_public.roomlist("roomCalendarId");
 CREATE TABLE app_public.transportresource (
     "id"       SERIAL primary key
 ,   "transportName"     VARCHAR(240)
-, 	"contactId"         INT NOT NULL
-,	"publisherId"       INT NOT NULL
-,	"createdById"       INT NOT NULL
-,	"locatedIn"			area NOT NULL
-,	"addressInfoId"		INT NOT NULL
-,	"atAgency"			INT
-,	"atGuide"			INT
-,	"ownedByAt"         BOOLEAN NOT NULL DEFAULT false
-,	"presentationId" 		INT
-,	"isBus"				BOOLEAN NOT NULL
-,	"numberOfPlaces"	INT NOT NULL
-,	"bookingCalendarId"	INT NOT NULL
+,         "contactId"         INT NOT NULL
+,        "publisherId"       INT NOT NULL
+,        "createdById"       INT NOT NULL
+,        "locatedIn"                        area NOT NULL
+,        "addressInfoId"                INT NOT NULL
+,        "atAgency"                        INT
+,        "atGuide"                        INT
+,        "ownedByAt"         BOOLEAN NOT NULL DEFAULT false
+,        "presentationId"                 INT
+,        "isBus"                                BOOLEAN NOT NULL
+,        "numberOfPlaces"        INT NOT NULL
+,        "bookingCalendarId"        INT NOT NULL
 ,   "isActive"          BOOLEAN DEFAULT true
 ,   "isPublic"          BOOLEAN NOT NULL DEFAULT true
 ,    "lastModified"     TIMESTAMP
@@ -897,15 +945,15 @@ CREATE INDEX ON app_public.transportresource("atAgency");
 
 CREATE TABLE app_public.review (
     "id"     SERIAL primary key
-,	"publisherId"       INT NOT NULL
-,	"createdById"       INT NOT NULL
-,	"halfStars"			SMALLINT
-,	"reviewText"		TEXT
-,	"resourceType"		resourcetype NOT NULL
-,	"resourceId"		INT NOT NULL
-,	"publisherTarget" 	INT NOT NULL
-,	"startDateTripEvent"	DATE
-,	"byRomanian"        BOOLEAN
+,        "publisherId"       INT NOT NULL
+,        "createdById"       INT NOT NULL
+,        "halfStars"                        SMALLINT
+,        "reviewText"                TEXT
+,        "resourceType"                resourcetype NOT NULL
+,        "resourceId"                INT NOT NULL
+,        "publisherTarget"         INT NOT NULL
+,        "startDateTripEvent"        DATE
+,        "byRomanian"        BOOLEAN
 ,   "isActive"          BOOLEAN DEFAULT true
 ,   "timeCreated"       TIMESTAMP DEFAULT NOW()
 ,    FOREIGN KEY ("publisherId") REFERENCES app_public.publisher("id")
@@ -924,20 +972,20 @@ CREATE INDEX ON app_public.review("publisherTarget");
 CREATE TABLE app_public.hostresource (
     "id"    SERIAL primary key
 ,   "hostResourceName"  VARCHAR(240)
-, 	"contactId"         INT NOT NULL
-,	"publisherId"       INT NOT NULL
-,	"createdById"       INT NOT NULL
-,	"withAccomodation"  BOOLEAN NOT NULL
-,   "atAccomodation"	INT
+,         "contactId"         INT NOT NULL
+,        "publisherId"       INT NOT NULL
+,        "createdById"       INT NOT NULL
+,        "withAccomodation"  BOOLEAN NOT NULL
+,   "atAccomodation"        INT
 ,   "atAgency"          INT
 ,   "atGuide"         INT
 ,    "tripTypeName" VARCHAR(128)
-,	"locatedIn"			area
-,	"addressInfoId"		INT NOT NULL
-,	"ownedByAt"         BOOLEAN NOT NULL DEFAULT false
-,	"presentationId" 		INT NOT NULL
-,   "bookingCalendarId"	INT NOT NULL
-,	"isRomanian"        BOOLEAN
+,        "locatedIn"                        area
+,        "addressInfoId"                INT NOT NULL
+,        "ownedByAt"         BOOLEAN NOT NULL DEFAULT false
+,        "presentationId"                 INT NOT NULL
+,   "bookingCalendarId"        INT NOT NULL
+,        "isRomanian"        BOOLEAN
 ,   "isActive"          BOOLEAN DEFAULT true
 ,   "isPublic"          BOOLEAN NOT NULL DEFAULT true
 ,    "lastModified"     TIMESTAMP
@@ -973,19 +1021,19 @@ CREATE TABLE app_public.tourist (
     "id"              SERIAL primary key
 ,   "touristFirstName"       VARCHAR(64)
 ,   "touristLastName"        VARCHAR(64)
-, 	"contactId"              INT NOT NULL
-,	"publisherId"            INT NOT NULL
-,	"createdById"            INT NOT NULL
+,         "contactId"              INT NOT NULL
+,        "publisherId"            INT NOT NULL
+,        "createdById"            INT NOT NULL
 ,   "nativeLanguage"         languages
 ,   "alternativeLanguage"    languages
-,	"touristOfferId"          INT NOT NULL
-,	"touristFavoriteId"       INT NOT NULL
-,	"touristBidId"            INT NOT NULL
-,	"touristDealId"           INT NOT NULL
-,	"guideReviewInIdPool"         INT[]
-,	"agencyReviewInIdPool"        INT[]
-,	"guideReviewOutIdPool"        INT[]
-,	"agencyReviewOutIdPool"       INT[]
+,        "touristOfferId"          INT NOT NULL
+,        "touristFavoriteId"       INT NOT NULL
+,        "touristBidId"            INT NOT NULL
+,        "touristDealId"           INT NOT NULL
+,        "guideReviewInIdPool"         INT[]
+,        "agencyReviewInIdPool"        INT[]
+,        "guideReviewOutIdPool"        INT[]
+,        "agencyReviewOutIdPool"       INT[]
 ,   "timeCreated"            TIMESTAMP DEFAULT NOW()
 ,   "atTravelGroup"          INT
 ,   "isActive"               BOOLEAN DEFAULT true
@@ -1016,8 +1064,8 @@ ADD  FOREIGN KEY ("atTourist") REFERENCES app_public.tourist("id");
 
 CREATE TABLE app_public.languagelevel  (
     "id"  SERIAL primary key
-,	"langauges"			languages NOT NULL
-,	"langaugesSkill"    languageskill NOT NULL
+,        "langauges"                        languages NOT NULL
+,        "langaugesSkill"    languageskill NOT NULL
 ,   "isActive"          BOOLEAN DEFAULT true
 ,   "createdById"       INT NOT NULL
 ,   "publisherId"       INT NOT NULL
@@ -1038,15 +1086,15 @@ CREATE INDEX ON app_public.languagelevel("createdById");
 CREATE TABLE app_public.guideresource (
     "id"          SERIAL primary key
 ,   "guideResourceName"        VARCHAR(240)
-,	"publisherId"       INT NOT NULL
-,	"createdById"       INT NOT NULL
-,	"atGuide"         INT
-,	"timeRangeId"      INT
-,	"priceInfoId"		INT NOT NULL
-,	"atAgency"			INT
+,        "publisherId"       INT NOT NULL
+,        "createdById"       INT NOT NULL
+,        "atGuide"         INT
+,        "timeRangeId"      INT
+,        "priceInfoId"                INT NOT NULL
+,        "atAgency"                        INT
 ,   "multipleTimeRange" BOOLEAN NOT NULL
 ,   "bookingCalendarId" INT
-,	"isRomanian"        BOOLEAN
+,        "isRomanian"        BOOLEAN
 ,   "isActive"          BOOLEAN DEFAULT true
 ,   "isPublic"          BOOLEAN NOT NULL DEFAULT true
 ,    "lastModified"     TIMESTAMP
@@ -1073,31 +1121,31 @@ CREATE INDEX ON app_public.guideresource("priceInfoId");
 CREATE TABLE app_public.guide (
     "id"           SERIAL primary key
 ,    "name"            VARCHAR(240)
-, 	"contactId"         INT NOT NULL
-,	"hasGuideLicence"   BOOLEAN NOT NULL
-,	"guideLicenceUrl"   VARCHAR(128)
-,	"publisherId"       INT NOT NULL
-,	"createdById"       INT NOT NULL
-,	"guideFirstName"    VARCHAR(64)
+,         "contactId"         INT NOT NULL
+,        "hasGuideLicence"   BOOLEAN NOT NULL
+,        "guideLicenceUrl"   VARCHAR(128)
+,        "publisherId"       INT NOT NULL
+,        "createdById"       INT NOT NULL
+,        "guideFirstName"    VARCHAR(64)
 ,   "guideLastName"     VARCHAR(64)
-,	"hasOwnCompany"     BOOLEAN NOT NULL
-,	"atAgency"          INT
-,	"languageLevelId"    INT NOT NULL
-,	"areas"             area[] NOT NULL
+,        "hasOwnCompany"     BOOLEAN NOT NULL
+,        "atAgency"          INT
+,        "languageLevelId"    INT NOT NULL
+,        "areas"             area[] NOT NULL
 ,    "tripTypeName" VARCHAR(128)
-,	"guideOfferId"     INT NOT NULL
-,	"guideBidId"       INT NOT NULL
-,	"guideFavoriteId"  INT NOT NULL
-,	"guideDealId"      INT NOT NULL
-,	"agencyReviewInIdPool"   INT[]
-,	"touristReviewInIdPool"  INT[]
-,	"agencyReviewOutIdPool"  INT[]
-,	"touristReviewOutIdPool"  INT[]
-,	"bookingCalendarId"     INT NOT NULL
-,	"hostIdPool"          INT[]
-,	"eventIdPool"         INT[]
-,	"accomodationIdPool"  INT[]
-,	"transportIdPool"     INT[]
+,        "guideOfferId"     INT NOT NULL
+,        "guideBidId"       INT NOT NULL
+,        "guideFavoriteId"  INT NOT NULL
+,        "guideDealId"      INT NOT NULL
+,        "agencyReviewInIdPool"   INT[]
+,        "touristReviewInIdPool"  INT[]
+,        "agencyReviewOutIdPool"  INT[]
+,        "touristReviewOutIdPool"  INT[]
+,        "bookingCalendarId"     INT NOT NULL
+,        "hostIdPool"          INT[]
+,        "eventIdPool"         INT[]
+,        "accomodationIdPool"  INT[]
+,        "transportIdPool"     INT[]
 ,    "lastModified"     TIMESTAMP
 ,   "timeCreated"       TIMESTAMP DEFAULT NOW()
 ,   "isActive"          BOOLEAN DEFAULT true
@@ -1175,30 +1223,30 @@ ADD FOREIGN KEY ("atGuide") REFERENCES app_public.guide("id");
 CREATE TABLE app_public.agency (
     "id"          SERIAL primary key
 ,   "name"             VARCHAR(240) NOT NULL
-, 	"contactId"         INT
-,	"activeInsurance"   BOOLEAN NOT NULL
-,	"insuranceUrl"      VARCHAR(128)
+,         "contactId"         INT
+,        "activeInsurance"   BOOLEAN NOT NULL
+,        "insuranceUrl"      VARCHAR(128)
 ,   "insuranceExpery"   DATE
-,	"publisherId"       INT
-,	"createdById"       INT NOT NULL
+,        "publisherId"       INT
+,        "createdById"       INT NOT NULL
 ,   "isActive"          BOOLEAN DEFAULT true
 ,   "isPublic"          BOOLEAN DEFAULT true
-,	"agencyBidId"      INT
-,	"agencyFavoriteId" INT
-,	"agencyOfferId"    INT
-,	"agencyDealId"     INT
-,	"trustedPartnerIdPool"   INT[]
-,	"extendedNetworkIdPool"   INT[]
-,	"guideReviewInIdPool"    INT[]
-,	"agencyReviewInIdPool"   INT[]
-,	"touristReviewInIdPool"  INT[]
-,	"guideReviewOutIdPool"   INT[]
-,	"agencyReviewOutIdPool"  INT[]
-,	"touristReviewOutIdPool" INT[]
+,        "agencyBidId"      INT
+,        "agencyFavoriteId" INT
+,        "agencyOfferId"    INT
+,        "agencyDealId"     INT
+,        "trustedPartnerIdPool"   INT[]
+,        "extendedNetworkIdPool"   INT[]
+,        "guideReviewInIdPool"    INT[]
+,        "agencyReviewInIdPool"   INT[]
+,        "touristReviewInIdPool"  INT[]
+,        "guideReviewOutIdPool"   INT[]
+,        "agencyReviewOutIdPool"  INT[]
+,        "touristReviewOutIdPool" INT[]
 ,   "agencyMediaLibraryId"    INT
-,	"isRomanian"        BOOLEAN NOT NULL
-,	"bookingCalendarId"  INT
-,	"specializedAgency" resourcetype
+,        "isRomanian"        BOOLEAN NOT NULL
+,        "bookingCalendarId"  INT
+,        "specializedAgency" resourcetype
 ,    "lastModified"     TIMESTAMP
 ,   "timeCreated"       TIMESTAMP DEFAULT NOW()
 ,    FOREIGN KEY ("contactId") REFERENCES app_public.contact("id")
@@ -1292,16 +1340,16 @@ CREATE INDEX ON app_public.medialocation("atResource");
 CREATE TABLE app_public.touristresource (
     "id" SERIAL primary key
 ,    "name"             VARCHAR(240)
-, 	"contactId"         INT NOT NULL
-,	"publisherId"       INT NOT NULL
-,	"createdById"       INT NOT NULL
-,	"atTravelGroup"			INT
-,	"atAgency"			INT
-,	"atGuide"			INT
-,	"isSigned"			BOOLEAN NOT NULL
-,	"priceInfoId"    		INT NOT NULL
-,	"travellingCalendarId"	INT NOT NULL
-,	"isRomanian"        BOOLEAN
+,         "contactId"         INT NOT NULL
+,        "publisherId"       INT NOT NULL
+,        "createdById"       INT NOT NULL
+,        "atTravelGroup"                        INT
+,        "atAgency"                        INT
+,        "atGuide"                        INT
+,        "isSigned"                        BOOLEAN NOT NULL
+,        "priceInfoId"                    INT NOT NULL
+,        "travellingCalendarId"        INT NOT NULL
+,        "isRomanian"        BOOLEAN
 ,   "isActive"           BOOLEAN DEFAULT TRUE
 ,   "isPublic"          BOOLEAN NOT NULL DEFAULT true
 ,    "lastModified"     TIMESTAMP
@@ -1334,19 +1382,19 @@ CREATE INDEX ON app_public.touristresource("travellingCalendarId");
 CREATE TABLE app_public.travelgroupresource (
     "id"          SERIAL primary key
 ,   "travelGroupName"        VARCHAR(240)
-, 	"contactId"         INT NOT NULL
-,	"publisherId"       INT NOT NULL
-,	"createdById"       INT NOT NULL
-,	"numberOfAdults"    SMALLINT
-,	"numberOfChildren"  SMALLINT
-,	"customInfo"        TEXT[]
-,	"bookingCalendarId"	INT NOT NULL
-,	"atAgency"			INT
-,	"atGuide"			INT
-,	"language"			languages NOT NULL
-,	"atTripOfferResource" INT
-,	"atTouristResource"   INT NOT NULL
-,	"isRomanian"        BOOLEAN NOT NULL
+,         "contactId"         INT NOT NULL
+,        "publisherId"       INT NOT NULL
+,        "createdById"       INT NOT NULL
+,        "numberOfAdults"    SMALLINT
+,        "numberOfChildren"  SMALLINT
+,        "customInfo"        TEXT[]
+,        "bookingCalendarId"        INT NOT NULL
+,        "atAgency"                        INT
+,        "atGuide"                        INT
+,        "language"                        languages NOT NULL
+,        "atTripOfferResource" INT
+,        "atTouristResource"   INT NOT NULL
+,        "isRomanian"        BOOLEAN NOT NULL
 ,   "isActive"          BOOLEAN DEFAULT TRUE
 ,    "lastModified"     TIMESTAMP
 ,   "timeCreated"       TIMESTAMP DEFAULT NOW()
@@ -1373,6 +1421,8 @@ CREATE INDEX ON app_public.travelgroupresource ("atAgency");
 CREATE INDEX ON app_public.travelgroupresource ("atGuide");
 CREATE INDEX ON app_public.travelgroupresource ("atTripOfferResource");
 CREATE INDEX ON app_public.travelgroupresource ("atTouristResource");
+
+--//
 
 CREATE TABLE app_public.agencyaccomodation (
   "agencyId" INT NOT NULL,
@@ -1403,11 +1453,11 @@ COMMENT ON COLUMN app_public.agencyaccomodation."presentationPlacements" is E'Th
 
 CREATE TABLE app_public.agencyevent (
   "agencyId"     INT NOT NULL
-,	"eventId"    INT NOT NULL
+,        "eventId"    INT NOT NULL
 ,  "timeCreated" TIMESTAMP DEFAULT NOW()
 ,  PRIMARY KEY("agencyId", "eventId")
 ,  FOREIGN KEY ("agencyId") REFERENCES app_public.agency("id") ON DELETE CASCADE
-,  FOREIGN KEY ("eventId") REFERENCES eventresource("id") ON DELETE CASCADE
+,  FOREIGN KEY ("eventId") REFERENCES app_public.eventresource("id") ON DELETE CASCADE
 );
 
 CREATE INDEX ON app_public.agencyevent("eventId");
@@ -1431,7 +1481,7 @@ CREATE INDEX ON app_public.agencyguide("agencyId", "guideId");
 
 CREATE TABLE app_public.agencyhost (
   "agencyId"     INT NOT NULL
-,	"hostId"    INT NOT NULL
+,        "hostId"    INT NOT NULL
 ,  "timeCreated" TIMESTAMP DEFAULT NOW()
 ,  PRIMARY KEY("agencyId", "hostId")
 ,  FOREIGN KEY ("agencyId") REFERENCES app_public.agency("id") ON DELETE CASCADE
@@ -1443,7 +1493,7 @@ CREATE INDEX ON app_public.agencyhost("hostId");
 
 CREATE TABLE app_public.agencytourist (
   "agencyId"     INT NOT NULL
-,	"touristId"     INT NOT NULL
+,        "touristId"     INT NOT NULL
 ,  "timeCreated" TIMESTAMP DEFAULT NOW()
 ,  PRIMARY KEY("agencyId", "touristId")
 ,  FOREIGN KEY ("agencyId") REFERENCES app_public.agency("id") ON DELETE CASCADE
@@ -1456,7 +1506,7 @@ CREATE INDEX ON "app_public"."agencytourist"("agencyId", "touristId");
 
 CREATE TABLE app_public.agencytransport (
   "agencyId"     INT NOT NULL
-,	"transportId"     INT NOT NULL
+,        "transportId"     INT NOT NULL
 ,  "timeCreated" TIMESTAMP DEFAULT NOW()
 ,  PRIMARY KEY("agencyId", "transportId")
 ,  FOREIGN KEY ("agencyId") REFERENCES app_public.agency("id") ON DELETE CASCADE
@@ -1480,7 +1530,7 @@ CREATE INDEX ON app_public.agencytravelgroup("travelGroupId");
 
 CREATE TABLE app_public.agencytripoffer (
   "agencyId"     INT NOT NULL
-,	"tripOfferId"     INT NOT NULL
+,        "tripOfferId"     INT NOT NULL
 ,  "timeCreated" TIMESTAMP DEFAULT NOW()
 ,  PRIMARY KEY("agencyId", "tripOfferId")
 ,  FOREIGN KEY ("agencyId") REFERENCES app_public.agency("id") ON DELETE CASCADE
@@ -1492,7 +1542,7 @@ CREATE INDEX ON app_public.agencytripoffer("tripOfferId");
 
 CREATE TABLE app_public.agencyuser (
   "agencyId"     INT
-,	"userId"     INT
+,        "userId"     INT
 ,  "timeCreated" TIMESTAMP DEFAULT NOW()
 ,  PRIMARY KEY("agencyId", "userId")
 ,  FOREIGN KEY ("agencyId") REFERENCES app_public.agency("id") ON DELETE CASCADE
@@ -1575,14 +1625,14 @@ CREATE INDEX ON app_public.mediadestinationresource("imageGallery10");
 
 CREATE TABLE app_public.agencyreview (
     "id"          SERIAL primary key
-,	"publisherId"            INT NOT NULL
-,	"createdById"            INT NOT NULL
+,        "publisherId"            INT NOT NULL
+,        "createdById"            INT NOT NULL
 ,   "isActive"                BOOLEAN DEFAULT TRUE
-,	"halfStars"              SMALLINT
-,	"reviewText" 		     VARCHAR(1000)
-,	"agencyIdTarget"	     INT NOT NULL
-,	"startDateTripEvent"     DATE
-,	"byRomanian"             BOOLEAN
+,        "halfStars"              SMALLINT
+,        "reviewText"                      VARCHAR(1000)
+,        "agencyIdTarget"             INT NOT NULL
+,        "startDateTripEvent"     DATE
+,        "byRomanian"             BOOLEAN
 ,   "timeCreated"           TIMESTAMP DEFAULT NOW()
 ,    FOREIGN KEY ("publisherId") REFERENCES app_public.publisher("id")
 ,    FOREIGN KEY ("agencyIdTarget") REFERENCES app_public.agency("id")
@@ -1599,14 +1649,14 @@ CREATE INDEX ON app_public.agencyreview("createdById");
 
 CREATE TABLE app_public.guidereview (
     "id"     SERIAL primary key
-,	"publisherId"       INT NOT NULL
-,	"createdById"       INT NOT NULL
+,        "publisherId"       INT NOT NULL
+,        "createdById"       INT NOT NULL
 ,   "isActive"           BOOLEAN DEFAULT TRUE
-,	"halfStars"         SMALLINT
-,	"reviewText" 		VARCHAR(1000)
-,	"guideIdTarget"	    INT NOT NULL
-,	"startDateTripEvent"		DATE
-,	"byRomanian"        BOOLEAN
+,        "halfStars"         SMALLINT
+,        "reviewText"                 VARCHAR(1000)
+,        "guideIdTarget"            INT NOT NULL
+,        "startDateTripEvent"                DATE
+,        "byRomanian"        BOOLEAN
 ,   "timeCreated"       TIMESTAMP DEFAULT NOW()
 ,    FOREIGN KEY ("publisherId") REFERENCES app_public.publisher("id")
 ,    FOREIGN KEY ("guideIdTarget") REFERENCES app_public.guide("id")
@@ -1638,7 +1688,7 @@ CREATE TABLE app_public.agencymedialibrary (
     "uploadLocations"       TEXT[],
     "locationSignedUrls"      TEXT[],
     "signedUrlsUpdate"      TIMESTAMP[],
-	"lastModifiedBy"            INT NOT NULL,
+        "lastModifiedBy"            INT NOT NULL,
    "timeCreated"           TIMESTAMP DEFAULT NOW(),
    "lastModified"           TIMESTAMP DEFAULT NOW(),
     FOREIGN KEY ("atAgency") REFERENCES app_public.agency("id"),
@@ -1656,13 +1706,13 @@ ALTER TABLE app_public.agency
 ADD FOREIGN KEY ("agencyMediaLibraryId") REFERENCES app_public.agencymedialibrary("id");
 CREATE TABLE app_public.agencydeal (
     "id"                SERIAL primary key
-,	"tripOfferResourceIdPool"     INT[]
-,	"guideResourceIdPool"         INT[]
-,	"touristResouceIdPool"        INT[]
-,	"eventResourceIdPool"          INT[]
-,	"transportationResourceIdPool" INT[]
-,	"accomodationResourceIdPool"   INT[]
-,	"hostResourceIdPool"           INT[]
+,        "tripOfferResourceIdPool"     INT[]
+,        "guideResourceIdPool"         INT[]
+,        "touristResouceIdPool"        INT[]
+,        "eventResourceIdPool"          INT[]
+,        "transportationResourceIdPool" INT[]
+,        "accomodationResourceIdPool"   INT[]
+,        "hostResourceIdPool"           INT[]
 );
 
 ALTER TABLE app_public.agency
@@ -1686,8 +1736,8 @@ CREATE INDEX ON app_public.agencyfavorite("atAgency");
 
 CREATE TABLE app_public.agencyoffer (
     "id"                   SERIAL primary key
-,	"tripsOfferesourceIdPool"         INT[]
-,	"guideResourceIdPool"             INT[]
+,        "tripsOfferesourceIdPool"         INT[]
+,        "guideResourceIdPool"             INT[]
 
 
 );
@@ -1699,14 +1749,14 @@ ADD FOREIGN KEY ("agencyOfferId") REFERENCES app_public.agencyoffer("id");
 
 
 CREATE TABLE app_public.date_ (
-	"useTimeStamp"  Boolean NOT NULL DEFAULT false
-,	"timeStamp"		TIMESTAMP
-,	"year"          CHAR(4)
-,	"month"         VARCHAR(10)
-,	"day"           VARCHAR(10)
-,	"allDayEvent"   BOOLEAN NOT NULL DEFAULT false
-,	"hour"         VARCHAR(2)
-,	"minute"       VARCHAR(2)
+        "useTimeStamp"  Boolean NOT NULL DEFAULT false
+,        "timeStamp"                TIMESTAMP
+,        "year"          CHAR(4)
+,        "month"         VARCHAR(10)
+,        "day"           VARCHAR(10)
+,        "allDayEvent"   BOOLEAN NOT NULL DEFAULT false
+,        "hour"         VARCHAR(2)
+,        "minute"       VARCHAR(2)
 ,   "timeCreated"   TIMESTAMP DEFAULT NOW()
 );
 
@@ -1726,10 +1776,10 @@ ADD  FOREIGN KEY ("guideBidId") REFERENCES app_public.guidebid("id");
 
 CREATE TABLE app_public.guidedeal (
     "id"               SERIAL primary key
-,	"tripsOfferResourceIdPool"     INT[]
-,	"agenciesRomanianIdPool"       INT[]
-,	"agenciesAbroadIdPool"         INT[]
-,	"touristResourceIdPool"          INT[]
+,        "tripsOfferResourceIdPool"     INT[]
+,        "agenciesRomanianIdPool"       INT[]
+,        "agenciesAbroadIdPool"         INT[]
+,        "touristResourceIdPool"          INT[]
 
 );
 
@@ -1741,9 +1791,9 @@ ADD   FOREIGN KEY ("guideDealId") REFERENCES app_public.guidedeal("id");
 
 CREATE TABLE app_public.guidefavorite (
     "id"           SERIAL primary key
-,	"agenciesRomanianIdPool"     INT[]
-,	"agenciesAbroadIdPool"       INT[]
-,	"travelGroupResourceIdPool"  INT[]
+,        "agenciesRomanianIdPool"     INT[]
+,        "agenciesAbroadIdPool"       INT[]
+,        "travelGroupResourceIdPool"  INT[]
 
 );
 
@@ -1755,10 +1805,10 @@ ADD   FOREIGN KEY ("guideFavoriteId") REFERENCES app_public.guidefavorite("id");
 
 CREATE TABLE app_public.guideoffer (
     "id"                   SERIAL primary key
-,	"guideResourceIdPool"                  INT[]
-,	"transportResourceIdPool"        INT[]
-,	"hostResourceIdPool"             INT[]
-,	"accomodationResourceIdPool"     INT[]
+,        "guideResourceIdPool"                  INT[]
+,        "transportResourceIdPool"        INT[]
+,        "hostResourceIdPool"             INT[]
+,        "accomodationResourceIdPool"     INT[]
 
 );
 
@@ -1771,10 +1821,10 @@ ADD  FOREIGN KEY ("guideOfferId") REFERENCES app_public.guideoffer("id");
 CREATE TABLE app_public.touristbid (
     "id"                 SERIAL primary key
 ,   "tripOfferResourceIdPool"      INT[]
-,	"eventResourceIdPool"          INT[]
-,	"transportationResourceIdPool" INT[]
-,	"accomodationResourceIdPool"   INT[]
-,	"hostResourceIdPool"           INT[]
+,        "eventResourceIdPool"          INT[]
+,        "transportationResourceIdPool" INT[]
+,        "accomodationResourceIdPool"   INT[]
+,        "hostResourceIdPool"           INT[]
 
 );
 
@@ -1786,14 +1836,14 @@ ADD   FOREIGN KEY ("touristBidId") REFERENCES app_public.touristbid("id");
 
 CREATE TABLE app_public.touristdeal (
     "id"               SERIAL primary key
-,	"tripsOfferResourceIdPool"     INT[]
+,        "tripsOfferResourceIdPool"     INT[]
 ,   "guideOfferResourceIdPool"      INT[]
-,	"agenciesRomanianIdPool"       INT[]
-,	"agenciesAbroadIdPool"         INT[]
-,	"eventResourceIdPool"          INT[]
-,	"transportationResourceIdPool" INT[]
-,	"accomodationResourceIdPool"   INT[]
-,	"hostResourceIdPool"           INT[]
+,        "agenciesRomanianIdPool"       INT[]
+,        "agenciesAbroadIdPool"         INT[]
+,        "eventResourceIdPool"          INT[]
+,        "transportationResourceIdPool" INT[]
+,        "accomodationResourceIdPool"   INT[]
+,        "hostResourceIdPool"           INT[]
 
 );
 
@@ -1805,15 +1855,15 @@ ADD   FOREIGN KEY ("touristDealId") REFERENCES app_public.touristdeal("id");
 
 CREATE TABLE app_public.touristfavorite (
     "id"               SERIAL primary key
-,	"agenciesRomanianIdPool"       INT[]
-,	"agenciesAbroadIdPool"         INT[]
-,	"travelGroupResourceIdPool"    INT[]
-,	"tripsOfferResourceIdPool"     INT[]
-,	"guideResourceIdPool"          INT[]
-,	"eventResourceIdPool"          INT[]
-,	"transportationResourceIdPool" INT[]
-,	"accomodationResourceIdPool"   INT[]
-,	"hostResourceIdPool"           INT[]
+,        "agenciesRomanianIdPool"       INT[]
+,        "agenciesAbroadIdPool"         INT[]
+,        "travelGroupResourceIdPool"    INT[]
+,        "tripsOfferResourceIdPool"     INT[]
+,        "guideResourceIdPool"          INT[]
+,        "eventResourceIdPool"          INT[]
+,        "transportationResourceIdPool" INT[]
+,        "accomodationResourceIdPool"   INT[]
+,        "hostResourceIdPool"           INT[]
 
 );
 
@@ -1825,7 +1875,7 @@ ADD   FOREIGN KEY ("touristFavoriteId") REFERENCES app_public.touristfavorite("i
 
 CREATE TABLE app_public.touristoffer (
     "id"               SERIAL primary key
-,	"touristResourceIdPool"        INT[]
+,        "touristResourceIdPool"        INT[]
 
 );
 
@@ -1837,14 +1887,14 @@ ADD FOREIGN KEY ("touristOfferId") REFERENCES app_public.touristoffer("id");
 
 CREATE TABLE app_public.touristreview (
     "id"     SERIAL primary key
-,	"publisherId"       INT NOT NULL
-,	"createdById"       INT NOT NULL
+,        "publisherId"       INT NOT NULL
+,        "createdById"       INT NOT NULL
 ,   "isActive"          BOOLEAN DEFAULT true
-,	"halfStars"         SMALLINT NOT NULL
-,	"reviewText" 		VARCHAR(1000) NOT NULL
-,	"touristIdTarget"	INT NOT NULL
-,	"startDateTripEvent"		DATE NOT NULL
-,	"byRomanian"        BOOLEAN
+,        "halfStars"         SMALLINT NOT NULL
+,        "reviewText"                 VARCHAR(1000) NOT NULL
+,        "touristIdTarget"        INT NOT NULL
+,        "startDateTripEvent"                DATE NOT NULL
+,        "byRomanian"        BOOLEAN
 ,   "timeCreated"       TIMESTAMP DEFAULT NOW()
 ,    FOREIGN KEY ("publisherId") REFERENCES app_public.publisher("id")
 ,    FOREIGN KEY ("touristIdTarget") REFERENCES app_public.tourist("id")

@@ -9,4 +9,5 @@ locatedIn?: string;
 isRomanian?: boolean;
 isActive?: boolean;
 lastModified?: string;
+timeCreated?: string;
 }

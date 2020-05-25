@@ -5,4 +5,5 @@ halfStars?: number;
 reviewText?: string;
 startDateTripEvent?: string;
 byRomanian?: boolean;
+timeCreated?: string;
 }

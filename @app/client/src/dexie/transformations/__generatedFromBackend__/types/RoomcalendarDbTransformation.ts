@@ -1,6 +1,6 @@
-import { Roomcalendar  as gqlRoomcalendar } from '*.graphqls'
-
 import { roomcalendarDbType as objRoomcalendar } from '../../../dbTypes/__generatedFromBackend__/types/roomcalendarDbType'
+
+import { Roomcalendar  as gqlRoomcalendar } from '*.graphqls'
 
 
 export const RoomcalendarTransform = (raw: gqlRoomcalendar): objRoomcalendar => {

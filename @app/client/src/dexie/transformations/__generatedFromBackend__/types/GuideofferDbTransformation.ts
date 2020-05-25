@@ -1,11 +1,11 @@
-import { Guideoffer  as gqlGuideoffer } from '*.graphqls'
-
 import { guideofferDbType as objGuideoffer } from '../../../dbTypes/__generatedFromBackend__/types/guideofferDbType'
+
+import { Guideoffer  as gqlGuideoffer } from '*.graphqls'
 
 
 export const GuideofferTransform = (raw: gqlGuideoffer): objGuideoffer => {
     return {
-         id: raw.id, guideResourceIdPool: raw.guideResourceIdPool, transportResourceIdPool: raw.transportResourceIdPool, hostResourceIdPool: raw.hostResourceIdPool
+         id: raw.id
     }
 }
 

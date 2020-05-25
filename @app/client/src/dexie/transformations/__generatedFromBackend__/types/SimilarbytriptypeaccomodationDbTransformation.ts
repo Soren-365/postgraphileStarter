@@ -1,11 +1,11 @@
-import { Similarbytriptypeaccomodation  as gqlSimilarbytriptypeaccomodation } from '*.graphqls'
-
 import { similarbytriptypeaccomodationDbType as objSimilarbytriptypeaccomodation } from '../../../dbTypes/__generatedFromBackend__/types/similarbytriptypeaccomodationDbType'
+
+import { Similarbytriptypeaccomodation  as gqlSimilarbytriptypeaccomodation } from '*.graphqls'
 
 
 export const SimilarbytriptypeaccomodationTransform = (raw: gqlSimilarbytriptypeaccomodation): objSimilarbytriptypeaccomodation => {
     return {
-         accomodationIds: raw.accomodationIds, tripTypeName: raw.tripTypeName, atAgency: raw.atAgency, timeCreated: raw.timeCreated
+         accomodationIds: raw.accomodationIds, --: raw.--, triptypes: raw.triptypes, tripTypeName: raw.tripTypeName, atAgency: raw.atAgency, timeCreated: raw.timeCreated
     }
 }
 

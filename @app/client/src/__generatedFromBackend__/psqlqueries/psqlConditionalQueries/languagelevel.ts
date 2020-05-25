@@ -2,8 +2,8 @@ export const query = `query getConditionalLanguagelevel(, $id:  number , $create
         __typename
         languagelevels(condition: {id: $id ,,,,createdById: $createdById ,publisherId: $publisherId , })  {
           nodes {
-            id langauges langaugesSkill isActive createdById publisherId
- 
+            id langauges langaugesSkill isActive createdById publisherId timeCreated
+
           }
         }
       }`

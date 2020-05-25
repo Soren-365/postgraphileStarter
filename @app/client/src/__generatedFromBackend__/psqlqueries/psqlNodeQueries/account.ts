@@ -1,7 +1,7 @@
 export const query = `query getNodeaccount($nodeId: String!) {
         __typename
-        accountByNodeId(nodeId: $nodeId }) { 
-            id emailHash passwordHash sessionId
+        accountByNodeId(nodeId: $nodeId }) {
+            id
 
         }
       }`

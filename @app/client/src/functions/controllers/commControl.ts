@@ -12,7 +12,7 @@ import {
 } from "../../__generatedFromBackend__/psqlmutations/getCreateMutation";
 import { deleteMutationType } from "../../__generatedFromBackend__/psqlmutations/getDeleteMutation";
 import { updateMutationType } from "../../__generatedFromBackend__/psqlmutations/getUpdateMutation";
-import clientDB from "../../db/dexieDB";
+import clientDB from "../../db/dexieDBgenerated";
 import { clientDbI } from "../../redux/sagas/dbSaga";
 import {
   psqlAgencyQuery,

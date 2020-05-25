@@ -3,7 +3,7 @@ export const query = `query getConditionalAssocdestination(, $destinationId:  nu
         assocdestinations(condition: {,destinationId: $destinationId ,,timeCreated: $timeCreated  })  {
           nodes {
             assocDestinationId destinationId atAgency timeCreated
- 
+
           }
         }
       }`

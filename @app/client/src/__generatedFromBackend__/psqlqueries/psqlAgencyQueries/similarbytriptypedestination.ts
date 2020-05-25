@@ -2,7 +2,8 @@ export const query = `query getAgencysimilarbytriptypedestinations($atAgency: In
         __typename
         similarbytriptypedestinations(condition: {atAgency: $atAgency, id: $id }) {
           nodes {
-            destinationIds tripTypeName atAgency timeCreated
+            destinationIds -- resource eventres  accomodationres  hostres  transportres  app_public.guideres  app_public.tourist?  travelgroup?]
+ atAgency timeCreated
 
           }
         }

@@ -4,7 +4,7 @@ export const mutation = `mutation createRoomcalendar(,$publisherId: Int! ,$creat
             agencyEdge {
                 node {
                       id
-                     }  
+                     }
               }
             clientMutationId
             }

@@ -2,8 +2,8 @@ export const query = `query getConditionalBookingcalendar(, $id:  number , $belo
         __typename
         bookingcalendars(condition: {id: $id ,belongsToId: $belongsToId ,belongsToType: $belongsToType ,createdById: $createdById ,,,,,, })  {
           nodes {
-            id belongsToId belongsToType createdById isActive fromTimestamp toTimestamp resourceType comment
- 
+            id belongsToId belongsToType createdById isActive fromTimestamp toTimestamp resourceType comment timeCreated
+
           }
         }
       }`

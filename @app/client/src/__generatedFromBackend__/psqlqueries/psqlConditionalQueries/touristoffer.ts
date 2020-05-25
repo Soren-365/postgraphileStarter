@@ -3,7 +3,7 @@ export const query = `query getConditionalTouristoffer(, $id:  number ) {
         touristoffers(condition: {id: $id  })  {
           nodes {
             id
- 
+
           }
         }
       }`

@@ -18,9 +18,10 @@ bookingCalendarId: number;
 isActive?: boolean;
 isPublic: boolean;
 lastModified?: string;
+timeCreated?: string;
  nodeId?: string;
 
-  constructor(id?: number,transportName?: string,contactId: number,publisherId: number,createdById: number,locatedIn: string,addressInfoId: number,atAgency?: number,atGuide?: number,ownedByAt: boolean,presentationId?: number,isBus: boolean,numberOfPlaces: number,bookingCalendarId: number,isActive?: boolean,isPublic: boolean,lastModified?: string, nodeId?: string,) {
+  constructor(id?: number,transportName?: string,contactId: number,publisherId: number,createdById: number,locatedIn: string,addressInfoId: number,atAgency?: number,atGuide?: number,ownedByAt: boolean,presentationId?: number,isBus: boolean,numberOfPlaces: number,bookingCalendarId: number,isActive?: boolean,isPublic: boolean,lastModified?: string,timeCreated?: string, nodeId?: string,) {
     this.id = id
     this.transportName = transportName
     this.contactId = contactId
@@ -38,6 +39,7 @@ lastModified?: string;
     this.isActive = isActive
     this.isPublic = isPublic
     this.lastModified = lastModified
+    this.timeCreated = timeCreated
     this.nodeId = nodeId
   }
 //  add methods here and move to 'edited' folder

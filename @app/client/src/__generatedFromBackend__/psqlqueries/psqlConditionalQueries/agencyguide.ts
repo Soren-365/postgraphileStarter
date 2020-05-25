@@ -3,7 +3,7 @@ export const query = `query getConditionalAgencyguide(, $agencyId:  number , $gu
         agencyguides(condition: {agencyId: $agencyId ,guideId: $guideId ,timeCreated: $timeCreated  })  {
           nodes {
             agencyId guideId timeCreated
- 
+
           }
         }
       }`

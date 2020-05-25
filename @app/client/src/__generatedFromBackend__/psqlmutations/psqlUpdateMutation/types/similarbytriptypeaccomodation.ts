@@ -1,6 +1,8 @@
 export interface similarbytriptypeaccomodationupdateMutationType {
 accomodationIds: number[];
+--?: string;
+triptypes?: string;
 tripTypeName?: string;
-atAgency?: string;
-timeCreated?: number;
+atAgency?: number;
+timeCreated?: string;
 }

@@ -4,7 +4,7 @@ export const mutation = `mutation createAgencytransport($agencyId: Int! ,$transp
             agencyEdge {
                 node {
                       id
-                     }  
+                     }
               }
             clientMutationId
             }

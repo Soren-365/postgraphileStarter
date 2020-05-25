@@ -29,5 +29,6 @@ transportIdPool?: number[];
 lastModified?: string;
 timeCreated?: string;
 isActive?: boolean;
+isPublic: boolean;
  nodeId?: string;
 }

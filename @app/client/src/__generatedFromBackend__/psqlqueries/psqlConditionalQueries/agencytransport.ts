@@ -3,7 +3,7 @@ export const query = `query getConditionalAgencytransport(, $transportId:  numbe
         agencytransports(condition: {,transportId: $transportId ,timeCreated: $timeCreated  })  {
           nodes {
             agencyId transportId timeCreated
- 
+
           }
         }
       }`

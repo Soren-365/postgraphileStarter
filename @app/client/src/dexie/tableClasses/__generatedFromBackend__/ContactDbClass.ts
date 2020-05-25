@@ -15,9 +15,10 @@ isCompany?: boolean;
 createdById?: number;
 belongsToType?: string;
 belongsToId?: number;
+timeCreated?: string;
  nodeId?: string;
 
-  constructor(id?: number,firstName?: string,lastName?: string,associatedCompany?: string,street?: string,city?: string,postCode?: string,country?: string,telephone?: string,email?: string,isCompany?: boolean,createdById?: number,belongsToType?: string,belongsToId?: number, nodeId?: string,) {
+  constructor(id?: number,firstName?: string,lastName?: string,associatedCompany?: string,street?: string,city?: string,postCode?: string,country?: string,telephone?: string,email?: string,isCompany?: boolean,createdById?: number,belongsToType?: string,belongsToId?: number,timeCreated?: string, nodeId?: string,) {
     this.id = id
     this.firstName = firstName
     this.lastName = lastName
@@ -32,6 +33,7 @@ belongsToId?: number;
     this.createdById = createdById
     this.belongsToType = belongsToType
     this.belongsToId = belongsToId
+    this.timeCreated = timeCreated
     this.nodeId = nodeId
   }
 //  add methods here and move to 'edited' folder

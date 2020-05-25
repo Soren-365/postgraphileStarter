@@ -1,8 +1,8 @@
 export const query = `query Commandlogentry($id: Int!) {
         __typename
         commandlogentry(id: $id) {
-            id atPublisher belongsToType resourceId logcommand timeCommand
- 
+            id
+
         }
       }`
       export default `${query}`

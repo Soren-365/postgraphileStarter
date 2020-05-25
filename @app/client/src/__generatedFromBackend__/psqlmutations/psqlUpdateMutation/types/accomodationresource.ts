@@ -9,4 +9,5 @@ atAgency?: number;
 atGuide?: number;
 isPublic?: boolean;
 lastModified?: string;
+timeCreated?: string;
 }

@@ -11,5 +11,6 @@ isAuction: boolean;
 isActive?: boolean;
 atResourceType: string;
 belongsToId: number;
+timeCreated?: string;
  nodeId?: string;
 }

@@ -1,10 +1,10 @@
-export const mutation = `mutation createTimerange(,$fromTimestamp: Datetime ,$toTimestamp: Datetime ,$timeCreated: TIMESTAMP DEFAULT NOW( , $clientMutationId: String!) {
+export const mutation = `mutation createTimerange(, $clientMutationId: String!) {
         __typename
-        createTimerange(input: {clientMutationId: $clientMutationId,timerange: {,fromTimestamp: $fromTimestamp ,toTimestamp: $toTimestamp ,timeCreated: $timeCreated }}) {
+        createTimerange(input: {clientMutationId: $clientMutationId,timerange: {}}) {
             agencyEdge {
                 node {
                       id
-                     }  
+                     }
               }
             clientMutationId
             }

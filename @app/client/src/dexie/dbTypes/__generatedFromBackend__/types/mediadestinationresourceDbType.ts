@@ -33,5 +33,6 @@ imageGallery9SignedUrl?: string;
 imageGallery10?: number;
 imageGallery10SignedUrl?: string;
 signedUrlsUpdate: string;
+timeCreated?: string;
  nodeId?: string;
 }

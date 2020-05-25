@@ -1,10 +1,10 @@
-export const mutation = `mutation createTouristbid(,$tripOfferResourceIdPool: [Int] ,$eventResourceIdPool: [Int] ,$transportationResourceIdPool: [Int] ,$accomodationResourceIdPool: [Int] , $clientMutationId: String!) {
+export const mutation = `mutation createTouristbid(, $clientMutationId: String!) {
         __typename
-        createTouristbid(input: {clientMutationId: $clientMutationId,touristbid: {,tripOfferResourceIdPool: $tripOfferResourceIdPool ,eventResourceIdPool: $eventResourceIdPool ,transportationResourceIdPool: $transportationResourceIdPool ,accomodationResourceIdPool: $accomodationResourceIdPool }}) {
+        createTouristbid(input: {clientMutationId: $clientMutationId,touristbid: {}}) {
             agencyEdge {
                 node {
                       id
-                     }  
+                     }
               }
             clientMutationId
             }

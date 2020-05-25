@@ -3,7 +3,7 @@ export const query = `query getConditionalAgencyevent(, $eventId:  number , $tim
         agencyevents(condition: {,eventId: $eventId ,timeCreated: $timeCreated  })  {
           nodes {
             agencyId eventId timeCreated
- 
+
           }
         }
       }`

@@ -4,7 +4,7 @@ export const mutation = `mutation createGuidebid(, $clientMutationId: String!) {
             agencyEdge {
                 node {
                       id
-                     }  
+                     }
               }
             clientMutationId
             }

@@ -1,6 +1,6 @@
-import { Assocevent  as gqlAssocevent } from '*.graphqls'
-
 import { assoceventDbType as objAssocevent } from '../../../dbTypes/__generatedFromBackend__/types/assoceventDbType'
+
+import { Assocevent  as gqlAssocevent } from '*.graphqls'
 
 
 export const AssoceventTransform = (raw: gqlAssocevent): objAssocevent => {

@@ -5,4 +5,5 @@ bidId?: number;
 auctionExpiry?: string;
 isActive?: boolean;
 lastModified?: string;
+timeCreated?: string;
 }

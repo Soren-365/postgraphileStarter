@@ -10,6 +10,4 @@ viewportNorthEastLat?: number;
 viewportNorthEastLng?: number;
 viewportSouthWestLat?: number;
 viewportSouthWestLng?: number;
-lastModified?: string;
-timeCreated?: string;
 }

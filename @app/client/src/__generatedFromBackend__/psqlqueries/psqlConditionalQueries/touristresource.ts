@@ -2,8 +2,8 @@ export const query = `query getConditionalTouristresource(, $id:  number , $cont
         __typename
         touristresources(condition: {id: $id ,,contactId: $contactId ,publisherId: $publisherId ,createdById: $createdById ,atTravelGroup: $atTravelGroup ,atAgency: $atAgency ,atGuide: $atGuide ,,priceInfoId: $priceInfoId ,travellingCalendarId: $travellingCalendarId ,,,,, })  {
           nodes {
-            id name contactId publisherId createdById atTravelGroup atAgency atGuide isSigned priceInfoId travellingCalendarId isRomanian isActive isPublic lastModified
- 
+            id name contactId publisherId createdById atTravelGroup atAgency atGuide isSigned priceInfoId travellingCalendarId isRomanian isActive isPublic lastModified timeCreated
+
           }
         }
       }`

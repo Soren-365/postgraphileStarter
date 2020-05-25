@@ -1,9 +1,9 @@
-export const query = `query getConditionalRoomcalendarentry(, $id:  number , $atRoomCalendar:  number ) {
+export const query = `query getConditionalRoomcalendarentry(, $id:  number ) {
         __typename
-        roomcalendarentries(condition: {id: $id ,atRoomCalendar: $atRoomCalendar ,,,, })  {
+        roomcalendarentries(condition: {id: $id ,,,, })  {
           nodes {
-            id atRoomCalendar fromDate toDate comment timeCreated
- 
+            id
+
           }
         }
       }`

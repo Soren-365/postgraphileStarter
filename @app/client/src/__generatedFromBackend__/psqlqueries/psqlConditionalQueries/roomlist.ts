@@ -2,8 +2,8 @@ export const query = `query getConditionalRoomlist(, $id:  number , $atAccomodat
         __typename
         roomlists(condition: {id: $id ,atAccomodation: $atAccomodation ,,,roomCalendarId: $roomCalendarId ,, })  {
           nodes {
-            id atAccomodation roomNames roomNumPeople roomCalendarId roomPrices
- 
+            id atAccomodation roomNames roomNumPeople roomCalendarId roomPrices roomActive
+
           }
         }
       }`

@@ -8,5 +8,6 @@ reviewText?: string;
 guideIdTarget: number;
 startDateTripEvent?: string;
 byRomanian?: boolean;
+timeCreated?: string;
  nodeId?: string;
 }
