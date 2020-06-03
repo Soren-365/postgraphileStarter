@@ -1,12 +1,12 @@
-export const mutation = `mutation createTouristoffer(, $clientMutationId: String!) {
+export const mutation = `mutation createTouristoffer(,$touristResourceIdPool: Int , $id: String!) {
         __typename
-        createTouristoffer(input: {clientMutationId: $clientMutationId,touristoffer: {}}) {
+        createTouristoffer(input: {id: $id,touristoffer: {,touristResourceIdPool: $touristResourceIdPool }}) {
             agencyEdge {
                 node {
                       id
                      }
               }
-            clientMutationId
+            id
             }
           }`
           export default `${mutation}`

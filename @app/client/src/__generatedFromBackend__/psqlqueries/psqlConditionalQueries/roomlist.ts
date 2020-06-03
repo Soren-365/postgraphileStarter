@@ -1,6 +1,6 @@
-export const query = `query getConditionalRoomlist(, $id:  number , $atAccomodation:  number , $roomCalendarId:  number ) {
+export const query = `query getConditionalRoomlist(, $undefined:  undefined ) {
         __typename
-        roomlists(condition: {id: $id ,atAccomodation: $atAccomodation ,,,roomCalendarId: $roomCalendarId ,, })  {
+        roomlists(condition: {undefined: $undefined ,,,,,, })  {
           nodes {
             id atAccomodation roomNames roomNumPeople roomCalendarId roomPrices roomActive
 

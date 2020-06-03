@@ -1,3 +1,3 @@
 export interface medialocationdeleteMutationType {
-id: number; 
+id: number;
 }

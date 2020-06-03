@@ -13,7 +13,7 @@ export enum logcommand {
 ,  User = 'User'
 ,  Publisher = 'Publisher'
 ,  Bid = 'Bid'
-,  PriceInfo = 'PriceInfo'
+,  Priceinfo = 'Priceinfo'
 ,  HostResource = 'HostResource'
 ,  EventResource = 'EventResource'
 ,  Presentation = 'Presentation'
@@ -22,5 +22,6 @@ export enum logcommand {
 ,  TransportResource = 'TransportResource'
 ,  Review = 'Review'
 ,  BookingCalendar = 'BookingCalendar'
+,  Unknown = 'Unknown'
 
    }

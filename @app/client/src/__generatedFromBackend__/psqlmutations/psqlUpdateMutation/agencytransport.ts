@@ -1,7 +1,7 @@
-export const mutation = `mutation updateAgencytransport($agencyId: Int! ,$transportId: Int! ,$timeCreated: Datetime , $clientMutationId: String!) {
+export const mutation = `mutation updateAgencytransport($agencyId: Int! ,$transportId: Int! ,$timeCreated: Datetime , $id: String!) {
         __typename
-        updateAgencytransport(input: {clientMutationId: $clientMutationId, patch: {agencyId: $agencyId ,transportId: $transportId ,timeCreated: $timeCreated }, id: $id}) {
-            clientMutationId
+        updateAgencytransport(input: {id: $id, patch: {agencyId: $agencyId ,transportId: $transportId ,timeCreated: $timeCreated }, id: $id}) {
+            id
             }
           }`
           export default `${mutation}`

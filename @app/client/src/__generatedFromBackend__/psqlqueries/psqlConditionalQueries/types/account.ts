@@ -1,3 +1,3 @@
 export interface accountConditionalQueryType {
- id?:  number;
+ undefined?:  undefined;
 }

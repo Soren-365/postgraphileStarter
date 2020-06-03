@@ -1,6 +1,6 @@
-export const query = `query getConditionalTravelgroupresource(, $id:  number ) {
+export const query = `query getConditionalTravelgroupresource(, $undefined:  undefined ) {
         __typename
-        travelgroupresources(condition: {id: $id ,,,,,,,,,,,,,,,,, })  {
+        travelgroupresources(condition: {undefined: $undefined ,,,,,,,,,,,,,,,,, })  {
           nodes {
             id travelGroupName contactId publisherId createdById numberOfAdults numberOfChildren customInfo bookingCalendarId atAgency atGuide language atTripOfferResource atTouristResource isRomanian isActive lastModified timeCreated
 

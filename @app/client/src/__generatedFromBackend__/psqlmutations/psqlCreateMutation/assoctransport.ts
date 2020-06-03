@@ -1,12 +1,12 @@
-export const mutation = `mutation createAssoctransport($assocTransportId: [Int] ,$transportId: Int ,$atAgency: Int , $clientMutationId: String!) {
+export const mutation = `mutation createAssoctransport($assocTransportId: [Int] ,$transportId: Int ,$atAgency: Int , $id: String!) {
         __typename
-        createAssoctransport(input: {clientMutationId: $clientMutationId,assoctransport: {assocTransportId: $assocTransportId ,transportId: $transportId ,atAgency: $atAgency }}) {
+        createAssoctransport(input: {id: $id,assoctransport: {assocTransportId: $assocTransportId ,transportId: $transportId ,atAgency: $atAgency }}) {
             agencyEdge {
                 node {
                       id
                      }
               }
-            clientMutationId
+            id
             }
           }`
           export default `${mutation}`

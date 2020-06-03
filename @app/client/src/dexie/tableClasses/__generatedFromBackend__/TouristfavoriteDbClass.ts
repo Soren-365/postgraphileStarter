@@ -2,10 +2,28 @@ import { touristfavoriteDbType as TouristfavoriteDbType } from '../../dbTypes/__
 
 export class TouristfavoriteDbClass implements TouristfavoriteDbType {
 id?: number;
+agenciesRomanianIdPool?: number[];
+agenciesAbroadIdPool?: number[];
+travelGroupResourceIdPool?: number[];
+tripsOfferResourceIdPool?: number[];
+guideResourceIdPool?: number[];
+eventResourceIdPool?: number[];
+transportationResourceIdPool?: number[];
+accomodationResourceIdPool?: number[];
+hostResourceIdPool?: number;
  nodeId?: string;
 
-  constructor(id?: number, nodeId?: string,) {
+  constructor(id?: number,agenciesRomanianIdPool?: number[],agenciesAbroadIdPool?: number[],travelGroupResourceIdPool?: number[],tripsOfferResourceIdPool?: number[],guideResourceIdPool?: number[],eventResourceIdPool?: number[],transportationResourceIdPool?: number[],accomodationResourceIdPool?: number[],hostResourceIdPool?: number, nodeId?: string,) {
     this.id = id
+    this.agenciesRomanianIdPool = agenciesRomanianIdPool
+    this.agenciesAbroadIdPool = agenciesAbroadIdPool
+    this.travelGroupResourceIdPool = travelGroupResourceIdPool
+    this.tripsOfferResourceIdPool = tripsOfferResourceIdPool
+    this.guideResourceIdPool = guideResourceIdPool
+    this.eventResourceIdPool = eventResourceIdPool
+    this.transportationResourceIdPool = transportationResourceIdPool
+    this.accomodationResourceIdPool = accomodationResourceIdPool
+    this.hostResourceIdPool = hostResourceIdPool
     this.nodeId = nodeId
   }
 //  add methods here and move to 'edited' folder

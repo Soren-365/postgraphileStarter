@@ -5,7 +5,7 @@ import { Account  as gqlAccount } from '*.graphqls'
 
 export const AccountTransform = (raw: gqlAccount): objAccount => {
     return {
-         id: raw.id
+         id: raw.id, emailHash: raw.emailHash, passwordHash: raw.passwordHash, sessionId: raw.sessionId, logins: raw.logins
     }
 }
 

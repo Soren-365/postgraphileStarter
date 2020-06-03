@@ -1,6 +1,6 @@
-export const query = `query getConditionalReview(, $id:  number , $publisherId:  number , $createdById:  number , $publisherTarget:  number ) {
+export const query = `query getConditionalReview(, $undefined:  undefined ) {
         __typename
-        reviews(condition: {id: $id ,publisherId: $publisherId ,createdById: $createdById ,,,,,publisherTarget: $publisherTarget ,,,, })  {
+        reviews(condition: {undefined: $undefined ,,,,,,,,,,, })  {
           nodes {
             id publisherId createdById halfStars reviewText resourceType resourceId publisherTarget startDateTripEvent byRomanian isActive timeCreated
 

@@ -1,4 +1,4 @@
 export interface assoctravelgroupConditionalQueryType {
- travelGroupId?:  number;
- timeCreated?:  string;
+ undefined?:  undefined;
+ undefined?:  undefined;
 }

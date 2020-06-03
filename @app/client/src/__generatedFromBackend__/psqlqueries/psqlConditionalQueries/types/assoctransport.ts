@@ -1,4 +1,4 @@
 export interface assoctransportConditionalQueryType {
- transportId?:  number;
- atAgency?:  number;
+ undefined?:  undefined;
+ undefined?:  undefined;
 }

@@ -1,8 +1,8 @@
-export const query = `query getConditionalAgencyoffer(, $id:  number ) {
+export const query = `query getConditionalAgencyoffer(, $undefined:  undefined ) {
         __typename
-        agencyoffers(condition: {id: $id , })  {
+        agencyoffers(condition: {undefined: $undefined ,, })  {
           nodes {
-            id
+            id tripsOfferesourceIdPool guideResourceIdPool
 
           }
         }

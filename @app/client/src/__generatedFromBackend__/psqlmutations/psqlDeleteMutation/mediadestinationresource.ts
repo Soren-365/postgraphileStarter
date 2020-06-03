@@ -1,7 +1,7 @@
-export const mutation = `mutation deleteMediadestinationresource($id: Int , $clientMutationId: String!) {
+export const mutation = `mutation deleteMediadestinationresource($id: Int , $id: String!) {
         __typename
-        deleteMediadestinationresource(input: {clientMutationId: $clientMutationId, id: $id}) {
-            clientMutationId
+        deleteMediadestinationresource(input: {id: $id}) {
+            id
             }
           }`
           export default `${mutation}`

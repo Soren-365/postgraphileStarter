@@ -1,7 +1,7 @@
 export const query = `query Agencyoffer($id: Int!) {
         __typename
         agencyoffer(id: $id) {
-            id
+            id tripsOfferesourceIdPool guideResourceIdPool
 
         }
       }`

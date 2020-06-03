@@ -1,6 +1,6 @@
-export const query = `query getConditionalAgencyreview(, $id:  number , $publisherId:  number , $createdById:  number , $agencyIdTarget:  number ) {
+export const query = `query getConditionalAgencyreview(, $undefined:  undefined ) {
         __typename
-        agencyreviews(condition: {id: $id ,publisherId: $publisherId ,createdById: $createdById ,,,,agencyIdTarget: $agencyIdTarget ,,, })  {
+        agencyreviews(condition: {undefined: $undefined ,,,,,,,,, })  {
           nodes {
             id publisherId createdById isActive halfStars reviewText agencyIdTarget startDateTripEvent byRomanian timeCreated
 

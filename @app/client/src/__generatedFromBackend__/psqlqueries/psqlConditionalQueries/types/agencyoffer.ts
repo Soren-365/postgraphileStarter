@@ -1,3 +1,3 @@
 export interface agencyofferConditionalQueryType {
- id?:  number;
+ undefined?:  undefined;
 }

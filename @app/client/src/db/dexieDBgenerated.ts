@@ -5,10 +5,9 @@ import type { topicsDbType }  from '../dexie/dbTypes/__generatedFromBackend__/ty
 import type { postsDbType }  from '../dexie/dbTypes/__generatedFromBackend__/types/postsDbType'
 import type { user_feed_postsDbType }  from '../dexie/dbTypes/__generatedFromBackend__/types/user_feed_postsDbType'
 import type { triptypeDbType }  from '../dexie/dbTypes/__generatedFromBackend__/types/triptypeDbType'
-import type { usertablDbType }  from '../dexie/dbTypes/__generatedFromBackend__/types/usertablDbType'
+import type { usertableDbType }  from '../dexie/dbTypes/__generatedFromBackend__/types/usertableDbType'
 import type { accountDbType }  from '../dexie/dbTypes/__generatedFromBackend__/types/accountDbType'
 import type { contactDbType }  from '../dexie/dbTypes/__generatedFromBackend__/types/contactDbType'
-import type { publisherDbType }  from '../dexie/dbTypes/__generatedFromBackend__/types/publisherDbType'
 import type { commandlogentryDbType }  from '../dexie/dbTypes/__generatedFromBackend__/types/commandlogentryDbType'
 import type { publisherDbType }  from '../dexie/dbTypes/__generatedFromBackend__/types/publisherDbType'
 import type { geocodingDbType }  from '../dexie/dbTypes/__generatedFromBackend__/types/geocodingDbType'
@@ -84,10 +83,9 @@ import { TopicsDbClass } from '../dexie/tableClasses/__generatedFromBackend__/To
 import { PostsDbClass } from '../dexie/tableClasses/__generatedFromBackend__/PostsDbClass'
 import { User_feed_postsDbClass } from '../dexie/tableClasses/__generatedFromBackend__/User_feed_postsDbClass'
 import { TriptypeDbClass } from '../dexie/tableClasses/__generatedFromBackend__/TriptypeDbClass'
-import { UsertablDbClass } from '../dexie/tableClasses/__generatedFromBackend__/UsertablDbClass'
+import { UsertableDbClass } from '../dexie/tableClasses/__generatedFromBackend__/UsertableDbClass'
 import { AccountDbClass } from '../dexie/tableClasses/__generatedFromBackend__/AccountDbClass'
 import { ContactDbClass } from '../dexie/tableClasses/__generatedFromBackend__/ContactDbClass'
-import { PublisherDbClass } from '../dexie/tableClasses/__generatedFromBackend__/PublisherDbClass'
 import { CommandlogentryDbClass } from '../dexie/tableClasses/__generatedFromBackend__/CommandlogentryDbClass'
 import { PublisherDbClass } from '../dexie/tableClasses/__generatedFromBackend__/PublisherDbClass'
 import { GeocodingDbClass } from '../dexie/tableClasses/__generatedFromBackend__/GeocodingDbClass'
@@ -167,10 +165,9 @@ class clientDB extends Dexie {
 public posts?: Dexie.Table<postsDbType, number>;
 public user_feed_posts?: Dexie.Table<user_feed_postsDbType, number>;
 public triptype?: Dexie.Table<triptypeDbType, number>;
-public usertabl?: Dexie.Table<usertablDbType, number>;
+public usertable?: Dexie.Table<usertableDbType, number>;
 public account?: Dexie.Table<accountDbType, number>;
 public contact?: Dexie.Table<contactDbType, number>;
-public publisher?: Dexie.Table<publisherDbType, number>;
 public commandlogentry?: Dexie.Table<commandlogentryDbType, number>;
 public publisher?: Dexie.Table<publisherDbType, number>;
 public geocoding?: Dexie.Table<geocodingDbType, number>;
@@ -247,30 +244,29 @@ public assoctravelgroup?: Dexie.Table<assoctravelgroupDbType, number>;
 constructor() {
     super('clientDB')
     this.version(1).stores({
-        topics: '',
- posts: 'id, author_id, headline, body, topic, created_at',
- user_feed_posts: 'id, user_id, post_id',
+        topics: 'title',
+ posts: 'id, author_id, headline, body, topic, created_at, updated_at',
+ user_feed_posts: 'id, user_id, post_id, created_at',
  triptype: 'id, tripTypeName, atAgency, lastModified, timeCreated',
- usertabl: 'id',
- account: 'id',
+ usertable: 'id, firstName, lastName, userEmail, atAgency, isAdmin, atGuide, atTourist, timeCreated, isActive, isRomanian',
+ account: 'id, emailHash, passwordHash, sessionId, logins',
  contact: 'id, firstName, lastName, associatedCompany, street, city, postCode, country, telephone, email, isCompany, createdById, belongsToType, belongsToId, timeCreated',
+ commandlogentry: 'id, atPublisher, belongsToType, resourceId, logcommand, timeCommand',
  publisher: 'id, name, createdById, belongsToId, belongsToType, canReview, canPublish, isRomanian, isActive, commandLogEntryId, timeCreated, timeCommand',
- commandlogentry: 'id',
- publisher: 'id, name, createdById, belongsToId, belongsToType, canReview, canPublish, isRomanian, isActive, commandLogEntryId, timeCreated, timeCommand',
- geocoding: 'id, locationLat, locationLng, locationType, placesId, formattedAdress, type, viewportNorthEastLat, viewportNorthEastLng, viewportSouthWestLat, viewportSouthWestLng, createdById',
+ geocoding: 'id, locationLat, locationLng, locationType, placesId, formattedAdress, type, viewportNorthEastLat, viewportNorthEastLng, viewportSouthWestLat, viewportSouthWestLng, createdById, publishedById, lastModified, timeCreated',
  accounting: 'id, publisherId, paymentHistory, abonamentActive, lastPayment, lastPaymentAmount, abonamentExpires, onYearlyPayment, onFreePeriod, freePeriodExpires, isRomanian, isActive, timeCreated',
  presentation: 'id, headline, publisherId, createdById, resourceType, resourceTypeId, isActive, lastModified, timeCreated',
- bid: 'id',
+ bid: 'id, publisherId, createdById, bidAmount, isActive, timeCreated',
  auctioninfo: 'id, publishedById, createdById, advertisedPrice, currentHighBid, bidId, acceptsOffers, auctionExpiry, isAuction, isActive, atResourceType, belongsToId, timeCreated',
  priceinfo: 'id, publisherId, createdById, advertisedPrice, currentHighBId, bidId, acceptsOffers, auctionExpiry, isAuction, isActive, atResourceType, belongsToId, lastModified, timeCreated',
- calendarentry: 'id',
- timerange: 'id',
+ calendarentry: 'id, fromTimestamp, toTimestamp, resourceType, comment, timeCreated',
+ timerange: 'id, fromTimestamp, toTimestamp, timeCreated',
  bookingcalendar: 'id, belongsToId, belongsToType, createdById, isActive, fromTimestamp, toTimestamp, resourceType, comment, timeCreated',
  accomodationresource: 'id, accomodationName, contactId, addressId, locatedIn, locationCalendarId, tripTypeName, publisherId, createdById, isActive, ownedByAt, presentationId, atAgency, atGuide, isPublic, lastModified, timeCreated',
  destinationresource: 'id, destinationName, publishedById, createdById, area, judet, tripTypeName, isActive, priceInfoId, activeAtPeriodsId, presentationId, atAgency, geoCodingId, isPublic, lastModified, lastModifiedBy, timeCreated',
  eventresource: 'id, eventName, agencyName, contactId, publisherId, createdById, locatedIn, locationAddressId, tripTypeName, activeAtPeriodsId, ownedByAt, atAgency, atGuide, presentationId, isActive, isPublic, lastModified, timeCreated',
  tripofferresource: 'id, tripOfferName, publisherId, createdById, availableAtCalendarId, guideResponsibleId, guideSecondaryId, atAgency, priceInfoId, destinationId, isSigned, atGuide, isActive, isPublic, lastModified, timeCreated',
- roomcalendarentry: 'id',
+ roomcalendarentry: 'id, atRoomCalendar, fromDate, toDate, comment, timeCreated',
  roomcalendar: 'id, publisherId, createdById, isActive, calendarentryId, timeCreated',
  roomlist: 'id, atAccomodation, roomNames, roomNumPeople, roomCalendarId, roomPrices, roomActive',
  transportresource: 'id, transportName, contactId, publisherId, createdById, locatedIn, addressInfoId, atAgency, atGuide, ownedByAt, presentationId, isBus, numberOfPlaces, bookingCalendarId, isActive, isPublic, lastModified, timeCreated',
@@ -296,34 +292,28 @@ constructor() {
  mediadestinationresource: 'id, atAgency, atDestination, lastModified, lastModifiedBy, mainImage, mainImageSignedUrl, guideImage, guideSignedUrl, mapImage, mapImageSignedUrl, thumbnailImage, thumbnailImageSignedUrl, imageGallery1, imageGallery1SignedUrl, imageGallery2, imageGallery2SignedUrl, imageGallery3, imageGallery3SignedUrl, imageGallery4, imageGallery4SignedUrl, imageGallery5, imageGallery5SignedUrl, imageGallery6, imageGallery6SignedUrl, imageGallery7, imageGallery7SignedUrl, imageGallery8, imageGallery8SignedUrl, imageGallery9, imageGallery9SignedUrl, imageGallery10, imageGallery10SignedUrl, signedUrlsUpdate, timeCreated',
  agencyreview: 'id, publisherId, createdById, isActive, halfStars, reviewText, agencyIdTarget, startDateTripEvent, byRomanian, timeCreated',
  guidereview: 'id, publisherId, createdById, isActive, halfStars, reviewText, guideIdTarget, startDateTripEvent, byRomanian, timeCreated',
- agencybid: 'id, agencyId',
+ agencybid: 'id, agencyId, touristResourceIdPool',
  agencymedialibrary: 'id, atAgency, uploadLocations, locationSignedUrls, signedUrlsUpdate, lastModifiedBy, timeCreated, lastModified',
- agencydeal: 'id',
- agencyfavorite: 'resourceId',
- agencyoffer: 'id',
- date_: 'useTimeStamp',
- guidebid: 'id',
- guidedeal: 'id',
- guidefavorite: 'id',
- guideoffer: 'id',
- touristbid: 'id',
- touristdeal: 'id',
- touristfavorite: 'id',
- touristoffer: 'id',
+ agencydeal: 'id, tripOfferResourceIdPool, guideResourceIdPool, touristResouceIdPool, eventResourceIdPool, transportationResourceIdPool, accomodationResourceIdPool',
+ agencyfavorite: 'resourceId, resourceType, atAgency',
+ agencyoffer: 'id, tripsOfferesourceIdPool, guideResourceIdPool',
+ date_: 'useTimeStamp, timeStamp, year, month, day, allDayEvent, hour, minute, timeCreated',
+ guidebid: 'id, tripOfferIdPool',
+ guidedeal: 'id, tripsOfferResourceIdPool, agenciesRomanianIdPool, agenciesAbroadIdPool, touristResourceIdPool',
+ guidefavorite: 'id, agenciesRomanianIdPool, agenciesAbroadIdPool, travelGroupResourceIdPool',
+ guideoffer: 'id, guideResourceIdPool, transportResourceIdPool, hostResourceIdPool, accomodationResourceIdPool',
+ touristbid: 'id, tripOfferResourceIdPool, eventResourceIdPool, transportationResourceIdPool, accomodationResourceIdPool, hostResourceIdPool',
+ touristdeal: 'id, tripsOfferResourceIdPool, guideOfferResourceIdPool, agenciesRomanianIdPool, agenciesAbroadIdPool, eventResourceIdPool, transportationResourceIdPool, accomodationResourceIdPool, hostResourceIdPool',
+ touristfavorite: 'id, agenciesRomanianIdPool, agenciesAbroadIdPool, travelGroupResourceIdPool, tripsOfferResourceIdPool, guideResourceIdPool, eventResourceIdPool, transportationResourceIdPool, accomodationResourceIdPool, hostResourceIdPool',
+ touristoffer: 'id, touristResourceIdPool',
  touristreview: 'id, publisherId, createdById, isActive, halfStars, reviewText, touristIdTarget, startDateTripEvent, byRomanian, timeCreated',
- similarbytriptypeaccomodation: 'accomodationIds, --, triptypes, tripTypeName, atAgency, timeCreated',
- similarbytriptypedestination: 'destinationIds, --, resource, eventres, , accomodationres, , hostres, , transportres, , app_public.guideres, , app_public.tourist?, , travelgroup?],
- atAgency, timeCreated',
- similarbytriptypeevent: 'eventIds, --, resource, eventres, , accomodationres, , hostres, , transportres, , app_public.guideres, , app_public.tourist?, , travelgroup?],
- atAgency, timeCreated',
- similarbytriptypeguide: 'guideIds, --, resource, eventres, , accomodationres, , hostres, , transportres, , app_public.guideres, , app_public.tourist?, , travelgroup?],
- atAgency, timeCreated',
- similarbytriptypehost: 'hostIds, --, resource, eventres, , accomodationres, , hostres, , transportres, , app_public.guideres, , app_public.tourist?, , travelgroup?],
- atAgency, timeCreated',
- similarbytriptypetransport: 'transportIds, --, resource, eventres, , accomodationres, , hostres, , transportres, , app_public.guideres, , app_public.tourist?, , travelgroup?],
- atAgency, timeCreated',
- similarbytriptypetravelgroup: 'travelGroupIds, --, resource, eventres, , accomodationres, , hostres, , transportres, , app_public.guideres, , app_public.tourist?, , travelgroup?],
- atAgency, timeCreated',
+ similarbytriptypeaccomodation: 'accomodationIds, tripTypeName, atAgency, timeCreated',
+ similarbytriptypedestination: 'destinationIds, tripTypeName, atAgency, timeCreated',
+ similarbytriptypeevent: 'eventIds, tripTypeName, atAgency, timeCreated',
+ similarbytriptypeguide: 'guideIds, tripTypeName, atAgency, timeCreated',
+ similarbytriptypehost: 'hostIds, tripTypeName, atAgency, timeCreated',
+ similarbytriptypetransport: 'transportIds, tripTypeName, atAgency, timeCreated',
+ similarbytriptypetravelgroup: 'travelGroupIds, tripTypeName, atAgency, timeCreated',
  assocaccomodation: 'assocAccomodationId, accomodationId, atAgency, timeCreated',
  assochost: 'assocHostId, hostId, atAgency, timeCreated',
  assocguide: 'assocGuideId, guideId, atAgency, timeCreated',
@@ -337,10 +327,9 @@ constructor() {
 this.posts = this.table("posts")
 this.user_feed_posts = this.table("user_feed_posts")
 this.triptype = this.table("triptype")
-this.usertabl = this.table("usertabl")
+this.usertable = this.table("usertable")
 this.account = this.table("account")
 this.contact = this.table("contact")
-this.publisher = this.table("publisher")
 this.commandlogentry = this.table("commandlogentry")
 this.publisher = this.table("publisher")
 this.geocoding = this.table("geocoding")
@@ -416,10 +405,9 @@ this.assoctravelgroup = this.table("assoctravelgroup")
 this.posts.mapToClass(PostsDbClass)
 this.user_feed_posts.mapToClass(User_feed_postsDbClass)
 this.triptype.mapToClass(TriptypeDbClass)
-this.usertabl.mapToClass(UsertablDbClass)
+this.usertable.mapToClass(UsertableDbClass)
 this.account.mapToClass(AccountDbClass)
 this.contact.mapToClass(ContactDbClass)
-this.publisher.mapToClass(PublisherDbClass)
 this.commandlogentry.mapToClass(CommandlogentryDbClass)
 this.publisher.mapToClass(PublisherDbClass)
 this.geocoding.mapToClass(GeocodingDbClass)

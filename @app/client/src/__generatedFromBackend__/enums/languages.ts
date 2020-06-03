@@ -18,5 +18,6 @@ export enum languages {
 ,  Norwegian = 'Norwegian'
 ,  Chinese = 'Chinese'
 ,  Japanese = 'Japanese'
+,  Arabic = 'Arabic'
 
    }

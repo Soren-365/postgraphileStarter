@@ -1,6 +1,6 @@
-export const query = `query getConditionalTouristreview(, $id:  number , $publisherId:  number , $createdById:  number , $touristIdTarget:  number ) {
+export const query = `query getConditionalTouristreview(, $undefined:  undefined ) {
         __typename
-        touristreviews(condition: {id: $id ,publisherId: $publisherId ,createdById: $createdById ,,,,touristIdTarget: $touristIdTarget ,,, })  {
+        touristreviews(condition: {undefined: $undefined ,,,,,,,,, })  {
           nodes {
             id publisherId createdById isActive halfStars reviewText touristIdTarget startDateTripEvent byRomanian timeCreated
 

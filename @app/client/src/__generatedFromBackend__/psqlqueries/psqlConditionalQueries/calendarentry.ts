@@ -1,8 +1,8 @@
-export const query = `query getConditionalCalendarentry(, $id:  number ) {
+export const query = `query getConditionalCalendarentry(, $undefined:  undefined ) {
         __typename
-        calendarentries(condition: {id: $id ,,,, })  {
+        calendarentries(condition: {undefined: $undefined ,,,,, })  {
           nodes {
-            id
+            id fromTimestamp toTimestamp resourceType comment timeCreated
 
           }
         }

@@ -1,6 +1,6 @@
-export const query = `query getConditionalAgencyguide(, $agencyId:  number , $guideId:  number , $timeCreated:  string ) {
+export const query = `query getConditionalAgencyguide(, $undefined:  undefined , $undefined:  undefined ) {
         __typename
-        agencyguides(condition: {agencyId: $agencyId ,guideId: $guideId ,timeCreated: $timeCreated  })  {
+        agencyguides(condition: {undefined: $undefined ,undefined: $undefined , })  {
           nodes {
             agencyId guideId timeCreated
 

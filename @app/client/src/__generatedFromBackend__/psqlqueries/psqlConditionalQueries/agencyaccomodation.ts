@@ -1,6 +1,6 @@
-export const query = `query getConditionalAgencyaccomodation(, $agencyId:  number , $accomodationId:  number , $lastModified:  string , $urlExperyAt:  string , $timeCreated:  string ) {
+export const query = `query getConditionalAgencyaccomodation(, $undefined:  undefined , $undefined:  undefined ) {
         __typename
-        agencyaccomodations(condition: {agencyId: $agencyId ,accomodationId: $accomodationId ,lastModified: $lastModified ,urlExperyAt: $urlExperyAt ,,,timeCreated: $timeCreated  })  {
+        agencyaccomodations(condition: {undefined: $undefined ,undefined: $undefined ,,,,, })  {
           nodes {
             agencyId accomodationId lastModified urlExperyAt presentationPlacements agencyBucketUrls timeCreated
 

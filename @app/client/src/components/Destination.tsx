@@ -1,55 +1,67 @@
 /* eslint-disable no-undef */
-import { Button, Card, Code, Elevation, FileInput, H1, H2, H3, H5, Pre } from '@blueprintjs/core';
-import React, { useEffect,useState } from 'react';
-import { connect, useDispatch } from 'react-redux';
-import { destinationresourceDbType } from 'src/dexie/dbTypes/__generatedFromBackend__/types/destinationresourceDbType';
-import { DbTables } from 'src/functions/__generatedFromBackend__/tableEnums';
-import { saveClientDbData } from 'src/redux/sagas/dbSaga';
+import {
+  GetMyDestinationQuery,
+  UpdateDestinationMutation,
+  useGetMyDestinationQuery,
+  useUpdateDestinationMutation,
+} from "@app/graphql";
+import {
+  Button,
+  Card,
+  Code,
+  Elevation,
+  FileInput,
+  H1,
+  H2,
+  H3,
+  H5,
+  Pre,
+} from "@blueprintjs/core";
+import React, { useEffect, useState } from "react";
+import { connect, useDispatch } from "react-redux";
 
-import withApollo from '../lib/with-apollo';
+import { withApollo } from "../../../lib/src/withApollo";
+import { destinationresourceDbType } from "../dexie/dbTypes/__generatedFromBackend__/types/destinationresourceDbType";
+import { DbTables } from "../functions/__generatedFromBackend__/tableEnums";
 // import { fetchImageFromS3 } from '../lib/functions/fetch/fetchImagefromS3';
-import { getSignedUrlFromS3 } from '../src/functions/fetch/fetchSignedUrlfromS3';
-// import { useGetMyDestinationQuery } from '*/destinationquery.graphql';
-import { GetMyDestinationQuery,useGetMyDestinationQuery } from '../src/graphqlQueriesMS/destinationquery.graphql';
-import { UpdateDestinationMutation,useUpdateDestinationMutation } from '../src/graphqlQueriesMS/updateDestination.graphql';
-// import { useMutation } from '@apollo/react-hooks';
-// import { Destination } from 'src/graphqlQueriesMS/__generated__/Destination';
-import { loadS3Object_,uploadImageToS3 } from '../src/redux/actions/api/s3Creators';
-import { accountType } from '../src/redux/reducers/account';
-import type {  imagePlacement } from '../src/redux/reducers/appstate';
+import { getSignedUrlFromS3 } from "../functions/fetch/fetchSignedUrlfromS3";
+import {
+  loadS3Object_,
+  uploadImageToS3,
+} from "../redux/actions/api/s3Creators";
+import { accountType } from "../redux/reducers/account";
+import type { imagePlacement } from "../redux/reducers/appstate";
 // import PropTypes from 'prop-types';
 //  import base64Image from '../public/static/mainImage/base64encoded/base64image1.json';
-import { AppState } from '../src/redux/reducers/appstate';
-import { placeholderS3ObjectType,S3StoreType } from '../src/redux/reducers/s3';
-import { APPSTATE} from '../src/redux/types/types';
-import withReduxSaga from '../src/redux/withReduxSaga';
+import { AppState } from "../redux/reducers/appstate";
+import { placeholderS3ObjectType, S3StoreType } from "../redux/reducers/s3";
+import { saveClientDbData } from "../redux/sagas/dbSaga";
+import { APPSTATE } from "../redux/types/types";
+import withReduxSaga from "../redux/withReduxSaga";
 // import { useUpdateDestinationMutation, UpdateDestinationMutation } from '*/updateDestination.graphql';
 
+// import { resourceClass } from '../objectConstructors/resourceClass';
+// import { useUpdateDestinationMutation } from '__generated__/__intermediate__/graphqlQueriesMS/destinationmutation.graphql-e30b090acfe4014336abcea61ded58421849ed5b';
 
-
-// import { resourceClass } from '../src/objectConstructors/resourceClass';
-// import { useUpdateDestinationMutation } from '__generated__/__intermediate__/src/graphqlQueriesMS/destinationmutation.graphql-e30b090acfe4014336abcea61ded58421849ed5b';
-
-// import { Destinationresource } from '__generated__/__intermediate__/src/graphqlQueriesMS/destinationquery.graphql-9a03f5e49016e60319b13728eae1813bd0b44b5d';
-// import { Image } from 'src/objectConstructors/image';
+// import { Destinationresource } from '__generated__/__intermediate__/graphqlQueriesMS/destinationquery.graphql-9a03f5e49016e60319b13728eae1813bd0b44b5d';
+// import { Image } from 'objectConstructors/image';
 // import { string } from 'prop-types';
-//import { useAgencydestinationQuery } from '../src/graphqlQueriesMS/agencydestination.graphql';
+//import { useAgencydestinationQuery } from '../graphqlQueriesMS/agencydestination.graphql';
 
-//import db from '../src/dexie';
+//import db from '../dexie';
 
-// import { transformDestination } from '../src/objectConstructors/destination'
-//import { Destination_destinationresources_nodes } from 'src/graphqlQueriesMS/__generated__/Destination';
-// import { Destination } from 'src/graphqlQueriesMS/__generated__/Destination';
+// import { transformDestination } from '../objectConstructors/destination'
+//import { Destination_destinationresources_nodes } from 'graphqlQueriesMS/__generated__/Destination';
+// import { Destination } from 'graphqlQueriesMS/__generated__/Destination';
 
 interface DestinationProps {
   placeholderData: unknown;
   title: string;
-  state: { account: accountType;  appstate: AppState; s3: S3StoreType };
+  state: { account: accountType; appstate: AppState; s3: S3StoreType };
   props: any;
   imageS3Type: placeholderS3ObjectType;
-  loadS3Object_(input): unknown;
+  loadS3Object_(arg0: input): unknown;
   appstate: AppState;
-
 }
 
 type input = {
@@ -66,58 +78,57 @@ type ImageFile = {
   size: number;
 };
 
-
 const Destination: React.FC<DestinationProps> = ({
-
-
- title,
- placeholderData,
+  title,
+  placeholderData,
   state,
   imageS3Type,
   appstate,
   ...props
 }) => {
   const dispatch = useDispatch();
-  const { userId }  = state.account // user id = account id
-  const userType = 'agencies';    // This app in present version is for agencies only
+  const { userId } = state.account; // user id = account id
+  const userType = "agencies"; // This app in present version is for agencies only
   const agencyId = state.account.agencyId;
-  const resourceType = DbTables.destinationresource  // correct this if not in Destination.tsx
-  const resourceId  = state.appstate.now_showing_resourceId
-  const [destinationDbObject, setDestinationDbObject] = useState(state.appstate.view.object);
+  const resourceType = DbTables.destinationresource; // correct this if not in Destination.tsx
+  const resourceId = state.appstate.now_showing_resourceId;
+  const [destinationDbObject, setDestinationDbObject] = useState(
+    state.appstate.view.object
+  );
   // const imageFile = {} as ImageFile;
   // const { data, loading, error } = useAgencydestinationQuery();
   // console.log("resourceId:", resourceId)
-  
-  const { data, loading, error } = useGetMyDestinationQuery({ 
+
+  const { data, loading, error } = useGetMyDestinationQuery({
     variables: { id: resourceId },
   });
 
-//   let DestinationHub = new resourceClass({agencyId: agencyId, resourceType: resourceType, resourceId: resourceId, user: user, name: "DestinationHub"})
+  //   let DestinationHub = new resourceClass({agencyId: agencyId, resourceType: resourceType, resourceId: resourceId, user: user, name: "DestinationHub"})
 
-//   Object.defineProperties(book, {
-//     year_: {
-//     value: 2017
-//     },
-    
-//     edition: {
-//     value: 1
-//     },
-    
-//     year: {   
-//     get() {
-//     return this.year_;
-//     },
-    
-//     set(newValue) {
-//     if (newValue> 2017) {
-//     this.year_ = newValue;
-//     this.edition += newValue - 2017;
-//     }     
-//     }   
-//     }  
-// });
+  //   Object.defineProperties(book, {
+  //     year_: {
+  //     value: 2017
+  //     },
 
-//   console.log(Object.getOwnPropertyDescriptors(DestinationHub));
+  //     edition: {
+  //     value: 1
+  //     },
+
+  //     year: {
+  //     get() {
+  //     return this.year_;
+  //     },
+
+  //     set(newValue) {
+  //     if (newValue> 2017) {
+  //     this.year_ = newValue;
+  //     this.edition += newValue - 2017;
+  //     }
+  //     }
+  //     }
+  // });
+
+  //   console.log(Object.getOwnPropertyDescriptors(DestinationHub));
 
   // const keyToLocalStorage = `${resourceType}/` + JSON.stringify(resourceId);
   // const dataObject: GetMyDestinationQuery = JSON.parse(localStorage.getItem(keyToLocalStorage));
@@ -125,14 +136,13 @@ const Destination: React.FC<DestinationProps> = ({
 
   //////////////////////////
 
-
   const imagePlacement = {
-    mainImage: 'mainImage',
-    guideImage: 'guideImage',
-    mapImage: 'mapImage',
-    thumbnailImage: 'thumbnailImage',
-    imageGallery: 'imageGallery',
-  }
+    mainImage: "mainImage",
+    guideImage: "guideImage",
+    mapImage: "mapImage",
+    thumbnailImage: "thumbnailImage",
+    imageGallery: "imageGallery",
+  };
 
   // const [emailHash, setemailHash] = useState('');
   // const [passwordHash, setpasswordHash] = useState('');
@@ -141,15 +151,14 @@ const Destination: React.FC<DestinationProps> = ({
   // const [firstName, setfirstName] = useState('');
   // const [lastName, setlastName] = useState('');
 
-  const [ImageFiles, setImageFiles] = useState<ImageFile[]>([{ name: 'default', size: 0 }]);
+  const [ImageFiles, setImageFiles] = useState<ImageFile[]>([
+    { name: "default", size: 0 },
+  ]);
 
   const [ImageUrls, setImageUrls] = useState<imagePlacement>();
 
-  
-
   // console.log("clientDb printout test (agency):", clientDbd.Table.("timeCreated"))
   // console.log("clientDb printout test (agency):", clientDbd.agency)
- 
 
   // console.log("UPDATING AGAIN !!!", { placeholderData,  title,  state,  imageS3Type,  appstate,  loadS3Object_, props})
 
@@ -167,41 +176,62 @@ const Destination: React.FC<DestinationProps> = ({
   // console.log('state', state);
   // console.log('props', props);
 
-
   useEffect(() => {
     //console.log(db.contacts.get.name);
-    
-    setDestinationDbObject(state.appstate.view.object)
+
+    setDestinationDbObject(state.appstate.view.object);
     const keyToLocalStorage = `${resourceType}/${resourceId}`;
-   //  console.log("keyToLocalStorage:", keyToLocalStorage)
+    //  console.log("keyToLocalStorage:", keyToLocalStorage)
     const dataObject = JSON.parse(localStorage.getItem(keyToLocalStorage));
-    if (dataObject)  {
-  //  console.log("dataObject:", dataObject)
-    const { signedUrls }: { signedUrls: AppState['signedUrls'] } = dataObject?.destinationresource;
-   // console.log("signedUrls['mainImage']", signedUrls);
-    setImageUrls({ ...signedUrls });
-    ListObject(data);
+    if (dataObject) {
+      //  console.log("dataObject:", dataObject)
+      const {
+        signedUrls,
+      }: {
+        signedUrls: AppState["signedUrls"];
+      } = dataObject?.destinationresource;
+      // console.log("signedUrls['mainImage']", signedUrls);
+      setImageUrls({ ...signedUrls });
+      ListObject(data);
     }
 
-   
     if (state.appstate.upload_done) {
-    dispatch({ type: APPSTATE.S3_OBJECT_REFRESH_SUCCESS }); // emulating a destination page 
+      dispatch({ type: APPSTATE.S3_OBJECT_REFRESH_SUCCESS }); // emulating a destination page
     }
-//  console.log('useEFFECT executed');
+    //  console.log('useEFFECT executed');
+  }, [
+    state.appstate.upload_done,
+    state.appstate.view.object,
+    resourceType,
+    resourceId,
+    data,
+    dispatch,
+  ]); //,
 
-  }, [state.appstate.upload_done, state.appstate.view.object]);
-
-  const DisplayImage = elem => {
+  const DisplayImage = (elem: undefined) => {
     // const buf = fetched.data?.Body;
     // Create an HTML img tag
     if (elem !== undefined) {
       return (
         <>
           <picture>
-            <source media="(max-width: 500px)" srcSet="/static/images/sharp/3980a7f4518198410559261afcfd768a-500.webp" />
-            <source media="(max-width: 700px)" srcSet="/static/images/sharp/5414f38299552c211f0b4e50ab149134-700.webp" />
-            <source media="(max-width: 900px)" srcSet="/static/images/sharp/cf7dae5fd04ea4d142955ed705ad5935-900.webp" />
-            <img src="/static/images/sharp/66e6d60512218363c4cf5faef2069295-1190.png" alt="Castle" className="w-auto" />
+            <source
+              media="(max-width: 500px)"
+              srcSet="/static/images/sharp/3980a7f4518198410559261afcfd768a-500.webp"
+            />
+            <source
+              media="(max-width: 700px)"
+              srcSet="/static/images/sharp/5414f38299552c211f0b4e50ab149134-700.webp"
+            />
+            <source
+              media="(max-width: 900px)"
+              srcSet="/static/images/sharp/cf7dae5fd04ea4d142955ed705ad5935-900.webp"
+            />
+            <img
+              src="/static/images/sharp/66e6d60512218363c4cf5faef2069295-1190.png"
+              alt="Castle"
+              className="w-auto"
+            />
           </picture>
         </>
       );
@@ -212,18 +242,18 @@ const Destination: React.FC<DestinationProps> = ({
   const List = (props: ListProps) => {
     return (
       <>
-        {' '}
+        {" "}
         {props.list.map((value, index) => (
           <div key={index}>
             <span>{value.name}</span>
             <span>{value.size}</span>
           </div>
-        ))}{' '}
+        ))}{" "}
       </>
     );
   };
 
-  const ListObject = props => {
+  const ListObject = (props: {} | null | undefined) => {
     return (
       <div>
         <span>{props}</span>
@@ -239,197 +269,209 @@ const Destination: React.FC<DestinationProps> = ({
 
   if (data) {
     // If data !== localstorage, then send data to component state(display) && Copy to localstorage after
-  //  console.log('data', data);
+    //  console.log('data', data);
     // console.log('data.destinationresource.lastModified', data?.destinationresource?.lastModified);
     // console.log('stateDb', stateDb);
     // console.log('stateDb?.destinationresource.lastModified', stateDb?.destinationresource?.lastModified);
     // if (!stateDb || data?.destinationresource?.lastModified > stateDb?.destinationresource?.lastModified)  {
-     // console.log('data', data);
-//convert the signedUrls string to key:value object
-     
-      // const signedUrlsArrayOfObjects =  data.destinationresource?.signedUrls?.map((value, index) => {
-      //    const arrayOf2 = value[index].split(":")
-      //    const objectOf2 = { ...arrayOf2 } 
-      //    return objectOf2
-      //   })
-
+    // console.log('data', data);
+    //convert the signedUrls string to key:value object
+    // const signedUrlsArrayOfObjects =  data.destinationresource?.signedUrls?.map((value, index) => {
+    //    const arrayOf2 = value[index].split(":")
+    //    const objectOf2 = { ...arrayOf2 }
+    //    return objectOf2
+    //   })
     //  setStateDb(data)
-
-      //   const { destinationresource } = data   
-      // // console.log("convSignedUrls", signedUrlsArrayOfObjects)
-
-      // const compositeData = { ...destinationresource, ...{ signedUrls: signedUrlsArrayOfObjects }}
-      // console.log("compositeData", compositeData)
-
-      // console.log("data", data)
-      // // send data to component state (update)
-      // setStateDb(compositeData);
-      // // and then copy to local storage      
-      // localStorage.setItem(keyToLocalStorage, dataString);
-      // console.log("LocalStorage written to from data")
-      // // else do nothing
-   // }
+    //   const { destinationresource } = data
+    // // console.log("convSignedUrls", signedUrlsArrayOfObjects)
+    // const compositeData = { ...destinationresource, ...{ signedUrls: signedUrlsArrayOfObjects }}
+    // console.log("compositeData", compositeData)
+    // console.log("data", data)
+    // // send data to component state (update)
+    // setStateDb(compositeData);
+    // // and then copy to local storage
+    // localStorage.setItem(keyToLocalStorage, dataString);
+    // console.log("LocalStorage written to from data")
+    // // else do nothing
+    // }
   }
 
   if (error) {
-    console.log(' Destination: error', error);
+    console.log(" Destination: error", error);
   }
 
   function displayImages(files: string | any[]) {
     // console.log('files', files);
     if (!files.length) {
-      document.getElementById('ImageFile').innerHTML = '<p>No files selected!</p>';
+      document.getElementById("ImageFile").innerHTML =
+        "<p>No files selected!</p>";
     } else {
-      document.getElementById('ImageFile').innerHTML = '';
-      const list = document.createElement('ul');
-      document.getElementById('ImageFile').appendChild(list);
+      document.getElementById("ImageFile").innerHTML = "";
+      const list = document.createElement("ul");
+      document.getElementById("ImageFile").appendChild(list);
       for (let i = 0; i < files.length; i++) {
-        const li = document.createElement('li');
+        const li = document.createElement("li");
         list.appendChild(li);
-        const img = document.createElement('img');
+        const img = document.createElement("img");
         img.src = URL.createObjectURL(files[i]);
         img.height = 60;
-        img.onload = function() {
+        img.onload = function () {
           URL.revokeObjectURL(img.src);
         };
         li.appendChild(img);
-        const info = document.createElement('span');
-        info.innerHTML = files[i].name + ': ' + files[i].size + ' bytes';
+        const info = document.createElement("span");
+        info.innerHTML = files[i].name + ": " + files[i].size + " bytes";
         li.appendChild(info);
       }
     }
   }
 
-  function onSelectFile(ev, imagePlacement) {
+  function onSelectFile(ev: Event | undefined, imagePlacement: string) {
     ev.preventDefault();
     // console.log('Event', ev);
     const { files } = ev.target;
-    console.log('files typeof', typeof files);
+    console.log("files typeof", typeof files);
 
-    console.log('target', ev.target);
+    console.log("target", ev.target);
     const ImageFiles = [...files];
     setImageFiles(ImageFiles);
     displayImages(ImageFiles);
 
     // uploadToS3({url: `${userType}/${agencyId}/${resourceType}/${resourceId}/mainImage` , placementName: `mainImage` , file: ImageFile[1] })
     const imgURL = URL.createObjectURL(ImageFiles[0]);
-    console.log('imgURL', imgURL);
+    console.log("imgURL", imgURL);
     const amazonURL = `${userType}/${agencyId}/${resourceType}/${resourceId}/${imagePlacement}`;
     urlToUpload(imgURL, amazonURL, imagePlacement);
   }
 
+  function urlToUpload(
+    url: RequestInfo,
+    amazonUrl: string,
+    imagePlacement: string
+  ) {
+    const dispatch = useDispatch();
+    fetch(url)
+      .then((res) => res.blob()) // Gets the response and returns it as a blob
+      .then((blob) => {
+        dispatch(uploadImageToS3({ file: blob, amazonUrl })).then(
+          (res: any) => {
+            console.log("res.location:", res.location);
 
- function urlToUpload(url: RequestInfo, amazonUrl: string, imagePlacement: string) {
-  const dispatch = useDispatch();
-  fetch(url)
-    .then(res => res.blob()) // Gets the response and returns it as a blob
-    .then(blob => {
-      dispatch(uploadImageToS3({ file: blob, amazonUrl })).then((res: any) => {
-        console.log("res.location:", res.location)
-        
-        getSignedUrlFromS3({
-          url: `${userType}/${agencyId}/${resourceType}/${resourceId}`,
-          name: `${imagePlacement}`,
-          expires: 604800,
-        })
-          .then((fetchedUrl: { url: string }) => {
-            // async refresh page:
-            console.log('This is the fetched URL', fetchedUrl);
-            setImageUrls({ ...ImageUrls, [imagePlacement]: fetchedUrl.url });
-            console.log('ImageUrls', ImageUrls);
-            dispatch({ type: APPSTATE.S3_OBJECT_REFRESH_REQUEST, message: res });
-
-            // preparations for localstorage resource update:
-            const keyToLocalStorage = `${resourceType}/${resourceId}`;
-            const dataObject: GetMyDestinationQuery = JSON.parse(localStorage.getItem(keyToLocalStorage));
-            var date = Date.now() + 7 * 24 * 60 * 60 * 1000;
-            let toTimestamp = date => new Date(date);
-
-            const newSignedUrls = { ...dataObject.destinationresource, [imagePlacement]: fetchedUrl.url };
-        
-            const newProps = {        
-              signedUrls: newSignedUrls,
-              urlExperyAt: toTimestamp(date),
-              lastModified: toTimestamp(Date.now()),
-              lastModifiedBy: userId 
-            }
-            const newObject = {
-              ...dataObject.destinationresource,
-              ...newProps,
-            };
-
-          //  saveClientDbData({agencyId: agencyId, tableKey: resourceType, tableData: newObject})
-
-            const newDataString = JSON.stringify({ destinationresource: newObject });
-            localStorage.setItem(keyToLocalStorage, newDataString);
-
-            //  MUTATE TO POSTGRES (single source of truth)!
-            console.log("newSignedURLS",newSignedUrls )
-            const newSignedUrlsArray = Object.values(newSignedUrls)
-            console.log("newSignedURLSArray",newSignedUrlsArray )
-            const newSignedUrlsArrayKeys = Object.keys(newSignedUrls)
-            console.log("newSignedURLSArrayKeys",newSignedUrlsArrayKeys )
-            const newSignedUrlsArrayStrings = newSignedUrlsArray.map((value, index) => (`${newSignedUrlsArrayKeys[index]}:${value}`))
-             console.log("newSignedURLSArrayStrings",newSignedUrlsArrayStrings )
-
-             const [updateDestinationResource, {loading, data, error}] = useUpdateDestinationMutation()
-
-            updateDestinationResource({
-              variables: { lastModified: newProps.lastModified, lastModifiedBy: newProps.lastModifiedBy },
+            getSignedUrlFromS3({
+              url: `${userType}/${agencyId}/${resourceType}/${resourceId}`,
+              name: `${imagePlacement}`,
+              expires: 604800,
             })
-            if (error) {
-              console.log("Error! in useUpdateDestinationMutation:",error)
-            }
-            if (data) {
-              const data1: UpdateDestinationMutation = data 
-              console.log("data! in useUpdateDestinationMutation:",data1)
-            }
-            if (loading) {
-              console.log("Loading! in useUpdateDestinationMutation:",loading)
-            }
+              .then((fetchedUrl: { url: string }) => {
+                // async refresh page:
+                console.log("This is the fetched URL", fetchedUrl);
+                setImageUrls({
+                  ...ImageUrls,
+                  [imagePlacement]: fetchedUrl.url,
+                });
+                console.log("ImageUrls", ImageUrls);
+                dispatch({
+                  type: APPSTATE.S3_OBJECT_REFRESH_REQUEST,
+                  message: res,
+                });
 
+                // preparations for localstorage resource update:
+                const keyToLocalStorage = `${resourceType}/${resourceId}`;
+                const dataObject: GetMyDestinationQuery = JSON.parse(
+                  localStorage.getItem(keyToLocalStorage)
+                );
+                var date = Date.now() + 7 * 24 * 60 * 60 * 1000;
+                let toTimestamp = (date: string | number | Date) =>
+                  new Date(date);
 
-          })
-          .catch(error => console.log(error));
+                const newSignedUrls = {
+                  ...dataObject.destinationresource,
+                  [imagePlacement]: fetchedUrl.url,
+                };
+
+                const newProps = {
+                  signedUrls: newSignedUrls,
+                  urlExperyAt: toTimestamp(date).toDateString(),
+                  lastModified: toTimestamp(Date.now()).toDateString(),
+                  lastModifiedBy: userId,
+                };
+                const newObject = {
+                  ...dataObject.destinationresource,
+                  ...newProps,
+                };
+
+                //  saveClientDbData({agencyId: agencyId, tableKey: resourceType, tableData: newObject})
+
+                const newDataString = JSON.stringify({
+                  destinationresource: newObject,
+                });
+                localStorage.setItem(keyToLocalStorage, newDataString);
+
+                //  MUTATE TO POSTGRES (single source of truth)!
+                console.log("newSignedURLS", newSignedUrls);
+                const newSignedUrlsArray = Object.values(newSignedUrls);
+                console.log("newSignedURLSArray", newSignedUrlsArray);
+                const newSignedUrlsArrayKeys = Object.keys(newSignedUrls);
+                console.log("newSignedURLSArrayKeys", newSignedUrlsArrayKeys);
+                const newSignedUrlsArrayStrings = newSignedUrlsArray.map(
+                  (value, index) => `${newSignedUrlsArrayKeys[index]}:${value}`
+                );
+                console.log(
+                  "newSignedURLSArrayStrings",
+                  newSignedUrlsArrayStrings
+                );
+
+                const [
+                  updateDestinationResource,
+                  { loading, data, error },
+                ] = useUpdateDestinationMutation();
+
+                updateDestinationResource({
+                  variables: {
+                    lastModified: newProps.lastModified,
+                    lastModifiedBy: newProps.lastModifiedBy!,
+                  },
+                });
+                if (error) {
+                  console.log("Error! in useUpdateDestinationMutation:", error);
+                }
+                if (data) {
+                  const data1: UpdateDestinationMutation = data;
+                  console.log("data! in useUpdateDestinationMutation:", data1);
+                }
+                if (loading) {
+                  console.log(
+                    "Loading! in useUpdateDestinationMutation:",
+                    loading
+                  );
+                }
+              })
+              .catch((error) => console.log(error));
+          }
+        );
       });
-    });
-}
-
-
-  function getImgFromS3() {
-    console.log('In Destination: Button clicked for loadS3Object');
-     loadS3Object_({ url: `${userType}/${agencyId}/${resourceType}/${resourceId}/mainImage`, name: 'third_image' });
   }
 
-  function incResource(inc) {
-    dispatch({  type: APPSTATE.INCREMENT_RESOURCE, inc: inc })
+  function getImgFromS3() {
+    console.log("In Destination: Button clicked for loadS3Object");
+    loadS3Object_({
+      url: `${userType}/${agencyId}/${resourceType}/${resourceId}/mainImage`,
+      name: "third_image",
+    });
+  }
+
+  function incResource(inc: number) {
+    dispatch({ type: APPSTATE.INCREMENT_RESOURCE, inc: inc });
   }
   return (
     <React.Fragment>
       <div className="sub_container">
         <div className="flex_containers one">
-        <Button text="DEC RESOURCE" onClick={() => incResource(-1)} />
-        <Button text="INC RESOURCE" onClick={() => incResource(+1)} />
-          <H1>{destinationDbObject?.destinationName || "HEY, No data yet..."}</H1>
-          {/* <div className="p-5">
-            EmailHash <input onChange={e => setemailHash(e.target.value)}></input>
-            <hr />
-            PasswordHash <input onChange={e => setpasswordHash(e.target.value)}></input>
-            <hr />
-            CreatedById <input onChange={e => setcreatedById(e.target.value)}></input>
-            <hr />
-            UserEmail <input onChange={e => setuserEmail(e.target.value)}></input>
-            <hr />
-            FirstName <input onChange={e => setfirstName(e.target.value)}></input>
-            <hr />
-            LastName <input onChange={e => setlastName(e.target.value)}></input>
-            <hr />
-            <div>
-              <button className="btn-blue no-underline" onClick={createUser}>
-                Create User!
-              </button>
-            </div>
-          </div> */}
+          <Button text="DEC RESOURCE" onClick={() => incResource(-1)} />
+          <Button text="INC RESOURCE" onClick={() => incResource(+1)} />
+          <H1>
+            {destinationDbObject?.destinationName || "HEY, No data yet..."}
+          </H1>
         </div>
         <div className="flex_containers two content-center ">
           <div className="pt-20">
@@ -438,7 +480,9 @@ const Destination: React.FC<DestinationProps> = ({
               buttonText="Main Image"
               text="choose file"
               inputProps={{ multiple: false }}
-              onInputChange={() => onSelectFile(event, imagePlacement.mainImage)}
+              onInputChange={() =>
+                onSelectFile(event, imagePlacement.mainImage)
+              }
             />
             <a href="#" id="fileSelect">
               Select some files
@@ -451,11 +495,13 @@ const Destination: React.FC<DestinationProps> = ({
               buttonText="Guide Image"
               text="choose file"
               inputProps={{ multiple: false }}
-              onInputChange={() => onSelectFile(event, imagePlacement.guideImage)}
+              onInputChange={() =>
+                onSelectFile(event, imagePlacement.guideImage)
+              }
             />
           </div>
           <Button text="Get image from s3" onClick={() => getImgFromS3()} />
-          
+
           <Card interactive={true} elevation={Elevation.TWO}>
             <H5>
               <a href="#">Card heading</a>
@@ -463,7 +509,7 @@ const Destination: React.FC<DestinationProps> = ({
             {/* <DisplayImage data={state.s3?.placeholderS3Object} /> */}
             <p>Card content</p>
             <div className="w-40"></div>
-            <img src={ImageUrls && ImageUrls['mainImage']} />
+            <img src={ImageUrls && ImageUrls["mainImage"]} />
             {/*<img srcSet={responsiveImage.srcSet} src={responsiveImage.src}></img> */}
             <Button>Submit</Button>
           </Card>
@@ -472,7 +518,7 @@ const Destination: React.FC<DestinationProps> = ({
               <a href="#">Card heading</a>
             </H5>
             <p>Card content</p>
-            <DisplayImage data={'sumeData'} />
+            <DisplayImage data={"sumeData"} />
             <Button>Submit</Button>
           </Card>
           <Card interactive={true} elevation={Elevation.TWO}>
@@ -480,9 +526,12 @@ const Destination: React.FC<DestinationProps> = ({
               <a href="#">Card heading</a>
             </H5>
 
-            <img src={ImageUrls && ImageUrls['guideImage']} />
+            <img src={ImageUrls && ImageUrls["guideImage"]} />
 
-            <Button text="Get image from s3" onClick={() => onSelectFile(event, imagePlacement.guideImage)}>
+            <Button
+              text="Get image from s3"
+              onClick={() => onSelectFile(event, imagePlacement.guideImage)}
+            >
               Submit
             </Button>
           </Card>
@@ -543,7 +592,7 @@ const Destination: React.FC<DestinationProps> = ({
                   {stateDb?.destinationresource?.signedUrls?.map((node, index) => {
                     <div>{node[index]}</div>;
                   })}
-                </H3> 
+                </H3>
                 <H3>Expery at: {stateDb?.destinationresource}</H3>
                  <H3>
                   agencyBucket urls:{' '}
@@ -551,7 +600,7 @@ const Destination: React.FC<DestinationProps> = ({
                     <div>{node[index]}</div>;
                   })}
                 </H3> */}
-              </div>{' '}
+              </div>{" "}
             </div>
           )}
           {placeholderData && (
@@ -559,7 +608,7 @@ const Destination: React.FC<DestinationProps> = ({
               <Code>{JSON.stringify(placeholderData, null, 2)}</Code>
             </Pre>
           )}
-          {error && <p style={{ color: 'red' }}>Error: {error.message}</p>}
+          {error && <p style={{ color: "red" }}>Error: {error.message}</p>}
         </div>
         <style jsx>{`
           .sub_container {
@@ -582,12 +631,21 @@ const mapDispatchToProps = {
   loadS3Object_,
 };
 
-const mapStateToProps = state => {
-  return { imageS3File: state.s3.placeholderS3Object, state: state, appstate: state.appstate };
+const mapStateToProps = (state: {
+  s3: { placeholderS3Object: any };
+  appstate: any;
+}) => {
+  return {
+    imageS3File: state.s3.placeholderS3Object,
+    state: state,
+    appstate: state.appstate,
+  };
 };
 
 Destination.propTypes = {
   //https://www.npmjs.com/package/prop-types
 };
 
-export default withReduxSaga(connect(mapStateToProps, mapDispatchToProps)(withApollo(Destination)));
+export default withReduxSaga(
+  connect(mapStateToProps, mapDispatchToProps)(withApollo(Destination))
+);

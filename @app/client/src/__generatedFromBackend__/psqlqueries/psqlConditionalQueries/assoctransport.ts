@@ -1,6 +1,6 @@
-export const query = `query getConditionalAssoctransport(, $transportId:  number , $atAgency:  number ) {
+export const query = `query getConditionalAssoctransport(, $undefined:  undefined , $undefined:  undefined ) {
         __typename
-        assoctransports(condition: {,transportId: $transportId ,atAgency: $atAgency  })  {
+        assoctransports(condition: {,undefined: $undefined ,undefined: $undefined  })  {
           nodes {
             assocTransportId transportId atAgency
 

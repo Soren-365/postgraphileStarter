@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react'
-import { shallowEqual, useDispatch,useSelector } from 'react-redux'
+import React, { useEffect } from "react";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
 
-import { fetchAuthenticated } from '../src/redux/actions/api/accountCreators'
-import AuthLogin from './AuthLogin'
+import { fetchAuthenticated } from "../redux/actions/api/accountCreators";
+// import AuthLogin from "./AuthLogin";
 // import { getUser } from '../src/redux/calls/getUser';
 
 interface RootProps {
-    passthroughpage: React.ElementType
-    title: string
+  passthroughpage: React.ElementType;
+  title: string;
 }
 
 // type PassThroughPageProps = {
@@ -17,34 +17,42 @@ interface RootProps {
 // }
 
 const Root: React.StatelessComponent<RootProps> = ({
-    title,
-    passthroughpage,
+  title,
+  passthroughpage,
 }) => {
-    const { loggedIn, status } = useSelector(
-        (state) => state.account,
-        shallowEqual
-    )
+  const { loggedIn, status } = useSelector(
+    (state) => state.account,
+    shallowEqual
+  );
 
-    const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-    useEffect(() => {
-        if (!status && loggedIn !== true) {
-            dispatch(fetchAuthenticated())
-            // dispatch(getUser());
-        }
-    })
+  useEffect(() => {
+    if (!status && loggedIn !== true) {
+      dispatch(fetchAuthenticated());
+      // dispatch(getUser());
+    }
+  });
 
-    // {
-    //   console.log('passthroughpage', fetchAuthenticated);
-    // }
-    //  UNSAFE_componentWillMount() {
-    //    }
-    //  const PassThroughPage = props.PassThroughPage
-    //  console.log("Root: props:",props)
-    //  console.log("Root: PassThroughPage:",PassThroughPage)
+  // {
+  //   console.log('passthroughpage', fetchAuthenticated);
+  // }
+  //  UNSAFE_componentWillMount() {
+  //    }
+  //  const PassThroughPage = props.PassThroughPage
+  //  console.log("Root: props:",props)
+  //  console.log("Root: PassThroughPage:",PassThroughPage)
 
-    const PassThroughPage = passthroughpage
-    return <>{loggedIn ? <PassThroughPage title={title} /> : <AuthLogin />}</>
-}
+  const PassThroughPage = passthroughpage;
+  return (
+    <>
+      {loggedIn ? (
+        <PassThroughPage title={title} />
+      ) : (
+        <PassThroughPage title={title} />
+      )}
+    </>
+  ); // <AuthLogin/>
+};
 
-export default Root
+export default Root;

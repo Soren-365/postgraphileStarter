@@ -9,14 +9,15 @@ import { notification } from "antd";
 import { ApolloClient } from "apollo-client";
 import withReduxSaga from "next-redux-saga";
 import withRedux from "next-redux-wrapper";
-import App from "next/app";
+import App, { AppContext, AppInitialProps } from "next/app";
 import { Router, withRouter } from "next/router";
 import NProgress from "nprogress";
 import * as React from "react";
 import { Provider } from "react-redux";
+import { END } from "redux-saga";
 
 // import createStore from "../redux/basicStore";
-import store from "../redux/basicStore";
+import { SagaStore, wrapper } from "../redux/store";
 
 NProgress.configure({
   showSpinner: false,
@@ -46,15 +47,24 @@ if (typeof window !== "undefined") {
   });
 }
 
-class MyApp extends App<{ apollo: ApolloClient<any>; store: any }> {
-  static async getInitialProps({ Component, ctx, ...props }: any) {
-    let pageProps = {};
+interface thisAppProps extends AppInitialProps {
+  apollo: ApolloClient<any>;
+}
 
+class MyApp extends App<thisAppProps> {
+  static async getInitialProps({ Component, ctx, ...props }: AppContext) {
+    let pageProps = {};
+    // 1. Wait for all page actions to dispatch
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx);
-      console.log("props in MyApp", ...props);
+      console.log("props in MyApp", props);
     }
-
+    // // 2. Stop the saga if on server
+    //     if (ctx.req) {
+    //       ctx.store.dispatch(END);
+    //       await (ctx.store as SagaStore).sagaTask!.toPromise();
+    //   }
+    // 3. Return props
     return { pageProps };
   }
 
@@ -67,7 +77,7 @@ class MyApp extends App<{ apollo: ApolloClient<any>; store: any }> {
   }
 
   render() {
-    const { Component, pageProps, apollo, store } = this.props;
+    const { Component, pageProps, apollo } = this.props;
 
     //     return (
     //       <ApolloProvider client={apollo}>
@@ -78,11 +88,9 @@ class MyApp extends App<{ apollo: ApolloClient<any>; store: any }> {
     // }
 
     return (
-      <Provider store={store}>
-        <ApolloProvider client={apollo}>
-          <Component {...pageProps} />
-        </ApolloProvider>
-      </Provider>
+      <ApolloProvider client={apollo}>
+        <Component {...pageProps} />
+      </ApolloProvider>
     );
   }
 }
@@ -90,7 +98,11 @@ class MyApp extends App<{ apollo: ApolloClient<any>; store: any }> {
 //  export const  apolloClientApp  =  MyApp.getInitialProps.apolloClientApp
 
 //  export const  ctxApp  = MyApp.getInitialProps.ctxApp
-const withWrappers = withRedux(store)(
+// const withWrappers = withRedux(store)(
+//   withReduxSaga(withApollo(withRouter(MyApp)))
+// );
+
+const withWrappers = wrapper.withRedux(
   withReduxSaga(withApollo(withRouter(MyApp)))
 );
 

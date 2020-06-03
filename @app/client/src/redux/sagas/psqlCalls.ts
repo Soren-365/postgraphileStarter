@@ -21,8 +21,8 @@ export function* initCreateAgency(userId: number) {
     // 3): change variables. Enjoy typelinting on graphql calls
     // 4): change queryId
 
-    const tableKey = DbTables.agency;
-    const callType = psqlCallEnums.createMutation;
+    const tableKey = DbTables.assochost;
+    const callType = psqlCallEnums.updateMutation;
     interface argsType {
       tableKey: DbTables;
       variables: Pick<psqlCallTypes[typeof callType], typeof tableKey>;
@@ -33,10 +33,11 @@ export function* initCreateAgency(userId: number) {
       tableKey: tableKey,
       variables: {
         [tableKey]: {
-          name: " ",
-          activeInsurance: true,
-          createdById: userId,
-          isRomanian: true,
+     assocHostId: [3],
+     atAgency: 7,
+     hostId: 8,
+     timeCreated: '30292011T06:06:05'
+
         },
       },
       queryId: "initCreateAgency",
@@ -60,7 +61,7 @@ export function* initGetAgencyData(agencyId: number) {
     // 2): change callType ...
     // 3): change variables. Enjoy typelinting on graphql calls
 
-    const tableKey = DbTables.agency;
+    const tableKey = DbTables.roomcalendar;
     const callType = psqlCallEnums.idQuery;
     interface argsType {
       tableKey: DbTables;

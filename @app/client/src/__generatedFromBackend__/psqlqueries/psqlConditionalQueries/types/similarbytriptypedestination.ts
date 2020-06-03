@@ -1,3 +1,4 @@
 export interface similarbytriptypedestinationConditionalQueryType {
- timeCreated?:  string;
+ undefined?:  undefined;
+ undefined?:  undefined;
 }

@@ -1,3 +1,3 @@
 export interface travelgroupresourceConditionalQueryType {
- id?:  number;
+ undefined?:  undefined;
 }

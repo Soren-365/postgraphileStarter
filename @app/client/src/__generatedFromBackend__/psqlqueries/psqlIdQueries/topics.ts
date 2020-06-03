@@ -1,7 +1,7 @@
-export const query = `query Topics($undefined: Int!) {
+export const query = `query Topics($title: Int!) {
         __typename
-        topics(id: $undefined) {
-            
+        topics(id: $title) {
+            title
 
         }
       }`

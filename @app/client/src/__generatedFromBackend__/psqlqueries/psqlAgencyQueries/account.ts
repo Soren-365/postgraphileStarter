@@ -2,7 +2,7 @@ export const query = `query getAgencyaccounts($atAgency: Int!, $id: Int) {
         __typename
         accounts(condition: {atAgency: $atAgency, id: $id }) {
           nodes {
-            id
+            id emailHash passwordHash sessionId logins
 
           }
         }

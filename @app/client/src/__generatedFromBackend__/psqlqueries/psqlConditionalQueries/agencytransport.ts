@@ -1,6 +1,6 @@
-export const query = `query getConditionalAgencytransport(, $transportId:  number , $timeCreated:  string ) {
+export const query = `query getConditionalAgencytransport(, $undefined:  undefined , $undefined:  undefined ) {
         __typename
-        agencytransports(condition: {,transportId: $transportId ,timeCreated: $timeCreated  })  {
+        agencytransports(condition: {undefined: $undefined ,undefined: $undefined , })  {
           nodes {
             agencyId transportId timeCreated
 

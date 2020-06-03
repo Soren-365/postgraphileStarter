@@ -1,5 +1,3 @@
 export interface languagelevelConditionalQueryType {
- id?:  number;
- createdById?:  number;
- publisherId?:  number;
+ undefined?:  undefined;
 }

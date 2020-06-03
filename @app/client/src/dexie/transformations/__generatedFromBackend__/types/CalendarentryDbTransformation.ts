@@ -5,7 +5,7 @@ import { Calendarentry  as gqlCalendarentry } from '*.graphqls'
 
 export const CalendarentryTransform = (raw: gqlCalendarentry): objCalendarentry => {
     return {
-         id: raw.id
+         id: raw.id, fromTimestamp: raw.fromTimestamp, toTimestamp: raw.toTimestamp, resourceType: raw.resourceType, comment: raw.comment, timeCreated: raw.timeCreated
     }
 }
 

@@ -1,8 +1,8 @@
-export const query = `query getConditionalPosts(, $id:  number ) {
+export const query = `query getConditionalPosts(, $undefined:  undefined ) {
         __typename
-        postss(condition: {id: $id ,,,,, })  {
+        postss(condition: {undefined: $undefined ,,,,,, })  {
           nodes {
-            id author_id headline body topic created_at
+            id author_id headline body topic created_at updated_at
 
           }
         }

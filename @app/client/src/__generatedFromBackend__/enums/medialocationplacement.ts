@@ -12,5 +12,6 @@ export enum medialocationplacement {
 ,  imageGallery7 = 'imageGallery7'
 ,  imageGallery8 = 'imageGallery8'
 ,  imageGallery9 = 'imageGallery9'
+,  imageGallery10 = 'imageGallery10'
 
    }

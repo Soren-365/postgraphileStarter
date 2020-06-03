@@ -1,7 +1,7 @@
 export const query = `query getNodeguideoffer($nodeId: String!) {
         __typename
         guideofferByNodeId(nodeId: $nodeId }) {
-            id
+            id guideResourceIdPool transportResourceIdPool hostResourceIdPool accomodationResourceIdPool
 
         }
       }`

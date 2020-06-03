@@ -1,7 +1,7 @@
-export const mutation = `mutation deleteSimilarbytriptypetransport($transportIds: [Int] , $clientMutationId: String!) {
+export const mutation = `mutation deleteSimilarbytriptypetransport($transportIds: [Int] , $id: String!) {
         __typename
-        deleteSimilarbytriptypetransport(input: {clientMutationId: $clientMutationId, id: $id}) {
-            clientMutationId
+        deleteSimilarbytriptypetransport(input: {id: $id}) {
+            id
             }
           }`
           export default `${mutation}`

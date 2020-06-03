@@ -5,7 +5,7 @@ import { Topics  as gqlTopics } from '*.graphqls'
 
 export const TopicsTransform = (raw: gqlTopics): objTopics => {
     return {
-        
+         title: raw.title
     }
 }
 

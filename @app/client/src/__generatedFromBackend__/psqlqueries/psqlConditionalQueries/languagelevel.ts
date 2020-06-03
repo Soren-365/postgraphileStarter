@@ -1,6 +1,6 @@
-export const query = `query getConditionalLanguagelevel(, $id:  number , $createdById:  number , $publisherId:  number ) {
+export const query = `query getConditionalLanguagelevel(, $undefined:  undefined ) {
         __typename
-        languagelevels(condition: {id: $id ,,,,createdById: $createdById ,publisherId: $publisherId , })  {
+        languagelevels(condition: {undefined: $undefined ,,,,,, })  {
           nodes {
             id langauges langaugesSkill isActive createdById publisherId timeCreated
 

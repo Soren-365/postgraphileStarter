@@ -1,8 +1,8 @@
-export const query = `query getConditionalAgencyfavorite(, $resourceId:  number , $undefined:  string , $undefined:  number ) {
+export const query = `query getConditionalAgencyfavorite(, $undefined:  undefined , $undefined:  undefined , $undefined:  undefined ) {
         __typename
-        agencyfavorites(condition: {resourceId: $resourceId ,undefined: $undefined ,undefined: $undefined  })  {
+        agencyfavorites(condition: {undefined: $undefined ,undefined: $undefined ,undefined: $undefined  })  {
           nodes {
-            resourceId
+            resourceId resourceType atAgency
 
           }
         }

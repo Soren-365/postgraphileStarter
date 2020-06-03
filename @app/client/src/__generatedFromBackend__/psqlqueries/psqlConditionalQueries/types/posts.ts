@@ -1,3 +1,3 @@
 export interface postsConditionalQueryType {
- id?:  number;
+ undefined?:  undefined;
 }

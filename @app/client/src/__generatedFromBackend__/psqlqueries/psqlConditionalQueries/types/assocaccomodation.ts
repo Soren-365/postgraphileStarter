@@ -1,5 +1,4 @@
 export interface assocaccomodationConditionalQueryType {
- accomodationId?:  number;
- atAgency?:  number;
- timeCreated?:  string;
+ undefined?:  undefined;
+ undefined?:  undefined;
 }

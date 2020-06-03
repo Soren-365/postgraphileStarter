@@ -5,7 +5,7 @@ import { Touristfavorite  as gqlTouristfavorite } from '*.graphqls'
 
 export const TouristfavoriteTransform = (raw: gqlTouristfavorite): objTouristfavorite => {
     return {
-         id: raw.id
+         id: raw.id, agenciesRomanianIdPool: raw.agenciesRomanianIdPool, agenciesAbroadIdPool: raw.agenciesAbroadIdPool, travelGroupResourceIdPool: raw.travelGroupResourceIdPool, tripsOfferResourceIdPool: raw.tripsOfferResourceIdPool, guideResourceIdPool: raw.guideResourceIdPool, eventResourceIdPool: raw.eventResourceIdPool, transportationResourceIdPool: raw.transportationResourceIdPool, accomodationResourceIdPool: raw.accomodationResourceIdPool, hostResourceIdPool: raw.hostResourceIdPool
     }
 }
 

@@ -1,8 +1,8 @@
-export const query = `query getConditionalGeocoding(, $id:  number , $createdById:  number , $undefined:  number , $undefined:  string ) {
+export const query = `query getConditionalGeocoding(, $undefined:  undefined ) {
         __typename
-        geocodings(condition: {id: $id ,,,,,,,,,,,createdById: $createdById ,undefined: $undefined ,undefined: $undefined  })  {
+        geocodings(condition: {undefined: $undefined ,,,,,,,,,,,,,, })  {
           nodes {
-            id locationLat locationLng locationType placesId formattedAdress type viewportNorthEastLat viewportNorthEastLng viewportSouthWestLat viewportSouthWestLng createdById
+            id locationLat locationLng locationType placesId formattedAdress type viewportNorthEastLat viewportNorthEastLng viewportSouthWestLat viewportSouthWestLng createdById publishedById lastModified timeCreated
 
           }
         }

@@ -3,10 +3,9 @@ import topics from './psqlNodeQueries/topics'
 import posts from './psqlNodeQueries/posts'
 import user_feed_posts from './psqlNodeQueries/user_feed_posts'
 import triptype from './psqlNodeQueries/triptype'
-import usertabl from './psqlNodeQueries/usertabl'
+import usertable from './psqlNodeQueries/usertable'
 import account from './psqlNodeQueries/account'
 import contact from './psqlNodeQueries/contact'
-import publisher from './psqlNodeQueries/publisher'
 import commandlogentry from './psqlNodeQueries/commandlogentry'
 import publisher from './psqlNodeQueries/publisher'
 import geocoding from './psqlNodeQueries/geocoding'
@@ -83,10 +82,9 @@ import type { topicsNodeQueryType }  from './psqlNodeQueries/types/topics'
 import type { postsNodeQueryType }  from './psqlNodeQueries/types/posts'
 import type { user_feed_postsNodeQueryType }  from './psqlNodeQueries/types/user_feed_posts'
 import type { triptypeNodeQueryType }  from './psqlNodeQueries/types/triptype'
-import type { usertablNodeQueryType }  from './psqlNodeQueries/types/usertabl'
+import type { usertableNodeQueryType }  from './psqlNodeQueries/types/usertable'
 import type { accountNodeQueryType }  from './psqlNodeQueries/types/account'
 import type { contactNodeQueryType }  from './psqlNodeQueries/types/contact'
-import type { publisherNodeQueryType }  from './psqlNodeQueries/types/publisher'
 import type { commandlogentryNodeQueryType }  from './psqlNodeQueries/types/commandlogentry'
 import type { publisherNodeQueryType }  from './psqlNodeQueries/types/publisher'
 import type { geocodingNodeQueryType }  from './psqlNodeQueries/types/geocoding'
@@ -164,10 +162,9 @@ topics:  topics,
 posts:  posts,
 user_feed_posts:  user_feed_posts,
 triptype:  triptype,
-usertabl:  usertabl,
+usertable:  usertable,
 account:  account,
 contact:  contact,
-publisher:  publisher,
 commandlogentry:  commandlogentry,
 publisher:  publisher,
 geocoding:  geocoding,
@@ -246,10 +243,9 @@ topics:  topicsNodeQueryType;
 posts:  postsNodeQueryType;
 user_feed_posts:  user_feed_postsNodeQueryType;
 triptype:  triptypeNodeQueryType;
-usertabl:  usertablNodeQueryType;
+usertable:  usertableNodeQueryType;
 account:  accountNodeQueryType;
 contact:  contactNodeQueryType;
-publisher:  publisherNodeQueryType;
 commandlogentry:  commandlogentryNodeQueryType;
 publisher:  publisherNodeQueryType;
 geocoding:  geocodingNodeQueryType;
@@ -322,11 +318,11 @@ assocdestination:  assocdestinationNodeQueryType;
 assoctravelgroup:  assoctravelgroupNodeQueryType;
 }
 
-export function getNodeQuery (queryName) {
+export function getNodeQuery (queryName: string) {
 
 
     const query = Lookup[queryName]
-    console.log("querystring:" ,query)
+    // console.log("querystring:" ,query)
 
     return { query }
 }

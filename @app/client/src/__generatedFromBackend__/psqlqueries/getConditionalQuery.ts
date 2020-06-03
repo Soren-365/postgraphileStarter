@@ -3,10 +3,9 @@ import topics from './psqlIdQueries/topics'
 import posts from './psqlIdQueries/posts'
 import user_feed_posts from './psqlIdQueries/user_feed_posts'
 import triptype from './psqlIdQueries/triptype'
-import usertabl from './psqlIdQueries/usertabl'
+import usertable from './psqlIdQueries/usertable'
 import account from './psqlIdQueries/account'
 import contact from './psqlIdQueries/contact'
-import publisher from './psqlIdQueries/publisher'
 import commandlogentry from './psqlIdQueries/commandlogentry'
 import publisher from './psqlIdQueries/publisher'
 import geocoding from './psqlIdQueries/geocoding'
@@ -83,10 +82,9 @@ import type { topicsConditionalQueryType }  from './psqlConditionalQueries/types
 import type { postsConditionalQueryType }  from './psqlConditionalQueries/types/posts'
 import type { user_feed_postsConditionalQueryType }  from './psqlConditionalQueries/types/user_feed_posts'
 import type { triptypeConditionalQueryType }  from './psqlConditionalQueries/types/triptype'
-import type { usertablConditionalQueryType }  from './psqlConditionalQueries/types/usertabl'
+import type { usertableConditionalQueryType }  from './psqlConditionalQueries/types/usertable'
 import type { accountConditionalQueryType }  from './psqlConditionalQueries/types/account'
 import type { contactConditionalQueryType }  from './psqlConditionalQueries/types/contact'
-import type { publisherConditionalQueryType }  from './psqlConditionalQueries/types/publisher'
 import type { commandlogentryConditionalQueryType }  from './psqlConditionalQueries/types/commandlogentry'
 import type { publisherConditionalQueryType }  from './psqlConditionalQueries/types/publisher'
 import type { geocodingConditionalQueryType }  from './psqlConditionalQueries/types/geocoding'
@@ -164,10 +162,9 @@ topics:  topics,
 posts:  posts,
 user_feed_posts:  user_feed_posts,
 triptype:  triptype,
-usertabl:  usertabl,
+usertable:  usertable,
 account:  account,
 contact:  contact,
-publisher:  publisher,
 commandlogentry:  commandlogentry,
 publisher:  publisher,
 geocoding:  geocoding,
@@ -246,10 +243,9 @@ topics:  topicsConditionalQueryType;
 posts:  postsConditionalQueryType;
 user_feed_posts:  user_feed_postsConditionalQueryType;
 triptype:  triptypeConditionalQueryType;
-usertabl:  usertablConditionalQueryType;
+usertable:  usertableConditionalQueryType;
 account:  accountConditionalQueryType;
 contact:  contactConditionalQueryType;
-publisher:  publisherConditionalQueryType;
 commandlogentry:  commandlogentryConditionalQueryType;
 publisher:  publisherConditionalQueryType;
 geocoding:  geocodingConditionalQueryType;
@@ -322,10 +318,10 @@ assocdestination:  assocdestinationConditionalQueryType;
 assoctravelgroup:  assoctravelgroupConditionalQueryType;
 }
 
-export function getConditionalQuery (queryName) {
+export function getConditionalQuery (queryName: string) {
 
     const query = Lookup[queryName]
-    console.log("querystring:" ,query)
+    // console.log("querystring:" ,query)
 
     return { query }
 }

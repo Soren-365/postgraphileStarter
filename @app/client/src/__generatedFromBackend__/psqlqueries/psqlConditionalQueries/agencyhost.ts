@@ -1,6 +1,6 @@
-export const query = `query getConditionalAgencyhost(, $hostId:  number , $timeCreated:  string ) {
+export const query = `query getConditionalAgencyhost(, $undefined:  undefined , $undefined:  undefined ) {
         __typename
-        agencyhosts(condition: {,hostId: $hostId ,timeCreated: $timeCreated  })  {
+        agencyhosts(condition: {undefined: $undefined ,undefined: $undefined , })  {
           nodes {
             agencyId hostId timeCreated
 

@@ -1,7 +1,7 @@
-export const mutation = `mutation updateSimilarbytriptypeaccomodation($accomodationIds: [Int] ,$--: ResourceIds ,$triptypes: In ,$tripTypeName: String ,$atAgency: Int ,$timeCreated: Datetime , $clientMutationId: String!) {
+export const mutation = `mutation updateSimilarbytriptypeaccomodation($accomodationIds: [Int] ,$tripTypeName: String ,$atAgency: Int ,$timeCreated: Datetime , $id: String!) {
         __typename
-        updateSimilarbytriptypeaccomodation(input: {clientMutationId: $clientMutationId, patch: {accomodationIds: $accomodationIds ,--: $-- ,triptypes: $triptypes ,tripTypeName: $tripTypeName ,atAgency: $atAgency ,timeCreated: $timeCreated }, id: $id}) {
-            clientMutationId
+        updateSimilarbytriptypeaccomodation(input: {id: $id, patch: {accomodationIds: $accomodationIds ,tripTypeName: $tripTypeName ,atAgency: $atAgency ,timeCreated: $timeCreated }, id: $id}) {
+            id
             }
           }`
           export default `${mutation}`

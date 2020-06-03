@@ -1,7 +1,7 @@
 export const query = `query getNodeusertabl($nodeId: String!) {
         __typename
         usertablByNodeId(nodeId: $nodeId }) {
-            id
+            id firstName lastName userEmail atAgency isAdmin atGuide atTourist timeCreated isActive isRomanian
 
         }
       }`

@@ -18,7 +18,7 @@ export interface apiDbRequest {
 const apiDb = (
   state = apiDbDefaults,
   data: { type: any; query: any; id: any; destinationresource: any; error: any }
-): apiDbT => {
+): apiDbTypes => {
   switch (data.type) {
     case API.QUERY_PGDB_REQUEST:
       return {

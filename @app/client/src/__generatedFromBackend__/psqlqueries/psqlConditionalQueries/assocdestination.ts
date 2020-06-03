@@ -1,6 +1,6 @@
-export const query = `query getConditionalAssocdestination(, $destinationId:  number , $timeCreated:  string ) {
+export const query = `query getConditionalAssocdestination(, $undefined:  undefined , $undefined:  undefined ) {
         __typename
-        assocdestinations(condition: {,destinationId: $destinationId ,,timeCreated: $timeCreated  })  {
+        assocdestinations(condition: {,undefined: $undefined ,undefined: $undefined , })  {
           nodes {
             assocDestinationId destinationId atAgency timeCreated
 

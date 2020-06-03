@@ -1,5 +1,4 @@
 export interface agencyguideConditionalQueryType {
- agencyId?:  number;
- guideId?:  number;
- timeCreated?:  string;
+ undefined?:  undefined;
+ undefined?:  undefined;
 }

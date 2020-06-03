@@ -2,7 +2,7 @@ export const query = `query getAgencyusertabls($atAgency: Int!, $id: Int) {
         __typename
         usertabls(condition: {atAgency: $atAgency, id: $id }) {
           nodes {
-            id
+            id firstName lastName userEmail atAgency isAdmin atGuide atTourist timeCreated isActive isRomanian
 
           }
         }

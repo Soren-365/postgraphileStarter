@@ -1,6 +1,6 @@
-export const query = `query getConditionalTriptype(, $timeCreated:  string ) {
+export const query = `query getConditionalTriptype(, $undefined:  undefined , $undefined:  undefined ) {
         __typename
-        triptypes(condition: {,,,,timeCreated: $timeCreated  })  {
+        triptypes(condition: {,undefined: $undefined ,undefined: $undefined ,, })  {
           nodes {
             id tripTypeName atAgency lastModified timeCreated
 

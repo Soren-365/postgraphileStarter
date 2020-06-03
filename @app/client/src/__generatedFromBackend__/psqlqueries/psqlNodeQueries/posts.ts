@@ -1,7 +1,7 @@
 export const query = `query getNodeposts($nodeId: String!) {
         __typename
         postsByNodeId(nodeId: $nodeId }) {
-            id author_id headline body topic created_at
+            id author_id headline body topic created_at updated_at
 
         }
       }`

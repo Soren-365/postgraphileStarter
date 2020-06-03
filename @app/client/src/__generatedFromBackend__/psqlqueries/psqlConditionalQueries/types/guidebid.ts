@@ -1,3 +1,3 @@
 export interface guidebidConditionalQueryType {
- id?:  number;
+ undefined?:  undefined;
 }

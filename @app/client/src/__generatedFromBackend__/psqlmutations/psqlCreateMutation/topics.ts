@@ -1,12 +1,12 @@
-export const mutation = `mutation createTopics(, $clientMutationId: String!) {
+export const mutation = `mutation createTopics($title: String! , $id: String!) {
         __typename
-        createTopics(input: {clientMutationId: $clientMutationId,topics: {}}) {
+        createTopics(input: {id: $id,topics: {title: $title }}) {
             agencyEdge {
                 node {
                       id
                      }
               }
-            clientMutationId
+            id
             }
           }`
           export default `${mutation}`

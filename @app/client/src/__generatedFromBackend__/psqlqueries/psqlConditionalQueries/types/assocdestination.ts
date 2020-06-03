@@ -1,4 +1,4 @@
 export interface assocdestinationConditionalQueryType {
- destinationId?:  number;
- timeCreated?:  string;
+ undefined?:  undefined;
+ undefined?:  undefined;
 }

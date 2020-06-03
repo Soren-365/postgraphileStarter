@@ -1,7 +1,7 @@
-export const mutation = `mutation deleteLanguagelevel($id: Int , $clientMutationId: String!) {
+export const mutation = `mutation deleteLanguagelevel($id: Int , $id: String!) {
         __typename
-        deleteLanguagelevel(input: {clientMutationId: $clientMutationId, id: $id}) {
-            clientMutationId
+        deleteLanguagelevel(input: {id: $id}) {
+            id
             }
           }`
           export default `${mutation}`

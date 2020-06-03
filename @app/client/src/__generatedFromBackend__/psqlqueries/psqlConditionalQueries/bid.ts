@@ -1,8 +1,8 @@
-export const query = `query getConditionalBid(, $id:  number ) {
+export const query = `query getConditionalBid(, $undefined:  undefined ) {
         __typename
-        bids(condition: {id: $id ,,,, })  {
+        bids(condition: {undefined: $undefined ,,,,, })  {
           nodes {
-            id
+            id publisherId createdById bidAmount isActive timeCreated
 
           }
         }

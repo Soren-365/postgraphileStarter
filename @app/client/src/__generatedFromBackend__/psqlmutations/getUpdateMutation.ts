@@ -3,10 +3,9 @@ import topics from './psqlUpdateMutation/topics'
 import posts from './psqlUpdateMutation/posts'
 import user_feed_posts from './psqlUpdateMutation/user_feed_posts'
 import triptype from './psqlUpdateMutation/triptype'
-import usertabl from './psqlUpdateMutation/usertabl'
+import usertable from './psqlUpdateMutation/usertable'
 import account from './psqlUpdateMutation/account'
 import contact from './psqlUpdateMutation/contact'
-import publisher from './psqlUpdateMutation/publisher'
 import commandlogentry from './psqlUpdateMutation/commandlogentry'
 import publisher from './psqlUpdateMutation/publisher'
 import geocoding from './psqlUpdateMutation/geocoding'
@@ -82,10 +81,9 @@ import type { topicsupdateMutationType }  from './psqlUpdateMutation/types/topic
 import type { postsupdateMutationType }  from './psqlUpdateMutation/types/posts'
 import type { user_feed_postsupdateMutationType }  from './psqlUpdateMutation/types/user_feed_posts'
 import type { triptypeupdateMutationType }  from './psqlUpdateMutation/types/triptype'
-import type { usertablupdateMutationType }  from './psqlUpdateMutation/types/usertabl'
+import type { usertableupdateMutationType }  from './psqlUpdateMutation/types/usertable'
 import type { accountupdateMutationType }  from './psqlUpdateMutation/types/account'
 import type { contactupdateMutationType }  from './psqlUpdateMutation/types/contact'
-import type { publisherupdateMutationType }  from './psqlUpdateMutation/types/publisher'
 import type { commandlogentryupdateMutationType }  from './psqlUpdateMutation/types/commandlogentry'
 import type { publisherupdateMutationType }  from './psqlUpdateMutation/types/publisher'
 import type { geocodingupdateMutationType }  from './psqlUpdateMutation/types/geocoding'
@@ -157,7 +155,7 @@ import type { assoceventupdateMutationType }  from './psqlUpdateMutation/types/a
 import type { assocdestinationupdateMutationType }  from './psqlUpdateMutation/types/assocdestination'
 import type { assoctravelgroupupdateMutationType }  from './psqlUpdateMutation/types/assoctravelgroup'
 
-import { DbTables } from 'src/functions/__generatedFromBackend__/tableEnums'
+import { DbTables } from '../../functions/__generatedFromBackend__/tableEnums'
 
 export const Lookup = {
     
@@ -165,10 +163,9 @@ topics:  topics,
 posts:  posts,
 user_feed_posts:  user_feed_posts,
 triptype:  triptype,
-usertabl:  usertabl,
+usertable:  usertable,
 account:  account,
 contact:  contact,
-publisher:  publisher,
 commandlogentry:  commandlogentry,
 publisher:  publisher,
 geocoding:  geocoding,
@@ -247,10 +244,9 @@ topics:  topicsupdateMutationType;
 posts:  postsupdateMutationType;
 user_feed_posts:  user_feed_postsupdateMutationType;
 triptype:  triptypeupdateMutationType;
-usertabl:  usertablupdateMutationType;
+usertable:  usertableupdateMutationType;
 account:  accountupdateMutationType;
 contact:  contactupdateMutationType;
-publisher:  publisherupdateMutationType;
 commandlogentry:  commandlogentryupdateMutationType;
 publisher:  publisherupdateMutationType;
 geocoding:  geocodingupdateMutationType;
@@ -324,10 +320,10 @@ assoctravelgroup:  assoctravelgroupupdateMutationType;
 }
 
 export function getUpdateMutation(DbTablesSelection: keyof typeof DbTables) {
-    // console.log('queryName:', DbTablesSelection)
+    // // console.log('queryName:', DbTablesSelection)
 
      let queryNameAsString = DbTables[DbTablesSelection]
-   //  console.log('queryNameAsString:', queryNameAsString)
+   //  // console.log('queryNameAsString:', queryNameAsString)
      // const key = 'destinationresource'
      type getUpdateMutationTypes = updateMutationType[typeof queryNameAsString]
    //  type Picked = Exclude<getUpdateMutationTypes, "object" >;
@@ -335,7 +331,7 @@ export function getUpdateMutation(DbTablesSelection: keyof typeof DbTables) {
 
 
      const query = Lookup[DbTablesSelection]
-     console.log('query:', query)
+     // console.log('query:', query)
 
      return { query, getTypesFromEmpty }
  }

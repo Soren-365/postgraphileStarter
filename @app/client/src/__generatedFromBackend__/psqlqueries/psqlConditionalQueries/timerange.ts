@@ -1,8 +1,8 @@
-export const query = `query getConditionalTimerange(, $id:  number ) {
+export const query = `query getConditionalTimerange(, $undefined:  undefined ) {
         __typename
-        timeranges(condition: {id: $id ,, })  {
+        timeranges(condition: {undefined: $undefined ,,, })  {
           nodes {
-            id
+            id fromTimestamp toTimestamp timeCreated
 
           }
         }

@@ -1,4 +1,4 @@
 export interface agencyuserConditionalQueryType {
- userId?:  number;
- timeCreated?:  string;
+ undefined?:  undefined;
+ undefined?:  undefined;
 }

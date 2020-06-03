@@ -1,8 +1,8 @@
-export const query = `query getConditionalAccount(, $id:  number ) {
+export const query = `query getConditionalAccount(, $undefined:  undefined ) {
         __typename
-        accounts(condition: {id: $id ,,, })  {
+        accounts(condition: {undefined: $undefined ,,,, })  {
           nodes {
-            id
+            id emailHash passwordHash sessionId logins
 
           }
         }

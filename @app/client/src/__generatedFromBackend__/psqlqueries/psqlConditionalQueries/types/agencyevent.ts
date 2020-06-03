@@ -1,4 +1,4 @@
 export interface agencyeventConditionalQueryType {
- eventId?:  number;
- timeCreated?:  string;
+ undefined?:  undefined;
+ undefined?:  undefined;
 }

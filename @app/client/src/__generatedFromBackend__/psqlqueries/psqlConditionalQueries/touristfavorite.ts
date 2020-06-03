@@ -1,8 +1,8 @@
-export const query = `query getConditionalTouristfavorite(, $id:  number ) {
+export const query = `query getConditionalTouristfavorite(, $undefined:  undefined ) {
         __typename
-        touristfavorites(condition: {id: $id ,,,,,,,, })  {
+        touristfavorites(condition: {undefined: $undefined ,,,,,,,,, })  {
           nodes {
-            id
+            id agenciesRomanianIdPool agenciesAbroadIdPool travelGroupResourceIdPool tripsOfferResourceIdPool guideResourceIdPool eventResourceIdPool transportationResourceIdPool accomodationResourceIdPool hostResourceIdPool
 
           }
         }

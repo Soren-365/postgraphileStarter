@@ -1,3 +1,3 @@
 export interface bidConditionalQueryType {
- id?:  number;
+ undefined?:  undefined;
 }

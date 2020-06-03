@@ -2,10 +2,26 @@ import { touristdealDbType as TouristdealDbType } from '../../dbTypes/__generate
 
 export class TouristdealDbClass implements TouristdealDbType {
 id?: number;
+tripsOfferResourceIdPool?: number[];
+guideOfferResourceIdPool?: number[];
+agenciesRomanianIdPool?: number[];
+agenciesAbroadIdPool?: number[];
+eventResourceIdPool?: number[];
+transportationResourceIdPool?: number[];
+accomodationResourceIdPool?: number[];
+hostResourceIdPool?: number;
  nodeId?: string;
 
-  constructor(id?: number, nodeId?: string,) {
+  constructor(id?: number,tripsOfferResourceIdPool?: number[],guideOfferResourceIdPool?: number[],agenciesRomanianIdPool?: number[],agenciesAbroadIdPool?: number[],eventResourceIdPool?: number[],transportationResourceIdPool?: number[],accomodationResourceIdPool?: number[],hostResourceIdPool?: number, nodeId?: string,) {
     this.id = id
+    this.tripsOfferResourceIdPool = tripsOfferResourceIdPool
+    this.guideOfferResourceIdPool = guideOfferResourceIdPool
+    this.agenciesRomanianIdPool = agenciesRomanianIdPool
+    this.agenciesAbroadIdPool = agenciesAbroadIdPool
+    this.eventResourceIdPool = eventResourceIdPool
+    this.transportationResourceIdPool = transportationResourceIdPool
+    this.accomodationResourceIdPool = accomodationResourceIdPool
+    this.hostResourceIdPool = hostResourceIdPool
     this.nodeId = nodeId
   }
 //  add methods here and move to 'edited' folder

@@ -1,12 +1,12 @@
-export const mutation = `mutation createGuidebid(, $clientMutationId: String!) {
+export const mutation = `mutation createGuidebid(,$tripOfferIdPool: Int , $id: String!) {
         __typename
-        createGuidebid(input: {clientMutationId: $clientMutationId,guidebid: {}}) {
+        createGuidebid(input: {id: $id,guidebid: {,tripOfferIdPool: $tripOfferIdPool }}) {
             agencyEdge {
                 node {
                       id
                      }
               }
-            clientMutationId
+            id
             }
           }`
           export default `${mutation}`

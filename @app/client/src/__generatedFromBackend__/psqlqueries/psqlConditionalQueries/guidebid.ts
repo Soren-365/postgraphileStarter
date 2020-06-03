@@ -1,8 +1,8 @@
-export const query = `query getConditionalGuidebid(, $id:  number ) {
+export const query = `query getConditionalGuidebid(, $undefined:  undefined ) {
         __typename
-        guidebids(condition: {id: $id  })  {
+        guidebids(condition: {undefined: $undefined , })  {
           nodes {
-            id
+            id tripOfferIdPool
 
           }
         }

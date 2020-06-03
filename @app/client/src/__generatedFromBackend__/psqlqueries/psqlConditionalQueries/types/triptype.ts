@@ -1,3 +1,4 @@
 export interface triptypeConditionalQueryType {
- timeCreated?:  string;
+ undefined?:  undefined;
+ undefined?:  undefined;
 }

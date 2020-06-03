@@ -1,8 +1,8 @@
-export const query = `query getConditionalSimilarbytriptypeaccomodation(, $tripTypeName:  string , $timeCreated:  string ) {
+export const query = `query getConditionalSimilarbytriptypeaccomodation(, $undefined:  undefined , $undefined:  undefined ) {
         __typename
-        similarbytriptypeaccomodations(condition: {,,,tripTypeName: $tripTypeName ,,timeCreated: $timeCreated  })  {
+        similarbytriptypeaccomodations(condition: {,undefined: $undefined ,undefined: $undefined , })  {
           nodes {
-            accomodationIds -- triptypes tripTypeName atAgency timeCreated
+            accomodationIds tripTypeName atAgency timeCreated
 
           }
         }

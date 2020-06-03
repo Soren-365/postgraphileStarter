@@ -1,6 +1,6 @@
-export const query = `query getConditionalAgencymedialibrary(, $atAgency:  number , $lastModifiedBy:  number , $lastModified:  string ) {
+export const query = `query getConditionalAgencymedialibrary() {
         __typename
-        agencymedialibraries(condition: {,atAgency: $atAgency ,,,,lastModifiedBy: $lastModifiedBy ,,lastModified: $lastModified  })  {
+        agencymedialibraries(condition: {,,,,,,, })  {
           nodes {
             id atAgency uploadLocations locationSignedUrls signedUrlsUpdate lastModifiedBy timeCreated lastModified
 

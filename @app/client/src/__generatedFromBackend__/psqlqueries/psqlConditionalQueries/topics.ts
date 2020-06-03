@@ -1,8 +1,8 @@
-export const query = `query getConditionalTopics() {
+export const query = `query getConditionalTopics(, $undefined:  undefined , $undefined:  undefined ) {
         __typename
-        topicss(condition: { })  {
+        topicss(condition: {undefined: $undefined ,undefined: $undefined  })  {
           nodes {
-            
+            title
 
           }
         }

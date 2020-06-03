@@ -1,7 +1,7 @@
 export const query = `query getNoderoomcalendarentry($nodeId: String!) {
         __typename
         roomcalendarentryByNodeId(nodeId: $nodeId }) {
-            id
+            id atRoomCalendar fromDate toDate comment timeCreated
 
         }
       }`

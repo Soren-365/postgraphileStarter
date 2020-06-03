@@ -1,6 +1,6 @@
-export const query = `query getConditionalBookingcalendar(, $id:  number , $belongsToId:  number , $belongsToType:  string , $createdById:  number ) {
+export const query = `query getConditionalBookingcalendar(, $undefined:  undefined ) {
         __typename
-        bookingcalendars(condition: {id: $id ,belongsToId: $belongsToId ,belongsToType: $belongsToType ,createdById: $createdById ,,,,,, })  {
+        bookingcalendars(condition: {undefined: $undefined ,,,,,,,,, })  {
           nodes {
             id belongsToId belongsToType createdById isActive fromTimestamp toTimestamp resourceType comment timeCreated
 

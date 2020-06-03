@@ -1,7 +1,7 @@
 export const query = `query getNodetimerange($nodeId: String!) {
         __typename
         timerangeByNodeId(nodeId: $nodeId }) {
-            id
+            id fromTimestamp toTimestamp timeCreated
 
         }
       }`

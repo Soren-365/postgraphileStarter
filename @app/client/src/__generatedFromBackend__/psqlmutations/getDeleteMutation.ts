@@ -3,10 +3,9 @@ import topics from './psqlDeleteMutation/topics'
 import posts from './psqlDeleteMutation/posts'
 import user_feed_posts from './psqlDeleteMutation/user_feed_posts'
 import triptype from './psqlDeleteMutation/triptype'
-import usertabl from './psqlDeleteMutation/usertabl'
+import usertable from './psqlDeleteMutation/usertable'
 import account from './psqlDeleteMutation/account'
 import contact from './psqlDeleteMutation/contact'
-import publisher from './psqlDeleteMutation/publisher'
 import commandlogentry from './psqlDeleteMutation/commandlogentry'
 import publisher from './psqlDeleteMutation/publisher'
 import geocoding from './psqlDeleteMutation/geocoding'
@@ -82,10 +81,9 @@ import type { topicsdeleteMutationType }  from './psqlDeleteMutation/types/topic
 import type { postsdeleteMutationType }  from './psqlDeleteMutation/types/posts'
 import type { user_feed_postsdeleteMutationType }  from './psqlDeleteMutation/types/user_feed_posts'
 import type { triptypedeleteMutationType }  from './psqlDeleteMutation/types/triptype'
-import type { usertabldeleteMutationType }  from './psqlDeleteMutation/types/usertabl'
+import type { usertabledeleteMutationType }  from './psqlDeleteMutation/types/usertable'
 import type { accountdeleteMutationType }  from './psqlDeleteMutation/types/account'
 import type { contactdeleteMutationType }  from './psqlDeleteMutation/types/contact'
-import type { publisherdeleteMutationType }  from './psqlDeleteMutation/types/publisher'
 import type { commandlogentrydeleteMutationType }  from './psqlDeleteMutation/types/commandlogentry'
 import type { publisherdeleteMutationType }  from './psqlDeleteMutation/types/publisher'
 import type { geocodingdeleteMutationType }  from './psqlDeleteMutation/types/geocoding'
@@ -157,7 +155,7 @@ import type { assoceventdeleteMutationType }  from './psqlDeleteMutation/types/a
 import type { assocdestinationdeleteMutationType }  from './psqlDeleteMutation/types/assocdestination'
 import type { assoctravelgroupdeleteMutationType }  from './psqlDeleteMutation/types/assoctravelgroup'
 
-import { DbTables } from 'src/functions/__generatedFromBackend__/tableEnums'
+import { DbTables } from '../../functions/__generatedFromBackend__/tableEnums'
 
 export const Lookup = {
     
@@ -165,10 +163,9 @@ topics:  topics,
 posts:  posts,
 user_feed_posts:  user_feed_posts,
 triptype:  triptype,
-usertabl:  usertabl,
+usertable:  usertable,
 account:  account,
 contact:  contact,
-publisher:  publisher,
 commandlogentry:  commandlogentry,
 publisher:  publisher,
 geocoding:  geocoding,
@@ -247,10 +244,9 @@ topics:  topicsdeleteMutationType;
 posts:  postsdeleteMutationType;
 user_feed_posts:  user_feed_postsdeleteMutationType;
 triptype:  triptypedeleteMutationType;
-usertabl:  usertabldeleteMutationType;
+usertable:  usertabledeleteMutationType;
 account:  accountdeleteMutationType;
 contact:  contactdeleteMutationType;
-publisher:  publisherdeleteMutationType;
 commandlogentry:  commandlogentrydeleteMutationType;
 publisher:  publisherdeleteMutationType;
 geocoding:  geocodingdeleteMutationType;
@@ -324,10 +320,10 @@ assoctravelgroup:  assoctravelgroupdeleteMutationType;
 }
 
 export function getDeleteMutation(DbTablesSelection: keyof typeof DbTables) {
-    // console.log('queryName:', DbTablesSelection)
+    // // console.log('queryName:', DbTablesSelection)
 
      let queryNameAsString = DbTables[DbTablesSelection]
-   //  console.log('queryNameAsString:', queryNameAsString)
+   //  // console.log('queryNameAsString:', queryNameAsString)
      // const key = 'destinationresource'
      type getDeleteMutationTypes = deleteMutationType[typeof queryNameAsString]
    //  type Picked = Exclude<getDeleteMutationTypes, "object" >;
@@ -335,7 +331,7 @@ export function getDeleteMutation(DbTablesSelection: keyof typeof DbTables) {
 
 
      const query = Lookup[DbTablesSelection]
-     console.log('query:', query)
+     // console.log('query:', query)
 
      return { query, getTypesFromEmpty }
  }

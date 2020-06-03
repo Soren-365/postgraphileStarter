@@ -1,3 +1,3 @@
 export interface touristbidConditionalQueryType {
- id?:  number;
+ undefined?:  undefined;
 }

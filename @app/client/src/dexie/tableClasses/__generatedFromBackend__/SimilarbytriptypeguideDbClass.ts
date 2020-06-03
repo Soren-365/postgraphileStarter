@@ -2,33 +2,14 @@ import { similarbytriptypeguideDbType as SimilarbytriptypeguideDbType } from '..
 
 export class SimilarbytriptypeguideDbClass implements SimilarbytriptypeguideDbType {
 guideIds?: number[];
---?: string;
-resource?: string;
-eventres?: string;
-accomodationres?: string;
-hostres?: string;
-transportres?: string;
-app_public.guideres?: string;
-app_public.tourist??: string;
-travelgroup?]
-?: string;
+tripTypeName?: string;
 atAgency?: number;
 timeCreated?: string;
  nodeId?: string;
 
-  constructor(guideIds?: number[],--?: string,resource?: string,eventres?: string,accomodationres?: string,hostres?: string,transportres?: string,app_public.guideres?: string,app_public.tourist??: string,travelgroup?]?: string,atAgency?: number,timeCreated?: string, nodeId?: string,) {
+  constructor(guideIds?: number[],tripTypeName?: string,atAgency?: number,timeCreated?: string, nodeId?: string,) {
     this.guideIds = guideIds
-    this.-- = --
-    this.resource = resource
-    this.eventres = eventres
-    this.accomodationres = accomodationres
-    this.hostres = hostres
-    this.transportres = transportres
-    this.app_public.guideres = app_public.guideres
-    this.app_public.tourist? = app_public.tourist?
-    this.travelgroup?]
- = travelgroup?]
-
+    this.tripTypeName = tripTypeName
     this.atAgency = atAgency
     this.timeCreated = timeCreated
     this.nodeId = nodeId

@@ -1,12 +1,12 @@
-export const mutation = `mutation createPosts(,$author_id: ID ,$headline: String! ,$body: String ,$topic: String! ,$created_at: Timestamptz! , $clientMutationId: String!) {
+export const mutation = `mutation createPosts(,$author_id: ID ,$headline: String! ,$body: String ,$topic: String! ,$created_at: Timestamptz! ,$updated_at: Timestamptz! , $id: String!) {
         __typename
-        createPosts(input: {clientMutationId: $clientMutationId,posts: {,author_id: $author_id ,headline: $headline ,body: $body ,topic: $topic ,created_at: $created_at }}) {
+        createPosts(input: {id: $id,posts: {,author_id: $author_id ,headline: $headline ,body: $body ,topic: $topic ,created_at: $created_at ,updated_at: $updated_at }}) {
             agencyEdge {
                 node {
                       id
                      }
               }
-            clientMutationId
+            id
             }
           }`
           export default `${mutation}`

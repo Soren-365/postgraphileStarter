@@ -5,7 +5,7 @@ import { Timerange  as gqlTimerange } from '*.graphqls'
 
 export const TimerangeTransform = (raw: gqlTimerange): objTimerange => {
     return {
-         id: raw.id
+         id: raw.id, fromTimestamp: raw.fromTimestamp, toTimestamp: raw.toTimestamp, timeCreated: raw.timeCreated
     }
 }
 

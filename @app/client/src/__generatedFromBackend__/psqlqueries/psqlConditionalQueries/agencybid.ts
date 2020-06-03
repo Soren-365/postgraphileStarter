@@ -1,8 +1,8 @@
-export const query = `query getConditionalAgencybid(, $id:  number , $agencyId:  number ) {
+export const query = `query getConditionalAgencybid(, $undefined:  undefined ) {
         __typename
-        agencybids(condition: {id: $id ,agencyId: $agencyId  })  {
+        agencybids(condition: {undefined: $undefined ,, })  {
           nodes {
-            id agencyId
+            id agencyId touristResourceIdPool
 
           }
         }

@@ -1,3 +1,3 @@
 export interface touristdealConditionalQueryType {
- id?:  number;
+ undefined?:  undefined;
 }

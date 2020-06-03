@@ -3,10 +3,9 @@ import topics from './psqlAgencyQueries/topics'
 import posts from './psqlAgencyQueries/posts'
 import user_feed_posts from './psqlAgencyQueries/user_feed_posts'
 import triptype from './psqlAgencyQueries/triptype'
-import usertabl from './psqlAgencyQueries/usertabl'
+import usertable from './psqlAgencyQueries/usertable'
 import account from './psqlAgencyQueries/account'
 import contact from './psqlAgencyQueries/contact'
-import publisher from './psqlAgencyQueries/publisher'
 import commandlogentry from './psqlAgencyQueries/commandlogentry'
 import publisher from './psqlAgencyQueries/publisher'
 import geocoding from './psqlAgencyQueries/geocoding'
@@ -83,10 +82,9 @@ import type { topicsAgencyQueryType }  from './psqlAgencyQueries/types/topics'
 import type { postsAgencyQueryType }  from './psqlAgencyQueries/types/posts'
 import type { user_feed_postsAgencyQueryType }  from './psqlAgencyQueries/types/user_feed_posts'
 import type { triptypeAgencyQueryType }  from './psqlAgencyQueries/types/triptype'
-import type { usertablAgencyQueryType }  from './psqlAgencyQueries/types/usertabl'
+import type { usertableAgencyQueryType }  from './psqlAgencyQueries/types/usertable'
 import type { accountAgencyQueryType }  from './psqlAgencyQueries/types/account'
 import type { contactAgencyQueryType }  from './psqlAgencyQueries/types/contact'
-import type { publisherAgencyQueryType }  from './psqlAgencyQueries/types/publisher'
 import type { commandlogentryAgencyQueryType }  from './psqlAgencyQueries/types/commandlogentry'
 import type { publisherAgencyQueryType }  from './psqlAgencyQueries/types/publisher'
 import type { geocodingAgencyQueryType }  from './psqlAgencyQueries/types/geocoding'
@@ -164,10 +162,9 @@ topics:  topics,
 posts:  posts,
 user_feed_posts:  user_feed_posts,
 triptype:  triptype,
-usertabl:  usertabl,
+usertable:  usertable,
 account:  account,
 contact:  contact,
-publisher:  publisher,
 commandlogentry:  commandlogentry,
 publisher:  publisher,
 geocoding:  geocoding,
@@ -246,10 +243,9 @@ topics:  topicsAgencyQueryType;
 posts:  postsAgencyQueryType;
 user_feed_posts:  user_feed_postsAgencyQueryType;
 triptype:  triptypeAgencyQueryType;
-usertabl:  usertablAgencyQueryType;
+usertable:  usertableAgencyQueryType;
 account:  accountAgencyQueryType;
 contact:  contactAgencyQueryType;
-publisher:  publisherAgencyQueryType;
 commandlogentry:  commandlogentryAgencyQueryType;
 publisher:  publisherAgencyQueryType;
 geocoding:  geocodingAgencyQueryType;
@@ -323,12 +319,12 @@ assoctravelgroup:  assoctravelgroupAgencyQueryType;
 }
 
 
-export function getAgencyQuery (queryName) {
+export function getAgencyQuery (queryName: string) {
 
 
 
     const query = Lookup[queryName]
-    console.log("querystring:" ,query)
+    // console.log("querystring:" ,query)
 
     return { query }
 }

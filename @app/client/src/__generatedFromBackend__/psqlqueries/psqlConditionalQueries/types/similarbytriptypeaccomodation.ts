@@ -1,4 +1,4 @@
 export interface similarbytriptypeaccomodationConditionalQueryType {
- tripTypeName?:  string;
- timeCreated?:  string;
+ undefined?:  undefined;
+ undefined?:  undefined;
 }

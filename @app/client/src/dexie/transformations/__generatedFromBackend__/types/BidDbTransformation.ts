@@ -5,7 +5,7 @@ import { Bid  as gqlBid } from '*.graphqls'
 
 export const BidTransform = (raw: gqlBid): objBid => {
     return {
-         id: raw.id
+         id: raw.id, publisherId: raw.publisherId, createdById: raw.createdById, bidAmount: raw.bidAmount, isActive: raw.isActive, timeCreated: raw.timeCreated
     }
 }
 

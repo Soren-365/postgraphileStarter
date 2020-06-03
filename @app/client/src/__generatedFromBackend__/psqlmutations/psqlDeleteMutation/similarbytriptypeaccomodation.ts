@@ -1,7 +1,7 @@
-export const mutation = `mutation deleteSimilarbytriptypeaccomodation($accomodationIds: [Int] , $clientMutationId: String!) {
+export const mutation = `mutation deleteSimilarbytriptypeaccomodation($accomodationIds: [Int] , $id: String!) {
         __typename
-        deleteSimilarbytriptypeaccomodation(input: {clientMutationId: $clientMutationId, id: $id}) {
-            clientMutationId
+        deleteSimilarbytriptypeaccomodation(input: {id: $id}) {
+            id
             }
           }`
           export default `${mutation}`

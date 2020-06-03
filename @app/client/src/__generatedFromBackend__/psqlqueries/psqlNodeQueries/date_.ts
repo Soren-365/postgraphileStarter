@@ -1,7 +1,7 @@
 export const query = `query getNodedate_($nodeId: String!) {
         __typename
         date_ByNodeId(nodeId: $nodeId }) {
-            useTimeStamp
+            useTimeStamp timeStamp year month day allDayEvent hour minute timeCreated
 
         }
       }`

@@ -1,3 +1,3 @@
 export interface guideofferConditionalQueryType {
- id?:  number;
+ undefined?:  undefined;
 }

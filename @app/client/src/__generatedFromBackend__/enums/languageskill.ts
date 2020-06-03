@@ -3,5 +3,6 @@ export enum languageskill {
 ,  Excellent = 'Excellent'
 ,  Good = 'Good'
 ,  Medium = 'Medium'
+,  Basic = 'Basic'
 
    }

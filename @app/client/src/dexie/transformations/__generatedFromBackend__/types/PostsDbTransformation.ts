@@ -5,7 +5,7 @@ import { Posts  as gqlPosts } from '*.graphqls'
 
 export const PostsTransform = (raw: gqlPosts): objPosts => {
     return {
-         id: raw.id, author_id: raw.author_id, headline: raw.headline, body: raw.body, topic: raw.topic, created_at: raw.created_at
+         id: raw.id, author_id: raw.author_id, headline: raw.headline, body: raw.body, topic: raw.topic, created_at: raw.created_at, updated_at: raw.updated_at
     }
 }
 

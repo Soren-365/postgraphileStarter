@@ -1,6 +1,6 @@
-export const query = `query getConditionalAssoctravelgroup(, $travelGroupId:  number , $timeCreated:  string ) {
+export const query = `query getConditionalAssoctravelgroup(, $undefined:  undefined , $undefined:  undefined ) {
         __typename
-        assoctravelgroups(condition: {,travelGroupId: $travelGroupId ,,timeCreated: $timeCreated  })  {
+        assoctravelgroups(condition: {,undefined: $undefined ,undefined: $undefined , })  {
           nodes {
             assocTravelGroupId travelGroupId atAgency timeCreated
 

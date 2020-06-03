@@ -1,3 +1,3 @@
 export interface commandlogentryConditionalQueryType {
- id?:  number;
+ undefined?:  undefined;
 }

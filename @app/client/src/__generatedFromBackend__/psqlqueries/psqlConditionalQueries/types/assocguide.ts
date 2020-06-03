@@ -1,4 +1,4 @@
 export interface assocguideConditionalQueryType {
- guideId?:  number;
- timeCreated?:  string;
+ undefined?:  undefined;
+ undefined?:  undefined;
 }

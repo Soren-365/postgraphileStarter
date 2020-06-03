@@ -1,9 +1,8 @@
-export const query = `query getConditionalSimilarbytriptypetransport(, $timeCreated:  string ) {
+export const query = `query getConditionalSimilarbytriptypetransport(, $undefined:  undefined , $undefined:  undefined ) {
         __typename
-        similarbytriptypetransports(condition: {,,,,,,,,,,,timeCreated: $timeCreated  })  {
+        similarbytriptypetransports(condition: {,undefined: $undefined ,undefined: $undefined , })  {
           nodes {
-            transportIds -- resource eventres  accomodationres  hostres  transportres  app_public.guideres  app_public.tourist?  travelgroup?]
- atAgency timeCreated
+            transportIds tripTypeName atAgency timeCreated
 
           }
         }

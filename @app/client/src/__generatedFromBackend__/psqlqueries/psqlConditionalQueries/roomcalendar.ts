@@ -1,6 +1,6 @@
-export const query = `query getConditionalRoomcalendar(, $id:  number , $publisherId:  number , $createdById:  number , $calendarentryId:  number ) {
+export const query = `query getConditionalRoomcalendar(, $undefined:  undefined ) {
         __typename
-        roomcalendars(condition: {id: $id ,publisherId: $publisherId ,createdById: $createdById ,,calendarentryId: $calendarentryId , })  {
+        roomcalendars(condition: {undefined: $undefined ,,,,, })  {
           nodes {
             id publisherId createdById isActive calendarentryId timeCreated
 

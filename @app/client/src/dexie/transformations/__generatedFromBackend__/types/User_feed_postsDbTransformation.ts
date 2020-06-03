@@ -5,7 +5,7 @@ import { User_feed_posts  as gqlUser_feed_posts } from '*.graphqls'
 
 export const User_feed_postsTransform = (raw: gqlUser_feed_posts): objUser_feed_posts => {
     return {
-         id: raw.id, user_id: raw.user_id, post_id: raw.post_id
+         id: raw.id, user_id: raw.user_id, post_id: raw.post_id, created_at: raw.created_at
     }
 }
 

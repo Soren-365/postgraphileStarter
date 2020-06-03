@@ -1,6 +1,6 @@
-export const query = `query getConditionalPublisher(, $id:  number , $createdById:  number , $belongsToType:  string , $commandLogEntryId:  number[] ) {
+export const query = `query getConditionalPublisher(, $undefined:  undefined ) {
         __typename
-        publishers(condition: {id: $id ,,createdById: $createdById ,,belongsToType: $belongsToType ,,,,,commandLogEntryId: $commandLogEntryId ,, })  {
+        publishers(condition: {undefined: $undefined ,,,,,,,,,,, })  {
           nodes {
             id name createdById belongsToId belongsToType canReview canPublish isRomanian isActive commandLogEntryId timeCreated timeCommand
 

@@ -1,12 +1,12 @@
-export const mutation = `mutation createAssoctravelgroup($assocTravelGroupId: [Int] ,$travelGroupId: Int ,$atAgency: Int ,$timeCreated: Datetime , $clientMutationId: String!) {
+export const mutation = `mutation createAssoctravelgroup($assocTravelGroupId: [Int] ,$travelGroupId: Int ,$atAgency: Int ,$timeCreated: Datetime , $id: String!) {
         __typename
-        createAssoctravelgroup(input: {clientMutationId: $clientMutationId,assoctravelgroup: {assocTravelGroupId: $assocTravelGroupId ,travelGroupId: $travelGroupId ,atAgency: $atAgency ,timeCreated: $timeCreated }}) {
+        createAssoctravelgroup(input: {id: $id,assoctravelgroup: {assocTravelGroupId: $assocTravelGroupId ,travelGroupId: $travelGroupId ,atAgency: $atAgency ,timeCreated: $timeCreated }}) {
             agencyEdge {
                 node {
                       id
                      }
               }
-            clientMutationId
+            id
             }
           }`
           export default `${mutation}`

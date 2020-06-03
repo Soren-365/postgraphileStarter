@@ -1,5 +1,4 @@
 export interface assochostConditionalQueryType {
- hostId?:  number;
- atAgency?:  number;
- timeCreated?:  string;
+ undefined?:  undefined;
+ undefined?:  undefined;
 }

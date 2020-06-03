@@ -5,7 +5,7 @@ import { Guidebid  as gqlGuidebid } from '*.graphqls'
 
 export const GuidebidTransform = (raw: gqlGuidebid): objGuidebid => {
     return {
-         id: raw.id
+         id: raw.id, tripOfferIdPool: raw.tripOfferIdPool
     }
 }
 

@@ -71,6 +71,15 @@ const OrganizationPageInner: FC<OrganizationPageInnerProps> = (props) => {
               </span>
             }
           />
+          <ButtonLink
+            key="destination"
+            href={`/o/[slug]/destinationresource`}
+            as={`/o/${organization.slug}/destinationresource`}
+            type="primary"
+            data-cy="organizationpage-button-destination"
+          >
+            Destinations
+          </ButtonLink>
         </div>
       </Col>
     </Row>

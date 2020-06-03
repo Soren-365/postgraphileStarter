@@ -11,5 +11,6 @@ export enum resourcetype {
 ,  CarResource = 'CarResource'
 ,  DestinationResource = 'DestinationResource'
 ,  TravelGroup = 'TravelGroup'
+,  Unknown = 'Unknown'
 
    }

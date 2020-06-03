@@ -7689,6 +7689,9 @@ type CreatePostPayload {
   Our root query field type. Allows us to run any query from our mutation payload.
   """
   query: Query
+
+  """Reads a single `Topic` that is related to this `Post`."""
+  topicByTopic: Topic
 }
 
 """All input for the create `Presentation` mutation."""
@@ -12017,6 +12020,9 @@ type DeletePostPayload {
   Our root query field type. Allows us to run any query from our mutation payload.
   """
   query: Query
+
+  """Reads a single `Topic` that is related to this `Post`."""
+  topicByTopic: Topic
 }
 
 """All input for the `deletePresentationByNodeId` mutation."""
@@ -21402,6 +21408,9 @@ type Post implements Node {
   """The `Topic` this has been posted in."""
   topic: String!
 
+  """Reads a single `Topic` that is related to this `Post`."""
+  topicByTopic: Topic
+
   """The time this `Post` was last modified (or created)."""
   updatedAt: Datetime!
 
@@ -21444,6 +21453,9 @@ input PostCondition {
 
   """Checks for equality with the object’s `id` field."""
   id: Int
+
+  """Checks for equality with the object’s `topic` field."""
+  topic: String
 }
 
 """An input for mutations affecting `Post`"""
@@ -21529,6 +21541,8 @@ enum PostsOrderBy {
   NATURAL
   PRIMARY_KEY_ASC
   PRIMARY_KEY_DESC
+  TOPIC_ASC
+  TOPIC_DESC
 }
 
 type Presentation implements Node {
@@ -26555,6 +26569,12 @@ enum RoomlistsOrderBy {
 }
 
 type Similarbytriptypeaccomodation implements Node {
+  """
+  -- resourceIds in one dimension, resource types in the other (7-8 or so)
+  [destinationres, eventres, accomodationres, hostres, transportres,
+  app_public.guideres, app_public.tourist?, travelgroup?]
+  
+  """
   accomodationIds: [Int]
 
   """
@@ -26585,6 +26605,12 @@ input SimilarbytriptypeaccomodationCondition {
 
 """An input for mutations affecting `Similarbytriptypeaccomodation`"""
 input SimilarbytriptypeaccomodationInput {
+  """
+  -- resourceIds in one dimension, resource types in the other (7-8 or so)
+  [destinationres, eventres, accomodationres, hostres, transportres,
+  app_public.guideres, app_public.tourist?, travelgroup?]
+  
+  """
   accomodationIds: [Int]
   atAgency: Int!
   timeCreated: Datetime
@@ -26595,6 +26621,12 @@ input SimilarbytriptypeaccomodationInput {
 Represents an update to a `Similarbytriptypeaccomodation`. Fields that are set will be updated.
 """
 input SimilarbytriptypeaccomodationPatch {
+  """
+  -- resourceIds in one dimension, resource types in the other (7-8 or so)
+  [destinationres, eventres, accomodationres, hostres, transportres,
+  app_public.guideres, app_public.tourist?, travelgroup?]
+  
+  """
   accomodationIds: [Int]
   atAgency: Int
   timeCreated: Datetime
@@ -27266,6 +27298,35 @@ type Topic implements Node {
   A globally unique identifier. Can be used in various places throughout the system to identify this single value.
   """
   nodeId: ID!
+
+  """Reads and enables pagination through a set of `Post`."""
+  postsByTopic(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: PostCondition
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `Post`."""
+    orderBy: [PostsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): PostsConnection!
   title: String!
 }
 
@@ -32689,6 +32750,9 @@ type UpdatePostPayload {
   Our root query field type. Allows us to run any query from our mutation payload.
   """
   query: Query
+
+  """Reads a single `Topic` that is related to this `Post`."""
+  topicByTopic: Topic
 }
 
 """All input for the `updatePresentationByNodeId` mutation."""

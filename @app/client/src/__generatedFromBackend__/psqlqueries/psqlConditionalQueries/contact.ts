@@ -1,6 +1,6 @@
-export const query = `query getConditionalContact(, $id:  number , $createdById:  number , $belongsToType:  string ) {
+export const query = `query getConditionalContact(, $undefined:  undefined ) {
         __typename
-        contacts(condition: {id: $id ,,,,,,,,,,,createdById: $createdById ,belongsToType: $belongsToType ,, })  {
+        contacts(condition: {undefined: $undefined ,,,,,,,,,,,,,, })  {
           nodes {
             id firstName lastName associatedCompany street city postCode country telephone email isCompany createdById belongsToType belongsToId timeCreated
 

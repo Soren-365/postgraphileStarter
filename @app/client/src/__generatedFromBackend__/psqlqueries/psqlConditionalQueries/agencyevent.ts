@@ -1,6 +1,6 @@
-export const query = `query getConditionalAgencyevent(, $eventId:  number , $timeCreated:  string ) {
+export const query = `query getConditionalAgencyevent(, $undefined:  undefined , $undefined:  undefined ) {
         __typename
-        agencyevents(condition: {,eventId: $eventId ,timeCreated: $timeCreated  })  {
+        agencyevents(condition: {undefined: $undefined ,undefined: $undefined , })  {
           nodes {
             agencyId eventId timeCreated
 

@@ -1,3 +1,3 @@
 export interface roomcalendarentryConditionalQueryType {
- id?:  number;
+ undefined?:  undefined;
 }

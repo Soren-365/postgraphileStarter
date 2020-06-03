@@ -1,6 +1,6 @@
-export const query = `query getConditionalMedialocation(, $atAgency:  number , $atResource:  number , $uploadLocationOriginal:  string , $uploadLocationThumbnail:  string , $timeCreated:  string ) {
+export const query = `query getConditionalMedialocation(, $undefined:  undefined , $undefined:  undefined , $undefined:  undefined ) {
         __typename
-        medialocations(condition: {,,atAgency: $atAgency ,atResource: $atResource ,uploadLocationOriginal: $uploadLocationOriginal ,uploadLocationThumbnail: $uploadLocationThumbnail ,,,,,,,,,,,timeCreated: $timeCreated  })  {
+        medialocations(condition: {,undefined: $undefined ,undefined: $undefined ,undefined: $undefined ,,,,,,,,,,,,, })  {
           nodes {
             id mediaLocationPlacement atAgency atResource uploadLocationOriginal uploadLocationThumbnail uploadLocationMobile uploadLocationTablet uploadLocationDesktop uploadLocation2K signedUrlThumbnail signedUrlMobile signedUrlTablet signedUrlDesktop signedUrl2K signedUrlsUpdate timeCreated
 

@@ -5,7 +5,7 @@ import { Agencyfavorite  as gqlAgencyfavorite } from '*.graphqls'
 
 export const AgencyfavoriteTransform = (raw: gqlAgencyfavorite): objAgencyfavorite => {
     return {
-         resourceId: raw.resourceId
+         resourceId: raw.resourceId, resourceType: raw.resourceType, atAgency: raw.atAgency
     }
 }
 

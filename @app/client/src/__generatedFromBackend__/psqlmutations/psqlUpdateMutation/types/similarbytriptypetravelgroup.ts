@@ -1,15 +1,6 @@
 export interface similarbytriptypetravelgroupupdateMutationType {
 travelGroupIds: number[];
---?: string;
-resource?: string;
-eventres?: string;
-accomodationres?: string;
-hostres?: string;
-transportres?: string;
-app_public.guideres?: string;
-app_public.tourist??: string;
-travelgroup?]
-?: string;
+tripTypeName?: string;
 atAgency?: number;
 timeCreated?: string;
 }

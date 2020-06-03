@@ -1,12 +1,12 @@
-export const mutation = `mutation createCommandlogentry(, $clientMutationId: String!) {
+export const mutation = `mutation createCommandlogentry(,$atPublisher: Int! ,$belongsToType: Resourcetype ,$resourceId: Int ,$logcommand: Logcommand! ,$timeCommand: Datetime , $id: String!) {
         __typename
-        createCommandlogentry(input: {clientMutationId: $clientMutationId,commandlogentry: {}}) {
+        createCommandlogentry(input: {id: $id,commandlogentry: {,atPublisher: $atPublisher ,belongsToType: $belongsToType ,resourceId: $resourceId ,logcommand: $logcommand ,timeCommand: $timeCommand }}) {
             agencyEdge {
                 node {
                       id
                      }
               }
-            clientMutationId
+            id
             }
           }`
           export default `${mutation}`

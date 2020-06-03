@@ -5,7 +5,7 @@ import { Agencybid  as gqlAgencybid } from '*.graphqls'
 
 export const AgencybidTransform = (raw: gqlAgencybid): objAgencybid => {
     return {
-         id: raw.id, agencyId: raw.agencyId
+         id: raw.id, agencyId: raw.agencyId, touristResourceIdPool: raw.touristResourceIdPool
     }
 }
 

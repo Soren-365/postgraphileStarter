@@ -1,6 +1,6 @@
-export const query = `query getConditionalAgencytourist(, $agencyId:  number , $timeCreated:  string ) {
+export const query = `query getConditionalAgencytourist(, $undefined:  undefined , $undefined:  undefined ) {
         __typename
-        agencytourists(condition: {agencyId: $agencyId ,,timeCreated: $timeCreated  })  {
+        agencytourists(condition: {undefined: $undefined ,undefined: $undefined , })  {
           nodes {
             agencyId touristId timeCreated
 

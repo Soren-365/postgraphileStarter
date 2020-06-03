@@ -82,7 +82,7 @@ create table app_public.posts (
 );
 alter table app_public.posts enable row level security;
 create index on app_public.posts (author_id);
-
+CREATE INDEX ON "app_public"."posts"("topic");
 --//
 
 create trigger _100_timestamps before insert or update on app_public.posts for each row execute procedure app_private.tg__timestamps();
@@ -146,17 +146,17 @@ CREATE TABLE app_public.triptype (
 ,    "atAgency"        INT
 ,    "lastModified"    TIMESTAMP
 ,    "timeCreated"     TIMESTAMP DEFAULT NOW()
-,  CONSTRAINT triptype_pkey PRIMARY KEY ("atAgency", "tripTypeName") -- explicit pk
+,  CONSTRAINT triptype_pkey PRIMARY KEY ("atAgency", "tripTypeName")
 );
 
 --//
 
-grant
-  select,
-  insert ("tripTypeName", "atAgency"),
-  update ("tripTypeName", "atAgency"),
-  delete
-on app_public.triptype to :DATABASE_VISITOR;
+-- grant
+--   select,
+--   insert ("tripTypeName", "atAgency"),
+--   update ("tripTypeName", "atAgency"),
+--   delete
+-- on app_public.triptype to :DATABASE_VISITOR;
 
 --// some comment here
 
@@ -190,12 +190,13 @@ CREATE TYPE  app_public.medialocationplacement AS ENUM (
   'imageGallery8',
   'imageGallery9',
   'imageGallery10'
+
 );
 
 --//
 
 CREATE TYPE  app_public.languages AS ENUM (
-    'German'
+         'German'
 ,        'English'
 ,        'Romanian'
 ,        'Danish'
@@ -215,6 +216,7 @@ CREATE TYPE  app_public.languages AS ENUM (
 ,        'Chinese'
 ,        'Japanese'
 ,        'Arabic'
+
 );
 
 --//
@@ -248,7 +250,7 @@ CREATE TYPE  app_public.languageskill AS ENUM (
 ,   'User'
 ,   'Publisher'
 ,        'Bid'
-,   ' app_public.priceinfo'
+,   'Priceinfo'
 ,   'HostResource'
 ,   'EventResource'
 ,   'Presentation'
@@ -386,34 +388,8 @@ CREATE TABLE app_public.contact (
 CREATE INDEX ON app_public.contact("createdById");
 CREATE INDEX ON app_public.contact("belongsToType");
 
---//
-
-CREATE TABLE app_public.publisher (
-    "id"       SERIAL primary key
-,   "name"     VARCHAR(240)
-,         "createdById"           INT
-,         "belongsToId"        INT
-,         "belongsToType"     resourcetype
-,        "canReview"                        BOOLEAN DEFAULT true
-,        "canPublish"                BOOLEAN DEFAULT true
-,        "isRomanian"        BOOLEAN
-,   "isActive"          BOOLEAN DEFAULT true
-,   "commandLogEntryId"                INT[]
-,   "timeCreated"       TIMESTAMP DEFAULT NOW()
-,   "timeCommand"        TIMESTAMP        default NOW()
-,    FOREIGN KEY ("createdById") REFERENCES app_public.usertable("id")
-);
- ALTER TABLE app_public.commandlogentry
- ADD FOREIGN KEY ("atPublisher") REFERENCES app_public.publisher("id");
-
-
-CREATE INDEX ON app_public.publisher("createdById");
-CREATE INDEX ON app_public.publisher("id");
-CREATE INDEX ON app_public.publisher("commandLogEntryId");
-CREATE INDEX ON app_public.publisher("belongsToType");
 
 --//
-
 
 CREATE TABLE app_public.commandlogentry (
     "id"       SERIAL primary key
@@ -426,7 +402,6 @@ CREATE TABLE app_public.commandlogentry (
 
 CREATE INDEX ON app_public.commandlogentry("atPublisher");
 
-
 --//
 
 
@@ -455,6 +430,9 @@ CREATE INDEX ON app_public.publisher("commandLogEntryId");
 CREATE INDEX ON app_public.publisher("belongsToType");
 
 --//
+
+
+
 
 CREATE TABLE app_public.geocoding (
    "id"  SERIAL primary key
@@ -1908,55 +1886,57 @@ CREATE INDEX ON app_public.touristreview("createdById");
 --//
 
 CREATE TABLE app_public.similarbytriptypeaccomodation (
-  "accomodationIds" INT[],  -- resourceIds in one dimension, triptypes in the other   "tripTypeName"           VARCHAR(128),
+  "accomodationIds" INT[],
      "tripTypeName"           VARCHAR(128),
   "atAgency"  INT REFERENCES app_public.agency ON DELETE CASCADE,
   "timeCreated" TIMESTAMP DEFAULT NOW(),
-  CONSTRAINT similartriptypeaccomodation_pkey PRIMARY KEY ("atAgency", "tripTypeName") -- explicit pk
+  CONSTRAINT similartriptypeaccomodation_pkey PRIMARY KEY ("atAgency", "tripTypeName")
 );
 CREATE INDEX ON app_public.similarbytriptypeaccomodation("tripTypeName");
+COMMENT ON COLUMN app_public.similarbytriptypeaccomodation."accomodationIds" is E'-- resourceIds in one dimension, resource types in the other (7-8 or so) [destinationres, eventres, accomodationres, hostres, transportres, app_public.guideres, app_public.tourist?, travelgroup?]
+';
 
 --//
 
 CREATE TABLE app_public.similarbytriptypedestination (
-  "destinationIds" INT[],  -- resourceIds in one dimension, resource types in the other (7-8 or so) [destinationres, eventres, accomodationres, hostres, transportres, app_public.guideres, app_public.tourist?, travelgroup?]
+  "destinationIds" INT[],
     "tripTypeName" VARCHAR(128),
   "atAgency"  INT REFERENCES app_public.agency ON DELETE CASCADE,
   "timeCreated" TIMESTAMP DEFAULT NOW(),
-  CONSTRAINT similartriptypedestination_pkey PRIMARY KEY ("atAgency", "tripTypeName") -- explicit pk
+  CONSTRAINT similartriptypedestination_pkey PRIMARY KEY ("atAgency", "tripTypeName")
 );
 CREATE INDEX ON app_public.similarbytriptypedestination ("tripTypeName");
 
 --//
 
 CREATE TABLE app_public.similarbytriptypeevent (
-  "eventIds" INT[],  -- resourceIds in one dimension, resource types in the other (7-8 or so) [destinationres, eventres, accomodationres, hostres, transportres, app_public.guideres, app_public.tourist?, travelgroup?]
+  "eventIds" INT[],
     "tripTypeName" VARCHAR(128),
   "atAgency"  INT REFERENCES app_public.agency ON DELETE CASCADE,
   "timeCreated" TIMESTAMP DEFAULT NOW(),
-  CONSTRAINT similartriptypeevent_pkey PRIMARY KEY ("atAgency", "tripTypeName") -- explicit pk
+  CONSTRAINT similartriptypeevent_pkey PRIMARY KEY ("atAgency", "tripTypeName")
 );
 CREATE INDEX ON app_public.similarbytriptypeevent ("tripTypeName");
 
 --//
 
 CREATE TABLE app_public.similarbytriptypeguide (
-  "guideIds" INT[],  -- resourceIds in one dimension, resource types in the other (7-8 or so) [destinationres, eventres, accomodationres, hostres, transportres, app_public.guideres, app_public.tourist?, travelgroup?]
-   "tripTypeName"           VARCHAR(128),
+  "guideIds" INT[],
+     "tripTypeName"           VARCHAR(128),
   "atAgency"  INT REFERENCES app_public.agency ON DELETE CASCADE,
   "timeCreated" TIMESTAMP DEFAULT NOW(),
-  CONSTRAINT similartriptypeguide_pkey PRIMARY KEY ("atAgency", "tripTypeName") -- explicit pk
+  CONSTRAINT similartriptypeguide_pkey PRIMARY KEY ("atAgency", "tripTypeName")
 );
 CREATE INDEX ON app_public.similarbytriptypeguide ("tripTypeName");
 
 --//
 
 CREATE TABLE app_public.similarbytriptypehost (
-  "hostIds" INT[],  -- resourceIds in one dimension, resource types in the other (7-8 or so) [destinationres, eventres, accomodationres, hostres, transportres, app_public.guideres, app_public.tourist?, travelgroup?]
-    "tripTypeName" VARCHAR(128),
+  "hostIds" INT[],
+      "tripTypeName" VARCHAR(128),
   "atAgency"  INT REFERENCES app_public.agency ON DELETE CASCADE,
   "timeCreated" TIMESTAMP DEFAULT NOW(),
-  CONSTRAINT similartriptypehost_pkey PRIMARY KEY ("atAgency", "tripTypeName") -- explicit pk
+  CONSTRAINT similartriptypehost_pkey PRIMARY KEY ("atAgency", "tripTypeName")
 );
 CREATE INDEX ON app_public.similarbytriptypehost("tripTypeName");
 
@@ -1964,22 +1944,22 @@ CREATE INDEX ON app_public.similarbytriptypehost("tripTypeName");
 --//
 
 CREATE TABLE app_public.similarbytriptypetransport (
-  "transportIds" INT[],  -- resourceIds in one dimension, resource types in the other (7-8 or so) [destinationres, eventres, accomodationres, hostres, transportres, app_public.guideres, app_public.tourist?, travelgroup?]
-    "tripTypeName" VARCHAR(128),
+  "transportIds" INT[],
+   "tripTypeName" VARCHAR(128),
   "atAgency"  INT REFERENCES app_public.agency ON DELETE CASCADE,
   "timeCreated" TIMESTAMP DEFAULT NOW(),
-  CONSTRAINT similartriptypetransport_pkey PRIMARY KEY ("atAgency", "tripTypeName") -- explicit pk
+  CONSTRAINT similartriptypetransport_pkey PRIMARY KEY ("atAgency", "tripTypeName")
 );
 CREATE INDEX ON app_public.similarbytriptypetransport ("tripTypeName");
 
 --//
 
 CREATE TABLE app_public.similarbytriptypetravelgroup (
-  "travelGroupIds" INT[],  -- resourceIds in one dimension, resource types in the other (7-8 or so) [destinationres, eventres, accomodationres, hostres, transportres, app_public.guideres, app_public.tourist?, travelgroup?]
-    "tripTypeName" VARCHAR(128),
+  "travelGroupIds" INT[],
+      "tripTypeName" VARCHAR(128),
   "atAgency"  INT REFERENCES app_public.agency ON DELETE CASCADE,
   "timeCreated" TIMESTAMP DEFAULT NOW(),
-  CONSTRAINT similartriptypetravelgroup_pkey PRIMARY KEY ("atAgency", "tripTypeName") -- explicit pk
+  CONSTRAINT similartriptypetravelgroup_pkey PRIMARY KEY ("atAgency", "tripTypeName")
 );
 CREATE INDEX ON app_public.similarbytriptypetravelgroup ("tripTypeName");
 
@@ -1990,7 +1970,7 @@ CREATE TABLE app_public.assocaccomodation (
   "accomodationId" INT REFERENCES app_public.accomodationresource ON DELETE CASCADE,
   "atAgency"  INT REFERENCES app_public.agency ON DELETE CASCADE,
   "timeCreated" TIMESTAMP DEFAULT NOW(),
-  CONSTRAINT assocaccomodation_pkey PRIMARY KEY ("atAgency", "accomodationId") -- explicit pk
+  CONSTRAINT assocaccomodation_pkey PRIMARY KEY ("atAgency", "accomodationId")
 );
 CREATE INDEX ON app_public.assocaccomodation("accomodationId");
 CREATE INDEX ON app_public.assocaccomodation("atAgency");
@@ -2003,7 +1983,7 @@ CREATE TABLE app_public.assochost (
   "hostId" INT REFERENCES hostresource ON DELETE CASCADE,
   "atAgency"  INT REFERENCES app_public.agency ON DELETE CASCADE,
   "timeCreated" TIMESTAMP DEFAULT NOW(),
-  CONSTRAINT assochost_pkey PRIMARY KEY ("atAgency", "hostId") -- explicit pk
+  CONSTRAINT assochost_pkey PRIMARY KEY ("atAgency", "hostId")
 );
 CREATE INDEX ON app_public.assochost("hostId");
 CREATE INDEX ON app_public.assochost("atAgency");
@@ -2016,7 +1996,7 @@ CREATE TABLE app_public.assocguide (
   "guideId" INT REFERENCES app_public.guideresource ON DELETE CASCADE,
   "atAgency"  INT REFERENCES app_public.agency ON DELETE CASCADE,
   "timeCreated" TIMESTAMP DEFAULT NOW(),
-  CONSTRAINT assocguide_pkey PRIMARY KEY ("atAgency", "guideId") -- explicit pk
+  CONSTRAINT assocguide_pkey PRIMARY KEY ("atAgency", "guideId")
 );
 CREATE INDEX ON app_public.assocguide("guideId");
 
@@ -2026,7 +2006,7 @@ CREATE TABLE app_public.assoctransport (
   "assocTransportId" INT[],
   "transportId" INT REFERENCES app_public.transportresource ON DELETE CASCADE,
   "atAgency"  INT REFERENCES app_public.agency ON DELETE CASCADE,
-  CONSTRAINT assoctransport_pkey PRIMARY KEY ("atAgency", "transportId") -- explicit pk
+  CONSTRAINT assoctransport_pkey PRIMARY KEY ("atAgency", "transportId")
 );
 CREATE INDEX ON app_public.assoctransport("transportId");
 
@@ -2037,7 +2017,7 @@ CREATE TABLE app_public.assocevent (
   "eventId" INT REFERENCES eventresource ON DELETE CASCADE,
   "atAgency"  INT REFERENCES app_public.agency ON DELETE CASCADE,
   "timeCreated" TIMESTAMP DEFAULT NOW(),
-  CONSTRAINT assocevent_pkey PRIMARY KEY ("atAgency", "eventId") -- explicit pk
+  CONSTRAINT assocevent_pkey PRIMARY KEY ("atAgency", "eventId")
 );
 CREATE INDEX ON app_public.assocevent("eventId");
 
@@ -2362,7 +2342,7 @@ CREATE TABLE app_public.assocdestination (
   "destinationId" INT REFERENCES destinationresource ON DELETE CASCADE,
   "atAgency"  INT REFERENCES app_public.agency ON DELETE CASCADE,
   "timeCreated" TIMESTAMP DEFAULT NOW(),
-  CONSTRAINT assocdestination_pkey PRIMARY KEY ("atAgency", "destinationId") -- explicit pk
+  CONSTRAINT assocdestination_pkey PRIMARY KEY ("atAgency", "destinationId")
 );
 CREATE INDEX ON app_public.assocdestination("destinationId");
 
@@ -2373,7 +2353,7 @@ CREATE TABLE app_public.assoctravelgroup (
   "travelGroupId" INT REFERENCES app_public.travelgroupresource ON DELETE CASCADE,
   "atAgency"  INT REFERENCES app_public.agency ON DELETE CASCADE,
   "timeCreated" TIMESTAMP DEFAULT NOW(),
-  CONSTRAINT assoctravelgroup_pkey PRIMARY KEY ("atAgency", "travelGroupId") -- explicit pk
+  CONSTRAINT assoctravelgroup_pkey PRIMARY KEY ("atAgency", "travelGroupId")
 );
 CREATE INDEX ON app_public.assoctravelgroup("travelGroupId");
 

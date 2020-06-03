@@ -1,3 +1,3 @@
 export interface timerangeConditionalQueryType {
- id?:  number;
+ undefined?:  undefined;
 }

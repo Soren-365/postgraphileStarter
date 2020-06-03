@@ -1,3 +1,3 @@
 export interface touristfavoriteConditionalQueryType {
- id?:  number;
+ undefined?:  undefined;
 }

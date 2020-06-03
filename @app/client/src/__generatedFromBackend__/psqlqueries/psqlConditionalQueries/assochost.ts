@@ -1,6 +1,6 @@
-export const query = `query getConditionalAssochost(, $hostId:  number , $atAgency:  number , $timeCreated:  string ) {
+export const query = `query getConditionalAssochost(, $undefined:  undefined , $undefined:  undefined ) {
         __typename
-        assochosts(condition: {,hostId: $hostId ,atAgency: $atAgency ,timeCreated: $timeCreated  })  {
+        assochosts(condition: {,undefined: $undefined ,undefined: $undefined , })  {
           nodes {
             assocHostId hostId atAgency timeCreated
 

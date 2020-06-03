@@ -1,6 +1,6 @@
-export const query = `query getConditionalAssocevent(, $eventId:  number , $timeCreated:  string ) {
+export const query = `query getConditionalAssocevent(, $undefined:  undefined , $undefined:  undefined ) {
         __typename
-        assocevents(condition: {,eventId: $eventId ,,timeCreated: $timeCreated  })  {
+        assocevents(condition: {,undefined: $undefined ,undefined: $undefined , })  {
           nodes {
             assocEventId eventId atAgency timeCreated
 

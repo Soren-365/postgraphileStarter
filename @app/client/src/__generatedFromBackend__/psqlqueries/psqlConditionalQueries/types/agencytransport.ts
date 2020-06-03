@@ -1,4 +1,4 @@
 export interface agencytransportConditionalQueryType {
- transportId?:  number;
- timeCreated?:  string;
+ undefined?:  undefined;
+ undefined?:  undefined;
 }

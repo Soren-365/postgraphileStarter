@@ -5,7 +5,7 @@ import { Roomcalendarentry  as gqlRoomcalendarentry } from '*.graphqls'
 
 export const RoomcalendarentryTransform = (raw: gqlRoomcalendarentry): objRoomcalendarentry => {
     return {
-         id: raw.id
+         id: raw.id, atRoomCalendar: raw.atRoomCalendar, fromDate: raw.fromDate, toDate: raw.toDate, comment: raw.comment, timeCreated: raw.timeCreated
     }
 }
 

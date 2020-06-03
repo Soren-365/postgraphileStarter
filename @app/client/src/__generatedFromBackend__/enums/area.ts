@@ -8,5 +8,6 @@ export enum area {
 ,  Bucovina = 'Bucovina'
 ,  Crisana = 'Crisana'
 ,  SatuMare = 'SatuMare'
+,  Maramures = 'Maramures'
 
    }

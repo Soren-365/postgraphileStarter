@@ -1,6 +1,6 @@
-export const query = `query getConditionalAssocguide(, $guideId:  number , $timeCreated:  string ) {
+export const query = `query getConditionalAssocguide(, $undefined:  undefined , $undefined:  undefined ) {
         __typename
-        assocguides(condition: {,guideId: $guideId ,,timeCreated: $timeCreated  })  {
+        assocguides(condition: {,undefined: $undefined ,undefined: $undefined , })  {
           nodes {
             assocGuideId guideId atAgency timeCreated
 

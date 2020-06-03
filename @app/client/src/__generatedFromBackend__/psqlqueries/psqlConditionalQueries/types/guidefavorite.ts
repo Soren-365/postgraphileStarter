@@ -1,3 +1,3 @@
 export interface guidefavoriteConditionalQueryType {
- id?:  number;
+ undefined?:  undefined;
 }

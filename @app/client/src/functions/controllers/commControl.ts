@@ -22,6 +22,7 @@ import {
   psqlIdQuery,
   psqlMutation,
   psqlNodeQuery,
+  psqlTestMutation,
   psqlUpdateMutation,
 } from "./commHelper";
 
@@ -56,6 +57,11 @@ export interface MutationType {
 }
 
 export interface CreateMutationType {
+  tableKey: DbTables;
+  variables: any;
+}
+
+export interface TestMutationType {
   tableKey: DbTables;
   variables: any;
 }
@@ -108,6 +114,11 @@ class comC {
     variables,
   }: UpdateMutationType) => Generator<any, { clientMutationId: any }, unknown>;
 
+  psqlTestMutation: ({
+    tableKey,
+    variables,
+  }: TestMutationType) => Generator<any, { clientMutationId: any }, unknown>;
+
   psqlDeleteMutation: ({
     tableKey,
     variables,
@@ -150,6 +161,7 @@ class comC {
     this.comCDb = comCDb;
     this.psqlCreateMutation = psqlCreateMutation;
     this.psqlUpdateMutation = psqlUpdateMutation;
+    this.psqlTestMutation = psqlTestMutation;
     this.psqlDeleteMutation = psqlDeleteMutation;
     this.psqlMutation = psqlMutation;
     this.getCreateMutation = getCreateMutation;

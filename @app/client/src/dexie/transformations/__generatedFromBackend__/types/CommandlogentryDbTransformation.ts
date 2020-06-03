@@ -5,7 +5,7 @@ import { Commandlogentry  as gqlCommandlogentry } from '*.graphqls'
 
 export const CommandlogentryTransform = (raw: gqlCommandlogentry): objCommandlogentry => {
     return {
-         id: raw.id
+         id: raw.id, atPublisher: raw.atPublisher, belongsToType: raw.belongsToType, resourceId: raw.resourceId, logcommand: raw.logcommand, timeCommand: raw.timeCommand
     }
 }
 

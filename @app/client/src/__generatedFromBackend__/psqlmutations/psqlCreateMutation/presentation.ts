@@ -1,12 +1,12 @@
-export const mutation = `mutation createPresentation(,$headline: String ,$publisherId: Int! ,$createdById: Int! ,$resourceType: Resourcetype! ,$resourceTypeId: Int! ,$isActive: Boolean ,$lastModified: Datetime ,$timeCreated: Datetime , $clientMutationId: String!) {
+export const mutation = `mutation createPresentation(,$headline: String ,$publisherId: Int! ,$createdById: Int! ,$resourceType: Resourcetype! ,$resourceTypeId: Int! ,$isActive: Boolean ,$lastModified: Datetime ,$timeCreated: Datetime , $id: String!) {
         __typename
-        createPresentation(input: {clientMutationId: $clientMutationId,presentation: {,headline: $headline ,publisherId: $publisherId ,createdById: $createdById ,resourceType: $resourceType ,resourceTypeId: $resourceTypeId ,isActive: $isActive ,lastModified: $lastModified ,timeCreated: $timeCreated }}) {
+        createPresentation(input: {id: $id,presentation: {,headline: $headline ,publisherId: $publisherId ,createdById: $createdById ,resourceType: $resourceType ,resourceTypeId: $resourceTypeId ,isActive: $isActive ,lastModified: $lastModified ,timeCreated: $timeCreated }}) {
             agencyEdge {
                 node {
                       id
                      }
               }
-            clientMutationId
+            id
             }
           }`
           export default `${mutation}`

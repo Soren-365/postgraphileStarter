@@ -1,3 +1,3 @@
 export interface calendarentryConditionalQueryType {
- id?:  number;
+ undefined?:  undefined;
 }

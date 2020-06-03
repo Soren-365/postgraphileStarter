@@ -1,3 +1,4 @@
 export interface similarbytriptypetransportConditionalQueryType {
- timeCreated?:  string;
+ undefined?:  undefined;
+ undefined?:  undefined;
 }

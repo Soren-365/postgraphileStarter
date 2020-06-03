@@ -2,10 +2,20 @@ import { touristbidDbType as TouristbidDbType } from '../../dbTypes/__generatedF
 
 export class TouristbidDbClass implements TouristbidDbType {
 id?: number;
+tripOfferResourceIdPool?: number[];
+eventResourceIdPool?: number[];
+transportationResourceIdPool?: number[];
+accomodationResourceIdPool?: number[];
+hostResourceIdPool?: number;
  nodeId?: string;
 
-  constructor(id?: number, nodeId?: string,) {
+  constructor(id?: number,tripOfferResourceIdPool?: number[],eventResourceIdPool?: number[],transportationResourceIdPool?: number[],accomodationResourceIdPool?: number[],hostResourceIdPool?: number, nodeId?: string,) {
     this.id = id
+    this.tripOfferResourceIdPool = tripOfferResourceIdPool
+    this.eventResourceIdPool = eventResourceIdPool
+    this.transportationResourceIdPool = transportationResourceIdPool
+    this.accomodationResourceIdPool = accomodationResourceIdPool
+    this.hostResourceIdPool = hostResourceIdPool
     this.nodeId = nodeId
   }
 //  add methods here and move to 'edited' folder

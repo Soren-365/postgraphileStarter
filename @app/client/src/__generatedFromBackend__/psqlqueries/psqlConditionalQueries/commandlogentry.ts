@@ -1,8 +1,8 @@
-export const query = `query getConditionalCommandlogentry(, $id:  number ) {
+export const query = `query getConditionalCommandlogentry(, $undefined:  undefined ) {
         __typename
-        commandlogentries(condition: {id: $id ,,,, })  {
+        commandlogentries(condition: {undefined: $undefined ,,,,, })  {
           nodes {
-            id
+            id atPublisher belongsToType resourceId logcommand timeCommand
 
           }
         }

@@ -1,12 +1,12 @@
-export const mutation = `mutation createAgencyuser($agencyId: Int ,$userId: Int ,$timeCreated: Datetime , $clientMutationId: String!) {
+export const mutation = `mutation createAgencyuser($agencyId: Int ,$userId: Int ,$timeCreated: Datetime , $id: String!) {
         __typename
-        createAgencyuser(input: {clientMutationId: $clientMutationId,agencyuser: {agencyId: $agencyId ,userId: $userId ,timeCreated: $timeCreated }}) {
+        createAgencyuser(input: {id: $id,agencyuser: {agencyId: $agencyId ,userId: $userId ,timeCreated: $timeCreated }}) {
             agencyEdge {
                 node {
                       id
                      }
               }
-            clientMutationId
+            id
             }
           }`
           export default `${mutation}`

@@ -3,10 +3,9 @@ import topics from './psqlIdQueries/topics'
 import posts from './psqlIdQueries/posts'
 import user_feed_posts from './psqlIdQueries/user_feed_posts'
 import triptype from './psqlIdQueries/triptype'
-import usertabl from './psqlIdQueries/usertabl'
+import usertable from './psqlIdQueries/usertable'
 import account from './psqlIdQueries/account'
 import contact from './psqlIdQueries/contact'
-import publisher from './psqlIdQueries/publisher'
 import commandlogentry from './psqlIdQueries/commandlogentry'
 import publisher from './psqlIdQueries/publisher'
 import geocoding from './psqlIdQueries/geocoding'
@@ -83,10 +82,9 @@ import type { topicsIdQueryType }  from './psqlIdQueries/types/topics'
 import type { postsIdQueryType }  from './psqlIdQueries/types/posts'
 import type { user_feed_postsIdQueryType }  from './psqlIdQueries/types/user_feed_posts'
 import type { triptypeIdQueryType }  from './psqlIdQueries/types/triptype'
-import type { usertablIdQueryType }  from './psqlIdQueries/types/usertabl'
+import type { usertableIdQueryType }  from './psqlIdQueries/types/usertable'
 import type { accountIdQueryType }  from './psqlIdQueries/types/account'
 import type { contactIdQueryType }  from './psqlIdQueries/types/contact'
-import type { publisherIdQueryType }  from './psqlIdQueries/types/publisher'
 import type { commandlogentryIdQueryType }  from './psqlIdQueries/types/commandlogentry'
 import type { publisherIdQueryType }  from './psqlIdQueries/types/publisher'
 import type { geocodingIdQueryType }  from './psqlIdQueries/types/geocoding'
@@ -165,10 +163,9 @@ topics:  topics,
 posts:  posts,
 user_feed_posts:  user_feed_posts,
 triptype:  triptype,
-usertabl:  usertabl,
+usertable:  usertable,
 account:  account,
 contact:  contact,
-publisher:  publisher,
 commandlogentry:  commandlogentry,
 publisher:  publisher,
 geocoding:  geocoding,
@@ -247,10 +244,9 @@ topics:  topicsIdQueryType;
 posts:  postsIdQueryType;
 user_feed_posts:  user_feed_postsIdQueryType;
 triptype:  triptypeIdQueryType;
-usertabl:  usertablIdQueryType;
+usertable:  usertableIdQueryType;
 account:  accountIdQueryType;
 contact:  contactIdQueryType;
-publisher:  publisherIdQueryType;
 commandlogentry:  commandlogentryIdQueryType;
 publisher:  publisherIdQueryType;
 geocoding:  geocodingIdQueryType;
@@ -323,10 +319,10 @@ assocdestination:  assocdestinationIdQueryType;
 assoctravelgroup:  assoctravelgroupIdQueryType;
 }
 
-export function getIdQuery (queryName) {
+export function getIdQuery (queryName: string) {
 
     const query = Lookup[queryName]
-    console.log("querystring:" ,query)
+    // console.log("querystring:" ,query)
 
     return { query }
 }

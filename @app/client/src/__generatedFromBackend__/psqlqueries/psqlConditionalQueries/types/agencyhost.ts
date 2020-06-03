@@ -1,4 +1,4 @@
 export interface agencyhostConditionalQueryType {
- hostId?:  number;
- timeCreated?:  string;
+ undefined?:  undefined;
+ undefined?:  undefined;
 }

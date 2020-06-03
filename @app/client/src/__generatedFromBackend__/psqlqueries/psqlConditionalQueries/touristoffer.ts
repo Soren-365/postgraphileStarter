@@ -1,8 +1,8 @@
-export const query = `query getConditionalTouristoffer(, $id:  number ) {
+export const query = `query getConditionalTouristoffer(, $undefined:  undefined ) {
         __typename
-        touristoffers(condition: {id: $id  })  {
+        touristoffers(condition: {undefined: $undefined , })  {
           nodes {
-            id
+            id touristResourceIdPool
 
           }
         }

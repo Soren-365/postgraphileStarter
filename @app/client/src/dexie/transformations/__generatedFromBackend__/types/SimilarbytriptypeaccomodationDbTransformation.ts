@@ -5,7 +5,7 @@ import { Similarbytriptypeaccomodation  as gqlSimilarbytriptypeaccomodation } fr
 
 export const SimilarbytriptypeaccomodationTransform = (raw: gqlSimilarbytriptypeaccomodation): objSimilarbytriptypeaccomodation => {
     return {
-         accomodationIds: raw.accomodationIds, --: raw.--, triptypes: raw.triptypes, tripTypeName: raw.tripTypeName, atAgency: raw.atAgency, timeCreated: raw.timeCreated
+         accomodationIds: raw.accomodationIds, tripTypeName: raw.tripTypeName, atAgency: raw.atAgency, timeCreated: raw.timeCreated
     }
 }
 
