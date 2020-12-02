@@ -1,15 +1,18 @@
 const { readFileSync } = require("fs");
+const { sign } = require("crypto");
 const schemaString = readFileSync(`${__dirname}/data/schema.graphql`, "utf8");
 
 module.exports = {
   parser: "@typescript-eslint/parser",
   extends: [
+    "eslint:recommended",
     "plugin:react/recommended",
     "plugin:import/errors",
     "plugin:import/typescript",
     "prettier",
     "prettier/@typescript-eslint",
     "prettier/react",
+    "plugin:prettier/recommended",
   ],
   plugins: [
     "jest",
@@ -18,6 +21,7 @@ module.exports = {
     "react",
     "graphql",
     "simple-import-sort",
+    "@blueprintjs/blueprint",
     "import",
   ],
   overrides: [
@@ -48,6 +52,10 @@ module.exports = {
     es6: true,
   },
   rules: {
+    "@blueprintjs/blueprint/icon-components": ["warn", "component"], // choose one
+    "@blueprintjs/blueprint/html-components": ["warn"],
+    "@typescript-eslint/explicit-function-return-type": "off",
+
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "error",
     // "@typescript-eslint/no-unused-vars": [
@@ -154,8 +162,8 @@ module.exports = {
      * disable others
      */
     "simple-import-sort/sort": "error",
-    "sort-imports": "off",
-    "import/order": "off",
+    "sort-imports": 0,
+    "import/order": "on",
 
     "import/no-deprecated": "warn",
     "import/no-duplicates": "error",

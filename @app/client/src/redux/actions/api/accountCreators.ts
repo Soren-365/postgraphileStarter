@@ -1,4 +1,5 @@
 import { BACKEND } from "../../../config";
+
 import { ACCOUNT } from "../../types/types";
 
 export const fetchFromAccount = ({

@@ -2,9 +2,12 @@ import { NextPageContext } from "next";
 import React from "react";
 
 // import { withRouter } from 'next/router'
-import News from "../../components/News";
-import Root from "../../components/Root";
-import withApollo from "../../lib/with-apollo";
+import News from "../../../components/News";
+import Root from "../../../components/Root";
+// import { withSecApollo } from "@app/lib";
+
+import { withSecApollo } from "@app/lib";
+//import withApollo from "../../../lib/with-apollo";
 
 // import { Button, Intent, Spinner } from '@blueprintjs/core';
 
@@ -48,4 +51,4 @@ class NewsPage extends React.PureComponent<Props> {
   }
 }
 
-export default withApollo(NewsPage);
+export default withSecApollo(NewsPage);

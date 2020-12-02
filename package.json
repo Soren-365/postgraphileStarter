@@ -1,8 +1,8 @@
 {
-  "name": "My_Project_Here",
-  "version": "3.0.1",
+  "name": "tourist-network",
+  "version": "1.0.0",
   "private": true,
-  "description": "Description of project here",
+  "description": "Getting the first version up and running...",
   "scripts": {
     "setup": "yarn && node ./scripts/setup.js",
     "start": "node ./scripts/start.js",

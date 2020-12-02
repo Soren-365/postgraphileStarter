@@ -5,7 +5,7 @@
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
-    "download-schema": "apollo client:download-schema --endpoint=http://localhost:5678/graphql --clientName=client --config=apollo.config.js --tagName=gql ./../../data/schema.graphql",
+    "download-schema": "apollo client:download-schema --endpoint=http://localhost:5678/graphql --clientName=client --config=apollo.config.js --tagName=gql ./../../data/schema.graphqls && cp ./../../data/schema.graphqls ../../@app/lib/dist/ ",
     "build": "yarn tsc -b && codegen",
     "watch": "yarn codegen --watch",
     "codegen": "graphql-codegen --config codegen.yml",

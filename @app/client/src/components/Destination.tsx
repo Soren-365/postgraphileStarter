@@ -1,9 +1,12 @@
 /* eslint-disable no-undef */
+
+import type { imagePlacement } from "../redux/reducers/appstate";
+
 import {
-  GetMyDestinationQuery,
-  UpdateDestinationMutation,
   useGetMyDestinationQuery,
   useUpdateDestinationMutation,
+  GetMyDestinationQuery,
+  UpdateDestinationMutation,
 } from "@app/graphql";
 import {
   Button,
@@ -17,11 +20,13 @@ import {
   H5,
   Pre,
 } from "@blueprintjs/core";
-import React, { useEffect, useState } from "react";
+
+import React, { useEffect, useState, FormEvent } from "react";
+
 import { connect, useDispatch } from "react-redux";
 
 import { withApollo } from "../../../lib/src/withApollo";
-import { destinationresourceDbType } from "../dexie/dbTypes/__generatedFromBackend__/types/destinationresourceDbType";
+// import { destinationresourceDbType } from "../dexie/dbTypes/__generatedFromBackend__/types/destinationresourceDbType";
 import { DbTables } from "../functions/__generatedFromBackend__/tableEnums";
 // import { fetchImageFromS3 } from '../lib/functions/fetch/fetchImagefromS3';
 import { getSignedUrlFromS3 } from "../functions/fetch/fetchSignedUrlfromS3";
@@ -29,30 +34,17 @@ import {
   loadS3Object_,
   uploadImageToS3,
 } from "../redux/actions/api/s3Creators";
-import { accountType } from "../redux/reducers/account";
-import type { imagePlacement } from "../redux/reducers/appstate";
-// import PropTypes from 'prop-types';
-//  import base64Image from '../public/static/mainImage/base64encoded/base64image1.json';
-import { AppState } from "../redux/reducers/appstate";
-import { placeholderS3ObjectType, S3StoreType } from "../redux/reducers/s3";
-import { saveClientDbData } from "../redux/sagas/dbSaga";
+
 import { APPSTATE } from "../redux/types/types";
+
 import withReduxSaga from "../redux/withReduxSaga";
-// import { useUpdateDestinationMutation, UpdateDestinationMutation } from '*/updateDestination.graphql';
 
-// import { resourceClass } from '../objectConstructors/resourceClass';
-// import { useUpdateDestinationMutation } from '__generated__/__intermediate__/graphqlQueriesMS/destinationmutation.graphql-e30b090acfe4014336abcea61ded58421849ed5b';
+import { AppState } from "../redux/reducers/appstate";
 
-// import { Destinationresource } from '__generated__/__intermediate__/graphqlQueriesMS/destinationquery.graphql-9a03f5e49016e60319b13728eae1813bd0b44b5d';
-// import { Image } from 'objectConstructors/image';
-// import { string } from 'prop-types';
-//import { useAgencydestinationQuery } from '../graphqlQueriesMS/agencydestination.graphql';
+import { accountType } from "../redux/reducers/account";
 
-//import db from '../dexie';
-
-// import { transformDestination } from '../objectConstructors/destination'
-//import { Destination_destinationresources_nodes } from 'graphqlQueriesMS/__generated__/Destination';
-// import { Destination } from 'graphqlQueriesMS/__generated__/Destination';
+import { placeholderS3ObjectType, S3StoreType } from "../redux/reducers/s3";
+// import { saveClientDbData } from "../redux/sagas/dbSaga";
 
 interface DestinationProps {
   placeholderData: unknown;
@@ -182,7 +174,7 @@ const Destination: React.FC<DestinationProps> = ({
     setDestinationDbObject(state.appstate.view.object);
     const keyToLocalStorage = `${resourceType}/${resourceId}`;
     //  console.log("keyToLocalStorage:", keyToLocalStorage)
-    const dataObject = JSON.parse(localStorage.getItem(keyToLocalStorage));
+    const dataObject = JSON.parse(localStorage.getItem(keyToLocalStorage)!);
     if (dataObject) {
       //  console.log("dataObject:", dataObject)
       const {
@@ -208,7 +200,7 @@ const Destination: React.FC<DestinationProps> = ({
     dispatch,
   ]); //,
 
-  const DisplayImage = (elem: undefined) => {
+  const DisplayImage = (elem: any) => {
     // const buf = fetched.data?.Body;
     // Create an HTML img tag
     if (elem !== undefined) {
@@ -303,12 +295,12 @@ const Destination: React.FC<DestinationProps> = ({
   function displayImages(files: string | any[]) {
     // console.log('files', files);
     if (!files.length) {
-      document.getElementById("ImageFile").innerHTML =
+      document.getElementById("ImageFile")!.innerHTML =
         "<p>No files selected!</p>";
     } else {
-      document.getElementById("ImageFile").innerHTML = "";
+      document.getElementById("ImageFile")!.innerHTML = "";
       const list = document.createElement("ul");
-      document.getElementById("ImageFile").appendChild(list);
+      document.getElementById("ImageFile")!.appendChild(list);
       for (let i = 0; i < files.length; i++) {
         const li = document.createElement("li");
         list.appendChild(li);
@@ -326,14 +318,19 @@ const Destination: React.FC<DestinationProps> = ({
     }
   }
 
-  function onSelectFile(ev: Event | undefined, imagePlacement: string) {
+  interface HTMLInputEvent extends FormEvent {
+    target: HTMLInputElement;
+  }
+
+  function onSelectFile(ev: HTMLInputEvent, imagePlacement: string) {
     ev.preventDefault();
     // console.log('Event', ev);
-    const { files } = ev.target;
+    const { files }: any = ev.target;
     console.log("files typeof", typeof files);
 
     console.log("target", ev.target);
     const ImageFiles = [...files];
+
     setImageFiles(ImageFiles);
     displayImages(ImageFiles);
 
@@ -362,7 +359,7 @@ const Destination: React.FC<DestinationProps> = ({
               name: `${imagePlacement}`,
               expires: 604800,
             })
-              .then((fetchedUrl: { url: string }) => {
+              .then((fetchedUrl: any) => {
                 // async refresh page:
                 console.log("This is the fetched URL", fetchedUrl);
                 setImageUrls({
@@ -378,7 +375,7 @@ const Destination: React.FC<DestinationProps> = ({
                 // preparations for localstorage resource update:
                 const keyToLocalStorage = `${resourceType}/${resourceId}`;
                 const dataObject: GetMyDestinationQuery = JSON.parse(
-                  localStorage.getItem(keyToLocalStorage)
+                  localStorage.getItem(keyToLocalStorage)!
                 );
                 var date = Date.now() + 7 * 24 * 60 * 60 * 1000;
                 let toTimestamp = (date: string | number | Date) =>
@@ -469,6 +466,7 @@ const Destination: React.FC<DestinationProps> = ({
         <div className="flex_containers one">
           <Button text="DEC RESOURCE" onClick={() => incResource(-1)} />
           <Button text="INC RESOURCE" onClick={() => incResource(+1)} />
+
           <H1>
             {destinationDbObject?.destinationName || "HEY, No data yet..."}
           </H1>
@@ -480,7 +478,7 @@ const Destination: React.FC<DestinationProps> = ({
               buttonText="Main Image"
               text="choose file"
               inputProps={{ multiple: false }}
-              onInputChange={() =>
+              onInputChange={(event: any) =>
                 onSelectFile(event, imagePlacement.mainImage)
               }
             />
@@ -495,7 +493,7 @@ const Destination: React.FC<DestinationProps> = ({
               buttonText="Guide Image"
               text="choose file"
               inputProps={{ multiple: false }}
-              onInputChange={() =>
+              onInputChange={(event: any) =>
                 onSelectFile(event, imagePlacement.guideImage)
               }
             />
@@ -530,7 +528,9 @@ const Destination: React.FC<DestinationProps> = ({
 
             <Button
               text="Get image from s3"
-              onClick={() => onSelectFile(event, imagePlacement.guideImage)}
+              onClick={(event: any) =>
+                onSelectFile(event, imagePlacement.guideImage)
+              }
             >
               Submit
             </Button>

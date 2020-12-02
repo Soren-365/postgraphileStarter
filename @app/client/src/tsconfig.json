@@ -9,7 +9,9 @@
     "esModuleInterop": true,
     "declaration": false,
     "declarationMap": false,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "downlevelIteration": true,
+    "noImplicitAny": false
   },
   "exclude": ["node_modules"],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

@@ -13,11 +13,9 @@ import App, { AppContext, AppInitialProps } from "next/app";
 import { Router, withRouter } from "next/router";
 import NProgress from "nprogress";
 import * as React from "react";
-import { Provider } from "react-redux";
-import { END } from "redux-saga";
 
-// import createStore from "../redux/basicStore";
-import { SagaStore, wrapper } from "../redux/store";
+import store from "../redux/basicStore";
+//import { SagaStore, wrapper } from "../redux/store";
 
 NProgress.configure({
   showSpinner: false,
@@ -47,11 +45,9 @@ if (typeof window !== "undefined") {
   });
 }
 
-interface thisAppProps extends AppInitialProps {
-  apollo: ApolloClient<any>;
-}
 
-class MyApp extends App<thisAppProps> {
+
+class MyApp extends App<{ apollo: ApolloClient<any> }> {
   static async getInitialProps({ Component, ctx, ...props }: AppContext) {
     let pageProps = {};
     // 1. Wait for all page actions to dispatch
@@ -98,13 +94,14 @@ class MyApp extends App<thisAppProps> {
 //  export const  apolloClientApp  =  MyApp.getInitialProps.apolloClientApp
 
 //  export const  ctxApp  = MyApp.getInitialProps.ctxApp
-// const withWrappers = withRedux(store)(
+const withWrappers = withRedux(store)(
+  withReduxSaga(withApollo(MyApp))
+);
+
+// for next-redux-wrapper 6.0.0
+// const withWrappers = wrapper.withRedux(
 //   withReduxSaga(withApollo(withRouter(MyApp)))
 // );
-
-const withWrappers = wrapper.withRedux(
-  withReduxSaga(withApollo(withRouter(MyApp)))
-);
 
 // export default (withRedux(createStore)(withReduxSaga(MyApp)))
 export default withWrappers;
